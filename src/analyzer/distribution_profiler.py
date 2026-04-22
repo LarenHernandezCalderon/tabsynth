@@ -12,7 +12,7 @@ transformation to apply before feeding the data into the diffusion model.
 What it produces (DistributionProfile) per numerical column:
     - distribution_type      : shape of the distribution
                                (normal, log_normal, skewed, bimodal,
-                                zero_inflated, uniform, exponential)
+                                zero_inflated, uniform, exponential, peaked)
     - normality_test         : Shapiro-Wilk result (is it truly normal?)
     - skewness_severity      : none | mild | moderate | severe
     - outlier_analysis       : count, ratio, and IQR bounds
@@ -78,7 +78,7 @@ class DistributionProfile:
     """Full distribution analysis for a single numerical column."""
     column_name           : str
     distribution_type     : str        # normal | log_normal | exponential |
-                                       # skewed | bimodal | zero_inflated | uniform
+                                       # skewed | bimodal | zero_inflated | uniform | peaked
     skewness_severity     : str        # none | mild | moderate | severe
     normality             : NormalityTest
     outliers              : OutlierAnalysis
@@ -253,9 +253,19 @@ class DistributionProfiler:
         if skewness > SKEW_SEVERE_THRESHOLD and series.min() >= 0:
             return "exponential"
 
-        # Uniform: very low std relative to range
+        # Peaked: high kurtosis (leptokurtic) — checked BEFORE uniform
+        # hours-per-week: low std/range but Q1=Q2=40, kurtosis>>3 → dominant spike, not uniform
+        if float(series.kurt()) > 3.0:
+            return "peaked"
+
+        # Uniform: very low std relative to range AND low skewness AND healthy IQR
+        # IQR guard: true uniform has IQR ≈ range/2, not near zero
         value_range = series.max() - series.min()
-        if value_range > 0 and series.std() / value_range < 0.15:
+        iqr = float(series.quantile(0.75) - series.quantile(0.25))
+        if (value_range > 0
+                and series.std() / value_range < 0.15
+                and abs(skewness) < SKEW_MILD_THRESHOLD
+                and iqr / value_range > 0.10):
             return "uniform"
 
         # Bimodal: negative kurtosis suggests flat/multimodal shape
@@ -308,6 +318,13 @@ class DistributionProfiler:
         if dist_type == "uniform":
             return "none", "Uniform distribution — diffusion model handles this well"
 
+        if dist_type == "peaked":
+            if skewness_severity in ("moderate", "severe"):
+                if series.min() >= 0:
+                    return "log", "Peaked + skewed distribution — log transform reduces skew and flattens spike"
+                return "quantile", "Peaked + skewed with negatives — quantile transform safer"
+            return "quantile", "Peaked distribution (leptokurtic) — quantile transform normalizes the spike"
+
         if dist_type == "bimodal":
             return "quantile", "Bimodal shape — quantile transform maps to uniform before model"
 
@@ -338,6 +355,7 @@ class DistributionProfiler:
             "zero_inflated" : "0️⃣ ",
             "uniform"       : "▬ ",
             "binary"        : "⚡",
+            "peaked"        : "🗻",
         }
 
         for p in self.profiles:

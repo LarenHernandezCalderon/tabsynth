@@ -39,8 +39,13 @@ from typing import Optional
 # ── Safety thresholds ────────────────────────────────────────────────────────
 CATEGORICAL_UNIQUE_RATIO    = 0.05   # below this → low cardinality → safe to send values
 ID_LIKE_UNIQUE_RATIO        = 0.95   # above this → almost certainly an ID
-ORDINAL_MAX_UNIQUE          = 15     # integers with few unique values → ordinal
+ORDINAL_MAX_UNIQUE          = 20     # integers with few unique values → ordinal
 SAMPLE_LENGTHS_COUNT        = 20     # how many length samples to collect
+
+# Sentinel values that represent missing data in disguise
+# These appear as categories in the distribution but are actually nulls
+MASKED_NULL_VALUES = {"?", "N/A", "n/a", "NA", "na", "None", "none",
+                      "NaN", "nan", "null", "NULL", "", " ", "-", "--", "unknown", "Unknown"}
 
 
 # ── Data contracts ────────────────────────────────────────────────────────────
@@ -81,6 +86,7 @@ class ColumnMetadata:
     stats:           Optional[NumericalStats]  = None   # numerics
     string_metadata: Optional[StringMetadata]  = None   # high-cardinality strings
     distribution:    Optional[dict]            = None   # low-cardinality categoricals
+    masked_nulls:    int                       = 0      # count of sentinel values replaced with NaN
 
 
 # ── Main extractor ────────────────────────────────────────────────────────────
@@ -111,6 +117,19 @@ class MetadataExtractor:
 
     def _extract_column(self, col: str) -> ColumnMetadata:
         series       = self.df[col]
+
+        # ── Masked null detection — must happen BEFORE dropna ─────────────────
+        # Replaces sentinel values ("?", "N/A", etc.) with real NaN so that
+        # missing_ratio is accurate and distributions don't include fake categories
+        if series.dtype == object or pd.api.types.is_string_dtype(series):
+            sentinel_mask = series.isin(MASKED_NULL_VALUES)
+            masked_count  = int(sentinel_mask.sum())
+            if masked_count > 0:
+                series = series.copy()
+                series[sentinel_mask] = np.nan
+        else:
+            masked_count = 0
+
         series_clean = series.dropna()
 
         total_rows    = len(series)
@@ -124,11 +143,12 @@ class MetadataExtractor:
         # ── Base metadata object ──────────────────────────────────────────────
         meta = ColumnMetadata(
             column_name   = col,
-            dtype         = str(series.dtype),
+            dtype         = str(self.df[col].dtype),   # original dtype, not modified series
             detected_type = detected_type,
             missing_ratio = missing_ratio,
             total_rows    = total_rows,
             unique_count  = unique_count,
+            masked_nulls  = masked_count,
         )
 
         # ── Enrich based on type ──────────────────────────────────────────────
@@ -272,6 +292,10 @@ class MetadataExtractor:
             print(f"   detected_type : {meta.detected_type}")
             print(f"   missing       : {meta.missing_ratio * 100:.1f}%")
             print(f"   unique values : {meta.unique_count}")
+
+            if meta.masked_nulls > 0:
+                ratio = round(meta.masked_nulls / meta.total_rows * 100, 1)
+                print(f"   masked nulls  : {meta.masked_nulls} ({ratio}%) — sentinel values replaced with NaN ⚠️")
 
             if meta.stats:
                 s = meta.stats

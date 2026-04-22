@@ -67,6 +67,36 @@ from analyzer.correlation_analyzer  import CorrelationAnalyzer,  CorrelationPair
 from analyzer.regex_miner           import RegexMiner
 
 
+# ── Categorical PII map ──────────────────────────────────────────────────────
+# Columns that never reach Layer 2 (low-cardinality categoricals / binaries)
+# but carry clear PII semantics based on their column name.
+# Key: lowercase column name fragment → (pii_detected, pii_category)
+# Matched via substring so "customer_gender", "gender_code", etc. all match.
+CATEGORICAL_PII_KEYWORDS: dict[str, tuple[bool, str]] = {
+    # Quasi-identifiers — re-identification risk when combined (GDPR Art. 4)
+    "gender"        : (True, "quasi_identifier"),
+    "sex"           : (True, "quasi_identifier"),
+    "race"          : (True, "quasi_identifier"),
+    "ethnicity"     : (True, "quasi_identifier"),
+    "nationality"   : (True, "quasi_identifier"),
+    "country"       : (True, "quasi_identifier"),
+    "native"        : (True, "quasi_identifier"),   # native-country
+    "marital"       : (True, "quasi_identifier"),
+    "age"           : (True, "quasi_identifier"),
+    "birth"         : (True, "quasi_identifier"),
+    "zipcode"       : (True, "quasi_identifier"),
+    "postal"        : (True, "quasi_identifier"),
+    # Sensitive — GDPR Art. 9 special categories
+    "religion"      : (True, "sensitive"),
+    "health"        : (True, "sensitive"),
+    "diagnosis"     : (True, "sensitive"),
+    "disability"    : (True, "sensitive"),
+    # NOTE: "income", "salary", "occupation", "relationship" deliberately excluded —
+    # these are model features / census labels, not PII in the GDPR sense
+    # when expressed as broad categorical buckets (e.g. <=50K, Husband, Prof-specialty)
+}
+
+
 # ── Skip rules ────────────────────────────────────────────────────────────────
 SKIP_TYPES = {"free_text", "unknown"}
 ID_TYPES   = {"id_like"}
@@ -301,6 +331,11 @@ class DatasetAnalyzer:
             if not profile.generation_strategy:
                 profile.generation_strategy = self._infer_strategy(meta, sem)
 
+            # Apply categorical PII rules for columns that bypass Layer 2
+            # (low-cardinality categoricals and binaries never reach GPT)
+            if not profile.pii_detected:
+                self._apply_categorical_pii(profile)
+
             self._apply_skip_rules(profile, meta, sem)
 
             column_profiles.append(profile)
@@ -354,6 +389,21 @@ class DatasetAnalyzer:
         if t == "datetime"             : return "datetime_range"
         if t == "id_like"              : return "sequential_id"
         return None
+
+    # ── Categorical PII classifier ───────────────────────────────────────────
+
+    def _apply_categorical_pii(self, profile: ColumnProfile) -> None:
+        """
+        Applies PII classification to categorical/binary columns that never
+        reach Layer 2 (GPT). Matches column name against known PII keywords.
+        Case-insensitive substring match — handles prefixes, suffixes, hyphens.
+        """
+        col_lower = profile.column_name.lower().replace("-", "_").replace(" ", "_")
+        for keyword, (pii_detected, pii_category) in CATEGORICAL_PII_KEYWORDS.items():
+            if keyword in col_lower:
+                profile.pii_detected = pii_detected
+                profile.pii_category = pii_category
+                break
 
     # ── Skip rule engine ──────────────────────────────────────────────────────
 
