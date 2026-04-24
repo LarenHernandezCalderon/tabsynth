@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from analyzer.dataset_analyzer import DatasetAnalyzer
 from preprocessor.preprocessor import Preprocessor
 from diffusion                  import TabDDPM
+from generator                  import Generator   
 
 load_dotenv()
 
@@ -30,13 +31,22 @@ model.summary()
 model.auto_tune(output.tensor_dataset)
 
 synthetic_tensor = model.generate(n_samples=len(df))
-synthetic_df     = prep.inverse_transform(synthetic_tensor)
 
-# ── Quick sanity check ────────────────────────────────────────────────────
-print(synthetic_df.head(20))
+# ── Phase 4: Generator ────────────────────────────────────────────────────
+gen    = Generator(profile, output, df)
+result = gen.generate(synthetic_tensor, prep)
+
+# ── Output ────────────────────────────────────────────────────────────────
+print(result.synthetic_df.head(80))
 print(f"\nOriginal shape  : {df.shape}")
-print(f"Synthetic shape : {synthetic_df.shape}")
-print(f"Columns match   : {list(df.columns) == list(synthetic_df.columns)}")
+print(f"Synthetic shape : {result.synthetic_df.shape}")
+print(f"Columns match   : {result.columns_match}")
+print(f"Dtypes match    : {result.dtypes_match}")
+
+# Save CSV
+os.makedirs("../output", exist_ok=True)
+result.synthetic_df.to_csv("../output/synthetic.csv", index=False)
+print("\nSaved → ../output/synthetic.csv")
 
 # ── Save model ────────────────────────────────────────────────────────────
 os.makedirs("models", exist_ok=True)

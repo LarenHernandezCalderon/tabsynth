@@ -347,7 +347,7 @@ class TabDDPM:
         type_counts = Counter(self.column_types.values())
 
         print("=" * 50)
-        print("TabDDPM — Model Summary")
+        print("Tabular Diffusion Model — Custom Implementation")
         print("=" * 50)
         print(f"  n_features   : {self.n_features}")
         print(f"  n_rows       : {self.n_rows}")
@@ -366,7 +366,7 @@ class TabDDPM:
     ) -> None:
         n_params = sum(p.numel() for p in self.model.parameters())
         es_info  = f"patience={patience}" if patience > 0 else "disabled"
-        print("Starting TabDDPM training")
+        print("Starting training — Tabular Diffusion Model (custom implementation)")
         print(f"  device         : {self.device}")
         print(f"  n_features     : {self.n_features}")
         print(f"  hidden_dims    : {self.hidden_dims}")
