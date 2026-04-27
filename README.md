@@ -189,10 +189,10 @@ The project does not (yet) support: time-series data, multi-table relational sch
 If you use tabsynth in your research or production work:
 
 ```bibtex
-@software{hernandez2025tabsynth,
+@software{hernandez2026tabsynth,
   author  = {Hernández Calderón, Laren},
   title   = {tabsynth: Auto-adaptive synthetic tabular data generation},
-  year    = {2025},
+  year    = {2026},
   url     = {https://github.com/LarenHernandezCalderon/tabsynth}
 }
 ```
