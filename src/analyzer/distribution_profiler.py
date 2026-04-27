@@ -309,7 +309,7 @@ class DistributionProfiler:
 
         if dist_type == "skewed":
             if skewness_severity == "mild":
-                return "sqrt", "Mild skew — sqrt transform is sufficient"
+                return "quantile", "Mild skew — quantile transform is more robust than sqrt for diffusion models"
             if skewness_severity in ("moderate", "severe"):
                 if series.min() >= 0:
                     return "log", "Moderate/severe skew — log transform recommended"

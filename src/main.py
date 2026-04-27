@@ -6,12 +6,12 @@ from analyzer.dataset_analyzer import DatasetAnalyzer
 from preprocessor.preprocessor import Preprocessor
 from diffusion                  import TabDDPM
 from generator                  import Generator
-from evaluator                  import Evaluator   # Phase 5
+from evaluator                  import Evaluator   
 
 load_dotenv()
 
 # Dataset selection
-df = pd.read_csv("../data/titanic.csv")
+df = pd.read_csv("../data/adult.csv")
 
 # Phase 1
 profile = DatasetAnalyzer(df, openai_api_key=os.getenv("OPENAI_API_KEY")).analyze()

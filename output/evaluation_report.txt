@@ -2,177 +2,174 @@
   Synthetic Data Engine — Evaluator (Phase 5)
 =======================================================
 
-  Real dataset      : 891 rows × 12 columns
-  Synthetic dataset : 891 rows × 12 columns
-  Target column     : Survived
+  Real dataset      : 48842 rows × 15 columns
+  Synthetic dataset : 48842 rows × 15 columns
+  Target column     : none
 
 ───────────────────────────────────────────────────────
   EVALUATOR A — Statistical Realism  (overall score)
 ───────────────────────────────────────────────────────
-  FIDELITY         ███████░░░  0.71  🟡 GOOD  (30%)
-  RELATIONSHIPS    ███████░░░  0.67  🟠 ACCEPTABLE  (25%)
-  UTILITY          █████████░  0.93  🟢 EXCELLENT  (30%)
+  FIDELITY         ████████░░  0.78  🟡 GOOD  (30%)
+  RELATIONSHIPS    ██████████  0.99  🟢 EXCELLENT  (25%)
+  UTILITY          ██████████  1.00  🟢 EXCELLENT  (30%)
   PRIVACY          ██████████  1.00  🟢 EXCELLENT  (10%)
-  DIVERSITY        █████████░  0.92  🟢 EXCELLENT  (5%)
+  DIVERSITY        █████████░  0.94  🟢 EXCELLENT  (5%)
 
 ───────────────────────────────────────────────────────
-  OVERALL SCORE    ████████░░  0.80  🟡 GOOD
+  OVERALL SCORE    █████████░  0.93  🟢 EXCELLENT
 ───────────────────────────────────────────────────────
 
   EVALUATOR B — Adversarial Detectability  (diagnostic only)
 ───────────────────────────────────────────────────────
-  DETECTABILITY    ███░░░░░░░  0.26  🔴 POOR  (not in overall)
-  Accuracy=0.840  AUC=0.896  (ideal ≈ 0.50)
-  Excluded: ['PassengerId', 'Name', 'Ticket']
-  ⚠️  Some detectable patterns — see DETECTABILITY DETAIL
+  DETECTABILITY    █████░░░░░  0.50  🔴 POOR  (not in overall)
+  Accuracy=0.714  AUC=0.788  (ideal ≈ 0.50)
+  Excluded: ['fnlwgt']
+  ✅ No strong detectable patterns
 ───────────────────────────────────────────────────────
 
 =======================================================
-  FIDELITY DETAIL   score=0.71  🟡 GOOD
+  FIDELITY DETAIL   score=0.78  🟡 GOOD
 =======================================================
 
   KS Test + Wasserstein (numeric columns)
-  Column                KS stat   p-value   Pass   Wasserstein
-  ------------------- --------  --------  -----  ------------
-  Fare                   0.1616    0.0000    ⚠️         6.8082
-  Age                    0.1422    0.0000    ⚠️         1.6918
-  Pclass                 0.1066    0.0001    ⚠️         0.1897
-  SibSp                  0.0976    0.0004    ⚠️         0.1930
-  Survived               0.0348    0.6538      ✅        0.0348
-  Parch                  0.0224    0.9784      ✅        0.0460
-  PassengerId            0.0000    1.0000      ✅        0.0000
+  Scoring: KS statistic (threshold=0.10), p-value shown for reference only.
+  Column                KS stat    Score    p-value   Pass   Wasserstein
+  ------------------- --------  -------  ---------  -----  ------------
+  fnlwgt                 0.1050     0.0%     0.0000    ⚠️     19800.3471
+  hours-per-week         0.0573    42.7%     0.0000      ✅        1.9399
+  educational-num        0.0379    62.1%     0.0000      ✅        0.2122
+  age                    0.0377    62.3%     0.0000      ✅        1.3402
+  capital-loss           0.0173    82.7%     0.0000      ✅       32.7428
+  capital-gain           0.0093    90.7%     0.0292      ✅      150.5441
 
-  KS passed: 3/7  score=42.9%  Wasserstein score=88.8%
+  KS score=56.8%  Pass rate (stat<0.10): 5/6  Wasserstein score=89.6%
 
   Excluded from TVD (unique_ratio > 50% — external generation):
-  ['PassengerId', 'Name', 'Ticket', 'Cabin']
+  ['fnlwgt']
 
   TVD (categorical / ordinal columns)
   Column                    TVD   Pass
   ------------------- --------  -----
-  Pclass                 0.1897    ⚠️ 
-  SibSp                  0.1044    ⚠️ 
-  Sex                    0.0999      ✅
-  Embarked               0.0602      ✅
-  Survived               0.0348      ✅
-  Parch                  0.0258      ✅
+  occupation             0.2418    ⚠️ 
+  workclass              0.0875      ✅
+  native-country         0.0805      ✅
+  education              0.0441      ✅
+  marital-status         0.0393      ✅
+  income                 0.0320      ✅
+  relationship           0.0290      ✅
+  race                   0.0235      ✅
+  gender                 0.0022      ✅
 
-  TVD passed: 4/6  score=91.4%
+  TVD passed: 8/9  score=93.6%
 
 =======================================================
-  RELATIONSHIPS DETAIL   score=0.67  🟠 ACCEPTABLE
+  RELATIONSHIPS DETAIL   score=0.99  🟢 EXCELLENT
 =======================================================
 
-  Frobenius norm  Pearson=0.0836  Spearman=0.1042
-  Mean Δ Pearson=0.0778  Mean Δ Spearman=0.0994
+  Frobenius norm  Pearson=0.0244  Spearman=0.0269
+  Mean Δ Pearson=0.0190  Mean Δ Spearman=0.0223
 
   Correlation pairs (sorted by Pearson delta)
   Pair                          Δ Pearson  Δ Spearman   Preserved
   --------------------------- ----------  ----------  ----------
-  Survived ↔ Age                   0.2034      0.1977         ⚠️ 
-  Pclass ↔ Parch                   0.1300      0.1498         ⚠️ 
-  Survived ↔ Fare                  0.1212      0.1021         ⚠️ 
-  Parch ↔ Fare                     0.1123      0.1813         ⚠️ 
-  PassengerId ↔ Age                0.1115      0.1160         ⚠️ 
-  Survived ↔ Parch                 0.1102      0.1322         ⚠️ 
-  Age ↔ Parch                      0.1062      0.1524         ⚠️ 
-  SibSp ↔ Parch                    0.1054      0.1598         ⚠️ 
-  Survived ↔ Pclass                0.0885      0.0885           ✅
-  PassengerId ↔ SibSp              0.0779      0.1107         ⚠️ 
-  PassengerId ↔ Pclass             0.0700      0.0682           ✅
-  PassengerId ↔ Fare               0.0659      0.0069           ✅
-  Pclass ↔ Age                     0.0640      0.0887           ✅
-  Survived ↔ SibSp                 0.0562      0.1091         ⚠️ 
-  Pclass ↔ SibSp                   0.0540      0.1150         ⚠️ 
+  age ↔ fnlwgt                     0.0677      0.0699           ✅
+  capital-gain ↔ hours-per-week     0.0476      0.0408           ✅
+  educational-num ↔ capital-loss     0.0368      0.0350           ✅
+  educational-num ↔ hours-per-week     0.0344      0.0534           ✅
+  age ↔ hours-per-week             0.0209      0.0237           ✅
+  age ↔ capital-loss               0.0177      0.0144           ✅
+  capital-loss ↔ hours-per-week     0.0129      0.0137           ✅
+  fnlwgt ↔ capital-gain            0.0115      0.0050           ✅
+  educational-num ↔ capital-gain     0.0108      0.0294           ✅
+  fnlwgt ↔ capital-loss            0.0069      0.0070           ✅
+  fnlwgt ↔ hours-per-week          0.0066      0.0066           ✅
+  capital-gain ↔ capital-loss      0.0060      0.0107           ✅
+  age ↔ educational-num            0.0043      0.0030           ✅
+  age ↔ capital-gain               0.0013      0.0172           ✅
+  fnlwgt ↔ educational-num         0.0006      0.0040           ✅
 
-  Pairs preserved: 9/21  pair_score=42.9%  frob_score=90.6%
-
-=======================================================
-  UTILITY (TSTR) DETAIL   score=0.93  🟢 EXCELLENT
-=======================================================
-
-  Target column : Survived
-  Best model    : RandomForest
-  Worst model   : GradientBoosting
-  Mean gap      : 0.7%
-
-  Model                   Acc Real  Acc Synth     Gap  AUC Real  AUC Synth  Pass
-  --------------------- --------- ---------- ------- --------- ---------- -----
-  LogisticRegression        0.8101     0.8045  0.0056    0.8472     0.8198     ✅
-  RandomForest              0.8045     0.8045  0.0000    0.8482     0.8341     ✅
-  GradientBoosting          0.7989     0.7821  0.0168    0.8120     0.8206     ✅
+  Pairs preserved: 15/15  pair_score=100.0%  frob_score=97.4%
 
 =======================================================
-  DETECTABILITY DETAIL   score=0.26  🔴 POOR
+  UTILITY (TSTR) DETAIL   score=1.00  🟢 EXCELLENT
+=======================================================
+
+  Target column : none
+  Best model    : n/a
+  Worst model   : n/a
+  Mean gap      : 0.0%
+
+=======================================================
+  DETECTABILITY DETAIL   score=0.50  🔴 POOR
 =======================================================
 
   Classifier : RandomForest (real vs synthetic label)
-  n_real     : 891   n_synthetic: 891
-  Features used      : 9 columns
-  Excluded (high cardinality): ['PassengerId', 'Name', 'Ticket']
+  n_real     : 48842   n_synthetic: 48842
+  Features used      : 14 columns
+  Excluded (high cardinality): ['fnlwgt']
   → Names/codes/IDs excluded — trivially distinguishable by construction
 
-  Accuracy : 0.8403  (ideal ≈ 0.50)  score=31.9%
-  ROC-AUC  : 0.8963  (ideal ≈ 0.50)  score=20.7%
-
-  ⚠️  High detectability — synthetic patterns differ noticeably from real.
+  Accuracy : 0.7135  (ideal ≈ 0.50)  score=57.3%
+  ROC-AUC  : 0.7885  (ideal ≈ 0.50)  score=42.3%
 
 =======================================================
   PRIVACY DETAIL   score=1.00  🟢 EXCELLENT
 =======================================================
 
-  Mean NND (synth→real)  : 0.4049
-  Min  NND (synth→real)  : 0.0473  (most at-risk record)
-  Mean NND (real→real)   : 0.2575  (reference density)
-  Distance ratio         : 1.5722  (ideal ≥ 1.0)
-  Records at risk (NND<0.05): 2
+  Mean NND (synth→real)  : 0.2498
+  Min  NND (synth→real)  : 0.0005  (most at-risk record)
+  Mean NND (real→real)   : 0.2318  (reference density)
+  Distance ratio         : 1.0778  (ideal ≥ 1.0)
+  Records at risk (NND<0.05): 73
 
   ✅ Privacy: synthetic records are sufficiently distant from real data.
 
 =======================================================
-  DIVERSITY DETAIL   score=0.92  🟢 EXCELLENT
+  DIVERSITY DETAIL   score=0.94  🟢 EXCELLENT
 =======================================================
 
   Variance ratio (synth / real) — ideal ≈ 1.0
   Column                 Var Real   Var Synth    Ratio    Score
   ------------------- ----------  ----------  -------  -------
-  PassengerId          66231.0000  66231.0000    1.000   100.0%
-  Survived                 0.2368      0.2437    1.029    98.5%
-  Pclass                   0.6990      0.9029    1.292    85.4%
-  Age                    211.0191    181.2916    0.859    93.0%
-  SibSp                    1.2160      1.1987    0.986    99.3%
-  Parch                    0.6497      0.6968    1.072    96.4%
-  Fare                  2469.4368    976.8532    0.396    69.8%
+  age                    187.9781    184.2920    0.980    99.0%
+  fnlwgt               11152210185.5748  9164040845.9804    0.822    91.1%
+  educational-num          6.6099      6.4958    0.983    99.1%
+  capital-gain         55532588.0357  44037593.2528    0.793    89.7%
+  capital-loss         162412.6690  98803.7742    0.608    80.4%
+  hours-per-week         153.5479    153.3937    0.999    99.9%
 
-  Variance score: 91.8%
+  Variance score: 93.2%
 
   PCA spread (variance per component — ideal ratio ≈ 1.0)
   PC       Var Real   Var Synth    Ratio    Score
   ----- ----------  ----------  -------  -------
-  PC1    66157.2813  66153.1483    1.000   100.0%
-  PC2     2468.2258    980.6196    0.397    69.9%
-  PC3      167.5996    152.1298    0.908    95.4%
-  PC4        1.2550      1.1721    0.934    96.7%
-  PC5        0.4629      0.5825    1.258    87.1%
+  PC1    11151982624.1010  9163849979.0704    0.822    91.1%
+  PC2    55530847.8161  44039982.8441    0.793    89.7%
+  PC3    162246.2680  98754.5502    0.609    80.4%
+  PC4      188.0752    188.1852    1.001   100.0%
+  PC5      149.1222    146.2956    0.981    99.1%
 
-  PCA score: 89.8%
+  PCA score: 92.0%
 
   Category coverage (categorical columns)
   Column                Real cats   Synth cats   Covered   Coverage
   ------------------- ----------  -----------  --------  ---------
-  Survived                      2            2         2     100.0%
-  Pclass                        3            3         3     100.0%
-  Sex                           2            2         2     100.0%
-  SibSp                         7            9         7     100.0%
-  Parch                         7            6         6      85.7%
-  Embarked                      3            3         3     100.0%
+  workclass                     9            8         8      88.9%
+  education                    16           16        16     100.0%
+  educational-num              16           16        16     100.0%
+  marital-status                7            7         7     100.0%
+  occupation                   15           14        14      93.3%
+  relationship                  6            6         6     100.0%
+  race                          5            5         5     100.0%
+  gender                        2            2         2     100.0%
+  income                        2            2         2     100.0%
 
-  Coverage score: 97.6%
+  Coverage score: 98.0%
 
 =======================================================
   EVALUATION COMPLETE
 =======================================================
-  Overall score : 0.8042  🟡 GOOD
+  Overall score : 0.9266  🟢 EXCELLENT
 
   Interpretation:
     🟢 EXCELLENT  (≥ 0.85) — production ready

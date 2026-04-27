@@ -291,6 +291,14 @@ class TabDDPM:
             )
 
         self.model.eval()
+
+        # Fix the generation seed for reproducibility.
+        # The training seed is intentionally NOT fixed (we want stochastic training).
+        # Only the generation is fixed so results are reproducible across runs.
+        torch.manual_seed(42)
+        if self.device.type == "cuda":
+            torch.cuda.manual_seed(42)
+
         x = torch.randn(n_samples, self.n_features, device=self.device)
 
         print(f"Generating {n_samples} synthetic samples ({self.T} reverse steps)...")
@@ -347,7 +355,7 @@ class TabDDPM:
         type_counts = Counter(self.column_types.values())
 
         print("=" * 50)
-        print("Tabular Diffusion Model — Custom Implementation")
+        print("TabDDPM — Model Summary")
         print("=" * 50)
         print(f"  n_features   : {self.n_features}")
         print(f"  n_rows       : {self.n_rows}")
@@ -366,7 +374,7 @@ class TabDDPM:
     ) -> None:
         n_params = sum(p.numel() for p in self.model.parameters())
         es_info  = f"patience={patience}" if patience > 0 else "disabled"
-        print("Starting training — Tabular Diffusion Model (custom implementation)")
+        print("Starting TabDDPM training")
         print(f"  device         : {self.device}")
         print(f"  n_features     : {self.n_features}")
         print(f"  hidden_dims    : {self.hidden_dims}")

@@ -27,7 +27,12 @@ Metrics:
             Captures differences in category proportions.
 
 Scoring:
-    KS:          score = fraction of columns with p-value > 0.05
+    KS:          score = mean(1 - min(ks_statistic / KS_THRESHOLD, 1))
+                 KS_THRESHOLD = 0.10 — a CDF distance > 10% is unacceptable.
+                 This replaces the p-value approach which breaks with large datasets:
+                 with 50k rows, any tiny difference produces p=0.000 regardless
+                 of practical significance. The KS statistic is sample-size-invariant.
+                 p-value is still reported for reference but does NOT affect the score.
     Wasserstein: score = mean(1 - min(normalised_distance, 1))
     TVD:         score = 1 - mean(TVD)
     Final:       weighted average (KS 40%, Wasserstein 30%, TVD 30%)
@@ -47,16 +52,25 @@ from scipy import stats
 from scipy.stats import wasserstein_distance
 
 
+# ── Constants ────────────────────────────────────────────────────────────────
+# KS statistic threshold for scoring.
+# A CDF distance > 10% is considered a meaningful distributional difference.
+# Using the statistic (not the p-value) makes the score robust to sample size:
+# with 50k rows the p-value is always 0.000 even for tiny differences.
+KS_STAT_THRESHOLD = 0.10
+
+
 # ── Data contracts ────────────────────────────────────────────────────────────
 
 @dataclass
 class KSResult:
-    column      : str
-    statistic   : float
-    p_value     : float
-    passed      : bool        # p_value > 0.05
-    wasserstein : float       # raw
-    wasserstein_norm: float   # normalised by real std
+    column           : str
+    statistic        : float
+    p_value          : float
+    passed           : bool   # statistic < KS_STAT_THRESHOLD (0.10)
+    ks_col_score     : float  # 1 - min(statistic / KS_STAT_THRESHOLD, 1)
+    wasserstein      : float  # raw
+    wasserstein_norm : float  # normalised by real std
 
 
 @dataclass
@@ -71,7 +85,8 @@ class FidelityResult:
     ks_results        : list[KSResult]
     tvd_results       : list[TVDResult]
     tvd_excluded      : list[str]   # high-cardinality cols excluded from TVD
-    ks_score          : float       # fraction of columns passing KS
+    ks_score          : float       # mean(1 - min(statistic/0.10, 1)) — size-invariant
+    ks_pass_rate      : float       # fraction of columns with statistic < 0.10 (informative)
     wasserstein_score : float       # mean normalised wasserstein score
     tvd_score         : float       # 1 - mean TVD
     score             : float       # weighted final score 0-1
@@ -138,7 +153,16 @@ class FidelityEvaluator:
                 tvd_results.append(self._tvd(col, real_df[col], synth_df[col]))
 
         # ── Scores ────────────────────────────────────────────────────────
+        # KS score: based on statistic, NOT p-value.
+        # p-value is sample-size dependent: with 50k rows p=0.000 always.
+        # KS statistic is scale-invariant: 0.066 means 6.6% max CDF distance.
         ks_score = (
+            float(np.mean([r.ks_col_score for r in ks_results]))
+            if ks_results else 1.0
+        )
+
+        # Pass rate is still reported for reference (informative only)
+        ks_pass_rate = (
             sum(r.passed for r in ks_results) / len(ks_results)
             if ks_results else 1.0
         )
@@ -160,6 +184,7 @@ class FidelityEvaluator:
             tvd_results       = tvd_results,
             tvd_excluded      = tvd_excluded,
             ks_score          = ks_score,
+            ks_pass_rate      = ks_pass_rate,
             wasserstein_score = wasserstein_score,
             tvd_score         = tvd_score,
             score             = float(np.clip(score, 0, 1)),
@@ -181,11 +206,14 @@ class FidelityEvaluator:
         real_std         = float(real_s.std()) or 1.0
         w_norm           = w_dist / real_std
 
+        ks_col_score = float(max(0, 1 - ks_stat / KS_STAT_THRESHOLD))
+
         return KSResult(
             column           = col,
             statistic        = float(ks_stat),
             p_value          = float(p_value),
-            passed           = p_value > 0.05,
+            passed           = ks_stat < KS_STAT_THRESHOLD,  # statistic-based
+            ks_col_score     = ks_col_score,
             wasserstein      = w_dist,
             wasserstein_norm = w_norm,
         )

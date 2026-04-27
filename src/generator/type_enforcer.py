@@ -139,9 +139,17 @@ class TypeEnforcer:
 
     def _enforce_ordinal(self, df, col, col_profile, report):
         """
-        Ordinal integer columns: round to int, clip to [min_real, max_real].
-        The real range is read from the original DataFrame (not the profile stats)
-        to guarantee consistency.
+        Ordinal integer columns: snap to the nearest value in the real discrete set.
+
+        Improvement over simple round+clip: instead of rounding to any integer in
+        [min, max], we snap to the exact set of values that appear in the real data.
+
+        Example for SibSp: real values are {0, 1, 2, 3, 4, 5, 8} (note: no 6 or 7).
+        A model-generated value of 6.3 would round to 6 with simple rounding,
+        but 6 never appears in the real data. Snap maps it to the closest real value
+        which is 5 — statistically correct.
+
+        Fallback: if fewer than 2 unique real values, use simple round+clip.
         """
         series = df[col]
 
@@ -156,12 +164,24 @@ class TypeEnforcer:
         if real_series.empty:
             return df, report
 
-        real_min = int(real_series.min())
-        real_max = int(real_series.max())
+        real_values = sorted(real_series.unique().astype(int).tolist())
 
-        before   = series.copy()
-        enforced = series.round().clip(real_min, real_max).astype(int)
-        changed  = int((before - enforced).abs().gt(0).sum())
+        before = series.copy()
+
+        if len(real_values) >= 2:
+            # Snap to nearest value in the real discrete set
+            real_arr = np.array(real_values)
+            def snap_to_real(x):
+                idx = np.argmin(np.abs(real_arr - x))
+                return int(real_arr[idx])
+            enforced = series.apply(snap_to_real)
+        else:
+            # Fallback: simple round + clip
+            real_min = int(real_series.min())
+            real_max = int(real_series.max())
+            enforced = series.round().clip(real_min, real_max).astype(int)
+
+        changed = int((before - enforced).abs().gt(0).sum())
 
         df[col] = enforced
         report.ordinal_cols_cast.append(col)

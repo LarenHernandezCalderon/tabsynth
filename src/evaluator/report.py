@@ -155,14 +155,15 @@ class ReportFormatter:
         if r.ks_results:
             w()
             w("  KS Test + Wasserstein (numeric columns)")
-            w(f"  {'Column':<20} {'KS stat':>8}  {'p-value':>8}  {'Pass':>5}  {'Wasserstein':>12}")
-            w(f"  {'-'*19} {'-'*8}  {'-'*8}  {'-'*5}  {'-'*12}")
-            for kr in sorted(r.ks_results, key=lambda x: x.p_value):
-                w(f"  {kr.column:<20} {kr.statistic:>8.4f}  {kr.p_value:>8.4f}  "
-                  f"{_pass(kr.passed):>5}  {kr.wasserstein:>12.4f}")
+            w("  Scoring: KS statistic (threshold=0.10), p-value shown for reference only.")
+            w(f"  {'Column':<20} {'KS stat':>8}  {'Score':>7}  {'p-value':>9}  {'Pass':>5}  {'Wasserstein':>12}")
+            w(f"  {'-'*19} {'-'*8}  {'-'*7}  {'-'*9}  {'-'*5}  {'-'*12}")
+            for kr in sorted(r.ks_results, key=lambda x: x.statistic, reverse=True):
+                w(f"  {kr.column:<20} {kr.statistic:>8.4f}  {_pct(kr.ks_col_score):>7}  "
+                  f"{kr.p_value:>9.4f}  {_pass(kr.passed):>5}  {kr.wasserstein:>12.4f}")
             passed = sum(kr.passed for kr in r.ks_results)
-            w(f"\n  KS passed: {passed}/{len(r.ks_results)}  "
-              f"score={_pct(r.ks_score)}  "
+            w(f"\n  KS score={_pct(r.ks_score)}  "
+              f"Pass rate (stat<0.10): {passed}/{len(r.ks_results)}  "
               f"Wasserstein score={_pct(r.wasserstein_score)}")
 
         if r.tvd_excluded:
