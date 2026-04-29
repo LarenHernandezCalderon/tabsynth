@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/banner.svg" alt="tabsynth" width="100%"/>
+  <img src="docs/assets/banner.svg" alt="tabsynth" width="100%"/>
 </div>
 
 <p align="center">
