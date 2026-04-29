@@ -1,892 +1,892 @@
 PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Cabin,Embarked
-1,0,1,Marc Collins,male,46.0,1,0,952982,89.1042,J41,S
-2,0,2,James Holt,male,51.0,0,0,O.M.S. 96539,17.8,Y76 G16,S
-3,0,3,Michael Baker,male,34.0,0,0,180248,8.05,,S
-4,0,3,Philip Graves,male,16.0,3,1,537971,39.0,,C
-5,0,3,Gina Harris,female,,0,0,LV 80017,13.0,P54,S
-6,0,3,David Fisher,male,,0,0,UC 99404,0.0,,S
-7,0,1,Karen Nelson,female,28.0,0,0,493497,15.0,,S
-8,1,3,Tiffany Johnson,female,22.0,0,0,84540,7.1417,,S
-9,1,3,Paul Benjamin,male,34.0,0,0,979965,7.0542,,S
-10,0,1,Anthony Carter,male,34.0,2,2,59880,83.475,,S
-11,1,3,David Perkins,male,,0,0,288482,12.475,,S
-12,0,1,Martin Vasquez,male,45.0,0,0,MMVO/I4. 9642372,33.0,,S
-13,0,3,Brian Beck,male,24.0,0,0,OW 31490,6.975,,S
-14,0,3,Eric Davis,male,23.0,0,0,7755,7.225,,S
-15,0,3,Corey Davis,male,,0,0,H.S.R. 8407,8.05,,S
-16,1,3,Patrick Collins,male,34.0,1,2,748335,8.6542,,S
-17,1,1,Meghan Warner,female,57.0,1,2,6547,135.6333,,S
-18,0,3,Sarah Carpenter,female,34.0,1,2,201824,26.55,J897,S
-19,1,1,Michael Williamson,male,30.0,0,0,930297,113.275,,C
-20,0,3,Amy Brown,female,,0,0,804571,7.8542,,C
-21,0,2,Luis Davis,male,28.0,0,0,5045827,31.275,,C
-22,1,3,Heather Martinez,female,,0,0,289705,7.65,L98,C
-23,1,2,Seth Brown,male,,0,0,VZ 86154,25.4667,,S
-24,0,3,Jonathan Baker,male,,0,0,184091,7.8958,,C
-25,0,1,John Brown,male,64.0,0,0,48665,80.0,,S
-26,0,3,Rebekah Hall,female,16.0,0,0,V.J./U.Y. 7,7.225,F,S
-27,0,3,Kenneth Smith,male,42.0,0,0,245135,7.65,J49,S
-28,1,1,Kimberly Shelton,female,34.0,1,2,904850,263.0,,C
-29,1,1,Monica Crosby,female,52.0,0,0,521870,39.6875,M44 V84 H53 F48,S
-30,0,3,Kristopher Taylor,male,34.0,0,0,147076,7.8958,M28,S
-31,0,3,Michelle Scott,female,21.0,3,2,72683,21.0,X40,S
-32,0,3,Lisa Grant,female,21.0,0,0,81040,7.25,,S
-33,1,2,Jennifer Zimmerman,female,23.0,1,2,76863,41.5792,,S
-34,1,3,Anthony Cummings,male,21.0,1,0,ZY 74886,7.8875,,C
-35,1,3,Charles Hart,male,,0,0,769148,7.75,,S
-36,0,3,Scott Reynolds,male,,0,0,726571,15.5,,S
-37,1,1,Charles Contreras,male,66.0,0,0,572776,26.55,,S
-38,0,3,Brian Bennett,male,,0,0,100948,14.5,,S
-39,0,3,Tyler Young,male,19.0,0,0,4163389,13.0,V16,S
-40,0,2,Robert Foster,male,19.0,0,0,236370,30.0708,,S
-41,1,1,Patricia Schmidt,female,34.0,0,0,423156,42.4,,S
-42,0,3,Matthew Vaughn,male,29.0,0,0,821688,8.05,,S
-43,0,3,Shawn Wall,male,17.0,0,0,787307,7.775,,S
-44,0,3,Marcus Stein,male,34.0,0,0,V.B./B.G. 525,11.5,,S
-45,0,3,Brendan Campbell,male,46.0,0,0,H.G. 5373,8.05,,C
-46,0,3,Eric Hale,male,14.0,0,0,948513,7.75,,S
-47,0,3,Kenneth Hayes,male,46.0,0,0,DZ 91486,7.2292,R93,S
-48,0,3,Robert Morris,male,,0,0,101437,14.4542,,S
-49,0,3,Joshua Cox,male,19.0,0,0,L4. 32988,7.2292,,S
-50,0,3,Oscar Manning,male,,0,0,L.T./IDSJO 42077,7.25,,S
-51,0,3,Jared Huff,male,34.0,0,0,II 23755,7.05,,S
-52,1,3,Laura Bradley,female,24.0,0,3,DF 9449,7.8958,,S
-53,1,1,Aaron Barnett,male,25.0,0,1,932211,55.4417,,S
-54,0,3,Joshua Watson,male,,0,0,9070359,26.25,,S
-55,0,2,Michael Michael,male,66.0,2,0,N/2. 9987,49.5042,,S
-56,0,3,Christopher Smith,male,24.0,2,0,62311,7.8958,,S
-57,1,3,Mckenzie Patel,female,26.0,1,1,16189,31.275,,C
-58,1,1,Stephanie Crane,female,34.0,2,0,720524,78.85,,C
-59,0,3,Troy Stanley,male,40.0,1,0,157204,8.6625,,S
-60,1,1,Haley Munoz,female,26.0,1,0,G.Z./Z.7. 87525,51.8625,A98 Q24 R26,C
-61,0,3,Leonard Yoder,male,45.0,1,0,841477,13.0,,C
-62,1,1,Jennifer Pearson,female,34.0,0,0,423855,52.0,,Q
-63,1,1,Katie Clark,female,70.0,1,0,531550,164.8667,,C
-64,0,3,Scott Ramirez,male,,0,0,D.0. 70007,6.45,R641,C
-65,0,3,Thomas Turner,male,28.0,3,2,590848,69.55,,S
-66,0,3,Michael Larson,male,29.0,1,0,KE 80070,13.8583,,S
-67,0,1,Gerald Gray,male,45.0,0,0,48108,27.75,,C
-68,0,3,Garrett Moore,male,,0,0,838329,8.0292,,S
-69,1,3,Nicholas Werner,male,34.0,0,0,2382,7.925,,S
-70,1,3,Heather Bailey,female,,1,0,AJ 8015,9.0,U21,C
-71,1,1,Rachel Horton,female,20.0,2,1,870288,262.375,M56,C
-72,1,3,Christopher Garner,male,,0,0,7621,7.225,,C
-73,0,3,Nancy Porter,female,,0,2,72713,7.75,,S
-74,1,1,Brian Mckenzie,male,42.0,1,0,7339,90.0,,S
-75,0,3,Elizabeth Mahoney,female,25.0,0,0,479143,7.8958,,S
-76,1,1,Sandra Fox,female,,0,0,303897,110.8833,,C
-77,0,1,Austin Lee,male,34.0,0,0,GE 47921,7.925,,S
-78,0,2,Ricardo Chambers,male,5.0,1,0,HW. 5426,52.5542,,C
-79,0,3,Heather Smith,female,52.0,1,2,62805,30.0,,S
-80,1,2,Lawrence Coleman,male,50.0,1,1,949748,13.0,N P94,S
-81,1,2,Deborah Carr,female,21.0,0,1,ZL 40550,27.9,K71,S
-82,0,3,Raymond Perez,male,46.0,1,0,I/GX 4298,27.0,,S
-83,0,3,Eddie Jarvis,male,40.0,0,0,DF 85050,7.125,,S
-84,0,3,Ryan West,male,,0,0,44592,7.725,,Q
-85,1,3,Richard Smith,male,8.0,0,0,924777,7.8958,,S
-86,0,3,Brianna Harris,female,24.0,0,0,A.B. 50453,7.925,,S
-87,1,2,Terri Becker,female,16.0,0,0,906737,27.75,D86,S
-88,1,2,Amanda Walters,female,,0,1,423866,14.0,U46,S
-89,1,3,Stacy Harris,female,,0,0,F.N.R. 41724,35.5,Z54,Q
-90,0,3,Jonathan Thomas,male,,0,0,46700,13.0,,C
-91,0,1,Michael Johnson,male,60.0,0,0,847182,34.0208,,S
-92,0,3,Brian Cooper,male,29.0,2,0,929331,22.3583,,S
-93,0,3,Shawn Dyer,male,29.0,0,0,1480,13.0,,S
-94,1,3,Deborah Sanchez,female,34.0,0,0,QF. 8962,8.05,Z60,C
-95,0,3,Steven Monroe,male,,0,0,DUIW/H3. 4176436,18.75,,S
-96,1,2,David York,male,,0,0,M.S. 6865,31.0,,Q
-97,0,3,Bradley Goodman,male,45.0,0,0,R.P./D.Z. 553,7.125,,S
-98,0,3,Kevin Colon,male,9.0,1,0,891318,15.1,,S
-99,1,2,Michelle Wright,female,54.0,0,0,752407,16.1,,S
-100,1,1,Lacey Tran,female,61.0,0,1,MPEC,90.0,,S
-101,0,2,Steven Garcia,male,24.0,0,0,6209,21.075,,C
-102,1,2,Lindsay Armstrong,female,8.0,1,0,MB 67395,52.5542,A23,C
-103,0,3,Meredith Moore,female,28.0,0,0,211458,21.0,,S
-104,0,3,Mark Davis,male,,0,0,320689,6.975,,S
-105,1,2,Stephanie Snow,female,0.75,2,1,29467,133.65,,S
-106,0,3,Frank Morrison,male,21.0,3,2,B.K. 10921,15.5,,S
-107,0,3,Chad Jimenez,male,34.0,0,0,PH 8002,13.0,,S
-108,0,2,Robert Green,male,64.0,0,0,8997,46.9,,S
-109,1,3,Gordon Burnett,male,17.0,0,0,103668,13.0,,S
-110,0,3,David Cook,male,28.0,0,0,401809,14.5,V11,S
-111,0,3,Steven Hunt,male,24.0,0,0,5207,7.55,,C
-112,0,3,Todd Jones,male,26.0,0,0,Z.U.H. 64893,7.8958,Q1,C
-113,0,3,David Parsons,male,51.0,0,0,2772,7.8958,,S
-114,0,1,Nathan Sanford,male,28.0,0,0,639401,83.1583,,S
-115,1,3,Joyce Morris,female,30.0,0,0,1325,7.875,O64,S
-116,0,3,Mario Adams,male,26.0,1,0,GS 41894,31.275,,S
-117,0,1,James James,male,43.0,0,0,54660,46.9,,S
-118,1,2,Robin Gross,female,18.0,0,1,291519,25.925,,S
-119,0,3,Michael Trujillo,male,28.0,0,0,T 97409,14.5,,S
-120,1,1,Julia Stokes,female,28.0,0,0,710407,79.65,Y0,C
-121,1,3,Stephanie Lynn,female,52.0,0,0,784932,7.75,,S
-122,1,2,Anita Gomez,female,,1,1,9831,34.375,,S
-123,0,3,Jeffrey Alvarez,male,17.0,0,0,93298,7.8958,,S
-124,0,3,James Smith,male,,0,0,228793,26.0,,C
-125,1,1,Elizabeth Hawkins,female,34.0,0,0,BLYSB/F.R. 7819564,79.65,,C
-126,0,3,Gregory Mendoza,male,30.0,0,0,13157,7.75,,S
-127,0,3,Anne White,female,18.0,0,0,6353,7.7958,,S
-128,0,3,David Nash,male,18.0,3,1,G.K.V. 52505,13.0,,C
-129,0,3,Tiffany Smith,female,26.0,0,5,825828,21.0,,S
-130,1,3,Luis Scott,male,,0,0,648,26.0,,S
-131,0,2,Anthony Mullins,male,3.0,1,0,DJ 72782,65.0,,Q
-132,0,3,Kevin Harris,male,,0,0,528341,20.575,,S
-133,0,3,Brian Velasquez,male,23.0,0,0,30295,10.5,,S
-134,1,1,Jennifer Cox,female,,1,0,DA/FW 842,227.525,,S
-135,1,1,Julia Shepherd,female,22.0,2,2,LA 6956,93.5,,S
-136,0,3,Bradley Diaz,male,14.0,0,0,2422,0.0,,S
-137,1,2,Cassidy Brown,female,19.0,0,0,EY 20684,15.85,,C
-138,0,3,Aaron Crawford,male,34.0,0,0,9648,7.775,,C
-139,1,2,Joann Simon,female,18.0,0,0,899390,15.5,,S
-140,1,2,Douglas Torres,male,34.0,0,0,82386,29.125,,S
-141,1,1,Steven Gonzalez,male,63.0,0,0,HL 52324,39.6875,,S
-142,1,3,Joshua Freeman,male,,0,0,298729,8.05,,S
-143,1,1,Dean Allen,male,34.0,0,1,815513,30.6958,,S
-144,0,1,James Fox,male,50.0,0,0,3698,28.5,,S
-145,0,3,Anthony Kelly,male,22.0,0,0,108850,8.05,,S
-146,0,3,Kevin White,male,29.0,0,0,10673,7.55,,S
-147,0,3,Michael Rosales,male,,0,0,1841,13.0,F57,C
-148,0,3,Billy Weber,male,34.0,0,0,415015,7.7958,G34,S
-149,0,2,Russell Krause,male,34.0,0,0,2812,31.275,Y7,S
-150,1,1,Susan Montoya,female,34.0,0,0,911772,40.125,,S
-151,1,1,Jennifer Lucas,female,,0,1,846385,63.3583,S47,S
-152,1,1,Jeffrey Miller,male,25.0,1,0,9106728,110.8833,,S
-153,0,3,Justin Garrett,male,48.0,1,0,2451,27.9,,S
-154,1,2,Jennifer Powell,female,57.0,0,2,PO 32973,14.4542,,S
-155,0,3,Theresa Jennings,female,26.0,2,1,NBOKN/L.K. 7921669,26.55,,S
-156,0,3,Donna Perry,female,,0,0,914488,8.05,A60,Q
-157,1,3,Jason French,male,19.0,0,0,SJRR/O 9. 1690361,8.05,,S
-158,1,1,Joseph Thornton,male,23.0,1,0,SPMWG/PV 160422,110.8833,,S
-159,1,2,Jennifer Hull,female,28.0,0,0,3475,31.0,N14,C
-160,1,1,Christopher Clark,male,50.0,1,0,68939,73.5,U N55,S
-161,1,2,Hannah Kane,female,34.0,1,2,843105,79.2,,Q
-162,0,1,Charles Walker,male,,0,0,725126,0.0,,S
-163,1,2,Megan Griffin,female,18.0,0,0,791321,24.15,Z97,C
-164,0,3,Jennifer Ortega,female,24.0,0,0,332616,8.3,,S
-165,1,2,Crystal Williams,female,19.0,0,0,388806,26.55,,C
-166,0,3,Patrick Stephens,male,,0,0,971783,8.6625,,C
-167,0,3,William Morgan,male,34.0,0,0,102553,13.5,,Q
-168,0,3,Bryan Burton,male,22.0,0,0,487713,12.35,,S
-169,0,3,Jacob Roberts,male,26.0,0,0,1551,13.5,B153,Q
-170,1,1,Jeffrey Lee,male,8.0,1,1,615742,77.9583,,S
-171,1,1,Jamie Mcclain,female,,0,0,506833,27.7208,,S
-172,0,1,Kristi Bentley,female,26.0,1,3,T/8 8392,227.525,,S
-173,0,3,Travis Patterson,male,47.0,0,0,908537,7.3125,,Q
-174,0,3,James Johnson,male,,0,0,171191,28.7125,,C
-175,0,3,Brandon Wall,male,16.0,2,2,342966,24.15,,C
-176,0,3,Alejandro Reynolds,male,34.0,0,0,136239,13.0,,S
-177,0,3,Michael Fernandez,male,,0,0,258747,7.75,Z16,C
-178,0,2,Jesse Ortega,male,40.0,0,0,CB 28873,29.0,,S
-179,1,1,Karen Smith,female,34.0,1,0,132876,52.0,,S
-180,0,1,Matthew Rodriguez,male,42.0,3,1,54104,134.5,,S
-181,1,3,Jesse Mckinney,male,23.0,0,0,4893,20.525,,C
-182,0,1,Donald Hughes,male,,0,0,7512,151.55,,C
-183,0,3,Marvin Hull,male,61.0,0,0,376538,14.5,N25,S
-184,0,3,Tyler Bird,male,,8,2,693199,52.0,,S
-185,1,3,Michelle Lopez,female,19.0,0,0,R/HV 2852,5.0,,S
-186,1,3,Erik Spencer,male,47.0,0,0,5769,15.0458,,S
-187,1,3,Eric Jefferson,male,34.0,1,0,PS 4667,14.4,,S
-188,0,3,David Lowe,male,34.0,0,0,8366,7.8958,,S
-189,0,3,Robin Sanders,female,28.0,0,2,AW 50610,8.05,,S
-190,0,3,David Jones,male,42.0,0,0,28122,7.75,,C
-191,1,2,Keith Conway,male,21.0,1,1,999264,21.075,K93 Z55,C
-192,1,2,Andrea Young,female,13.0,0,0,5174,13.0,,S
-193,0,3,Chad Taylor,male,19.0,0,0,3858,7.2292,,S
-194,1,3,Andrea Salazar,female,15.0,0,0,234552,7.25,N60,S
-195,0,3,Kevin Terry,male,,0,0,1772105,7.75,,Q
-196,0,1,Robert Simpson,male,45.0,0,0,J.R. 30867,53.1,,C
-197,1,3,Maria Miller,female,,0,0,593467,12.475,,S
-198,1,3,Samantha Meyer,female,,0,0,831662,13.0,U87,C
-199,0,3,John Bartlett,male,18.0,0,0,Jj 698930,7.8958,,S
-200,0,1,William Thornton,male,25.0,2,0,ZY 76010,151.55,,S
-201,1,3,Antonio Gonzalez,male,22.0,0,0,RSJXP/O.Z. 754970,10.4625,,S
-202,1,2,Donald Barnes,male,,0,0,867684,29.125,,C
-203,0,2,John Wilson,male,34.0,0,0,633678,7.225,V80,S
-204,0,3,Jamie Kim,female,,5,3,570797,110.8833,,Q
-205,0,1,David Hodges,male,54.0,0,0,8224,56.4958,,S
-206,1,3,Linda Campbell,female,,0,0,23967,7.75,I41,C
-207,0,3,Robert Nielsen,male,,0,0,331200,14.4,D51,Q
-208,0,3,Mark Jackson,male,,0,0,214683,8.5167,,Q
-209,1,2,Corey Hawkins,male,45.0,0,0,877947,23.0,,S
-210,0,3,Richard Downs,male,18.0,0,0,BK 44916,7.25,,C
-211,0,3,Janet Torres,female,19.0,2,2,152,30.0,Q54,S
-212,0,3,Tyler Espinoza,male,,0,0,96710,7.225,,Q
-213,1,2,Rebecca Smith,female,29.0,4,2,K/7 66181,153.4625,X557,S
-214,0,3,Jesse Little,male,,0,0,83537,10.5,Y1,C
-215,0,3,Brad Byrd,male,14.0,4,2,29637,26.25,,S
-216,0,1,Jeffrey Smith,male,58.0,0,0,991027,39.6875,,S
-217,1,3,Sherri Williams,female,,0,0,912409,8.05,,C
-218,0,3,Derrick Walters,male,24.0,0,0,E.G.I. 18515,13.0,,S
-219,1,3,Susan Blackburn,female,19.0,0,3,4205,23.0,,S
-220,1,3,Alexander Jones,male,34.0,1,0,INFTZ/V.N. 8612953,23.45,,S
-221,0,1,Daniel Wilcox,male,29.0,1,0,704223,56.9292,,S
-222,1,3,Lisa Moore,female,4.0,0,1,51442,7.6292,V75,C
-223,1,3,Regina Powell,female,28.0,0,0,6024463,7.8958,,S
-224,0,3,April Riddle,female,5.0,0,0,2116,7.7333,,C
-225,0,3,William Reyes,male,42.0,0,0,315701,7.2292,Q85,S
-226,0,3,Brandon Summers,male,26.0,0,0,429145,7.75,,S
-227,1,3,Cindy Gomez,female,,0,0,594109,7.75,,Q
-228,1,2,Caitlin Vasquez,female,,0,0,33789,9.5,,C
-229,1,3,Danielle Merritt,female,25.0,0,0,711925,7.2292,T58,C
-230,0,3,Shawn Castro,male,,0,0,L./V. 4079,10.5,,S
-231,0,3,Melissa West,female,4.0,0,1,297862,56.4958,,S
-232,1,3,Jesse Jenkins,male,0.67,2,2,347928,57.0,,S
-233,0,2,Joshua Travis,male,61.0,0,0,ZY. 5282,26.55,,Q
-234,1,2,Madeline Robertson,female,5.0,0,0,60339,15.2458,,Q
-235,0,3,Justin Patel,male,21.0,0,0,QS 78528,9.5,D36,S
-236,1,2,Brittany Welch,female,21.0,0,2,351512,15.9,,S
-237,0,3,Zachary Harris,male,21.0,0,0,124278,7.55,Y,S
-238,1,3,Julie Ramos,female,,0,0,DSDH/Z 3. 6005059,11.1333,,C
-239,0,3,Dawn Rogers,female,,1,1,RRVXB/UG 2828075,26.55,,Q
-240,1,3,Tracie Tyler,female,18.0,0,0,701663,7.65,,S
-241,0,3,Kevin Palmer,male,9.0,0,0,268024,8.4042,,S
-242,0,3,Michael Kelley,male,,0,0,W.B.A. 3157,7.75,,C
-243,0,3,Sarah Gray,female,,0,0,KG/OT Ciyyr 527,7.8958,Y70,S
-244,1,3,Leah Alexander,female,17.0,0,0,81073,7.2292,,S
-245,0,1,William Boyle,male,49.0,0,0,11253,53.1,N89,S
-246,1,1,Wendy Mcdonald,female,,1,0,QA 9292,120.0,,C
-247,0,3,Corey Fuller,male,,0,0,2646299,16.7,,C
-248,0,3,Jacqueline Ortiz,female,21.0,1,0,B.M./EEYDE 10371,26.0,,S
-249,0,3,John Martin,male,18.0,0,0,326356,8.05,J88,S
-250,0,1,Alexander Cervantes,male,,0,0,752287,0.0,,S
-251,0,2,Kimberly Perez,female,34.0,0,2,894064,8.05,R520,S
-252,0,3,Kelly Shannon,male,34.0,0,0,Q/3 8209,13.0,,S
-253,0,3,Robert Jennings,male,64.0,0,0,953034,11.5,K S13,S
-254,1,3,Emily Ray,female,34.0,1,0,440092,26.0,,S
-255,1,3,David Rush,male,24.0,0,0,EP 97971,8.05,,C
-256,0,1,Cassandra Fowler,female,34.0,0,0,856190,113.275,L59,C
-257,1,1,Jennifer Dodson,female,26.0,2,1,YC. 7258,146.5208,,S
-258,0,3,Shawna Russo,female,42.0,0,2,60805,26.0,M37,S
-259,0,3,Joseph Durham,male,26.0,0,0,381855,10.5,C12,S
-260,0,2,Derek Wells,male,,0,0,TA 2994,29.7,J30,C
-261,0,3,Andrew Ho,male,19.0,0,0,OZ 60517,9.2167,,S
-262,1,3,Adam Palmer,male,23.0,0,0,1783,7.05,,S
-263,0,3,Matthew Booker,male,,0,0,NGEEE/UT 337442,7.925,,C
-264,0,3,Jason Martinez,male,,0,0,6443,10.5,,S
-265,1,3,Ashlee Rodriguez,female,24.0,0,0,1368,7.8958,,S
-266,0,3,Jared Kim,male,34.0,0,0,82983,6.4375,,S
-267,1,1,Gloria Williams,female,34.0,1,0,9561,89.1042,,S
-268,0,3,Peter Garcia,male,42.0,0,0,74955,10.5,,S
-269,0,3,Thomas Miller,male,18.0,0,0,728611,7.8792,,S
-270,0,3,Daniel Collins,male,,0,0,105312,7.8958,,S
-271,1,2,Patricia Banks,female,29.0,1,1,YU 58124,86.5,,S
-272,0,2,Adam Guzman,male,,0,0,WK 64635,24.15,,S
-273,1,3,Sara Weber,female,15.0,0,0,66656,14.4542,,S
-274,1,1,Laura King,female,,0,0,KP. 3527,27.75,,S
-275,0,3,Michael Griffin,male,42.0,0,0,2031,7.7958,,S
-276,0,3,Nicholas Johnson,male,,0,0,538145,10.5,,Q
-277,1,1,Ana Sanders,female,52.0,1,2,ZP/K 8894,512.3292,,S
-278,1,1,Gabriella Espinoza,female,2.0,0,1,485318,82.1708,M11,S
-279,0,3,Michelle Chan,female,40.0,0,0,L/8 6506,7.775,,S
-280,0,3,Ernest Cochran,male,18.0,0,0,TDBY/X 4. 6227663,9.8417,,S
-281,0,3,Mario Lowe,male,,0,0,1952,8.7125,,Q
-282,1,3,Joshua Massey,male,28.0,0,0,748082,7.925,X44,S
-283,1,2,Michael Taylor,male,46.0,0,0,393956,26.55,,S
-284,1,2,James Smith,male,34.0,0,0,H.T./OIPCG 5538,8.3625,,S
-285,0,2,Jason Berger,male,,0,0,78678,50.4958,,S
-286,1,3,Anne Dunn,female,,1,0,65020,35.0,W28,C
-287,0,3,Gary Mcfarland,male,,0,0,415294,18.75,W6,S
-288,1,3,Ronald Brown,male,1.0,0,1,12801,7.775,,S
-289,0,3,Roger Kelley,male,26.0,1,0,190539,26.0,S22 X14,S
-290,1,1,Eileen Baker,female,34.0,0,1,753313,262.375,,S
-291,0,2,James Walter,male,50.0,1,1,697111,35.5,,S
-292,0,3,Anthony Warner,male,26.0,0,0,283011,7.5208,R30,S
-293,0,1,Jeffrey Stevens,male,,0,0,40676,26.0,,S
-294,1,2,Emily Fisher,female,34.0,0,0,921033,26.0,,S
-295,1,3,Katie Schaefer,female,,0,0,816508,7.925,,C
-296,1,2,Albert Clark,male,2.0,0,1,L.L. 91595,79.2,,C
-297,0,2,Adam Freeman,male,,0,0,855809,39.6875,,C
-298,1,2,Michele Allen,female,19.0,2,2,639188,50.0,,C
-299,0,3,Anna Hunt,female,,0,0,650683,7.925,,S
-300,0,3,James Mann,male,,0,0,287413,9.4833,,Q
-301,0,3,Mark Castro,male,,5,1,988057,39.0,V214,S
-302,0,3,Brian Carson,male,,0,0,745160,7.25,,S
-303,1,1,John Cohen,male,45.0,1,0,29677,47.1,,S
-304,0,1,Christopher Mcclain,male,,0,0,B/5 5756,0.0,X66,S
-305,1,1,Sara Thomas,female,34.0,1,0,48519,69.3,,S
-306,0,2,Derek Davis,male,29.0,1,0,3770,15.5,J82,S
-307,0,3,Wendy Pitts,female,18.0,0,0,1206,7.25,,S
-308,0,3,Justin Lane,male,43.0,1,0,TE. 3214,13.0,,S
-309,1,1,Brittney Harvey,female,,1,0,851570,135.6333,,C
-310,0,3,Jason Waters,male,,0,0,361143,8.6625,,C
-311,0,1,Jacob Hines,male,,0,0,MKXL/K3. 3297364,26.0,,S
-312,0,3,Michael Wallace,male,23.0,1,0,27981,7.8542,,S
-313,0,3,Theodore Park,male,26.0,0,0,925521,7.8958,,S
-314,0,3,Martin Garcia,male,,0,0,262045,7.8792,,Q
-315,0,1,Blake Estrada,male,34.0,0,0,F.K.E. 90940,73.5,,S
-316,0,3,Stephen Jacobs,male,30.0,0,0,B./A. 5763,7.8292,,S
-317,0,3,Steven Russell,male,42.0,0,0,866060,7.4958,J2,S
-318,0,3,Mark Miller,male,18.0,1,0,X.W. 77767,22.025,,C
-319,0,3,Ronald Mendez,male,18.0,0,0,T./P. 3345,8.05,,S
-320,1,3,Deborah Conrad,female,25.0,0,0,973188,6.8583,,S
-321,0,3,Amanda Jackson,female,11.0,4,2,42477,56.4958,X36,S
-322,0,3,Daniel Simmons,male,40.0,0,0,Z.O./IH 575,7.7333,,C
-323,0,3,Mark Rodriguez,male,45.0,0,0,782574,7.8542,D52,C
-324,0,3,Kimberly Carter,female,,1,0,5376431,13.0,,C
-325,0,3,Keith King,male,19.0,0,0,KK 17889,9.5,,Q
-326,0,3,Kevin Macdonald,male,23.0,0,0,L/4 8599,7.775,,S
-327,1,3,Jennifer Allen,female,0.75,3,1,79622,73.5,,S
-328,0,1,Michael Turner,male,62.0,0,0,681439,49.5,,S
-329,0,3,Thomas Bryant,male,,0,0,Q 5876,19.2583,,S
-330,0,3,Daniel Becker,male,22.0,2,0,674545,23.25,,S
-331,0,3,Joshua Henry,male,21.0,0,0,688445,7.75,O8,S
-332,1,3,Andrew Johnson,male,9.0,0,0,564514,27.9,O62,S
-333,1,2,Jo Mitchell,female,22.0,0,1,44167,9.35,,S
-334,1,2,Kelsey Adkins,female,0.92,0,2,541720,83.475,,S
-335,0,3,Thomas Cooper,male,43.0,0,0,PXMI/B4. 9262758,10.5167,,S
-336,0,2,Raymond Wilson,male,45.0,1,0,6876,25.9292,,S
-337,1,3,Adam West,male,34.0,0,0,481789,7.775,,C
-338,0,1,Kevin White,male,34.0,0,0,702167,53.1,,S
-339,1,3,Glenn Morris,male,29.0,1,0,JJ 3805,29.125,,S
-340,0,3,Rhonda Long,female,,1,0,OP 45964,26.55,S45,C
-341,0,2,Rachel Smith,female,18.0,1,0,441050,76.7292,,S
-342,0,3,Jessica Williams,female,,0,0,DT 3873,12.475,B53,Q
-343,1,3,Fernando Wolf,male,34.0,0,0,SL 91717,8.6625,,S
-344,0,3,Justin Richardson,male,,0,0,CH 56607,7.775,K62,C
-345,0,1,Joshua Allen,male,2.0,0,0,768869,24.15,V42,S
-346,0,2,Albert Herrera,male,47.0,0,0,491,30.5,,S
-347,1,2,Corey Aguirre,male,34.0,1,0,17600,13.0,,S
-348,0,3,Tyler Miranda,male,28.0,0,0,UO 41448,8.05,,S
-349,1,3,Jennifer Williams,female,34.0,0,0,68588,7.225,,S
-350,0,3,Anthony Flynn,male,21.0,4,2,3551,27.7208,,S
-351,0,3,Anthony Thomas,male,,1,0,71555,29.125,,S
-352,1,2,Carol Newton,female,,1,1,22486,106.425,,S
-353,1,1,David Nolan,male,26.0,0,0,6519,27.9,,S
-354,1,2,Katie Jordan,female,26.0,1,1,207754,19.2583,,S
-355,1,1,Thomas Clarke,male,18.0,1,0,20419,153.4625,S39,S
-356,0,3,Michelle Gillespie,female,74.0,0,4,ZU/DJFWE 4010,41.5792,,S
-357,1,2,Cathy Montgomery,female,34.0,1,2,O/2. 1421,31.3875,,S
-358,1,1,Carmen Lam,female,28.0,0,0,489509,39.6875,,S
-359,0,3,James Frye,male,,0,0,4637,8.05,,C
-360,1,3,Jeffrey Johnson,male,19.0,0,1,867600,16.1,,C
-361,1,2,Sheila Leach,female,18.0,0,1,972327,21.0,,S
-362,0,3,Kelly Williams,female,19.0,0,0,EJSA/C8. 9213072,7.8292,,S
-363,0,3,Eric Robinson,male,34.0,0,0,739490,8.05,,S
-364,0,3,Jared Evans,male,22.0,0,0,165231,7.05,,C
-365,1,3,Crystal Murphy,female,47.0,0,0,65712,7.55,,S
-366,0,3,John Brown,male,,0,0,208585,8.05,,C
-367,0,3,Luis Williams,male,34.0,0,0,2162,8.05,,S
-368,1,1,John Lopez,male,,0,0,155984,71.0,,S
-369,1,3,Julie Pena,female,18.0,0,1,7470,6.75,,S
-370,0,3,Tammy Tran,female,51.0,2,3,183247,55.9,,C
-371,1,2,Stacy Collier,female,28.0,0,1,6385330,21.0,,S
-372,0,3,Michael Rodgers,male,,0,0,979913,19.5,,S
-373,0,3,Allen Ellison,male,,0,0,268969,9.8458,,S
-374,0,3,Michael Adkins,male,34.0,1,0,623719,26.55,,S
-375,0,3,Joshua Arnold,male,34.0,1,0,75570,7.75,D408,Q
-376,0,3,Ashley Lara,female,,0,0,913100,13.0,Y,C
-377,0,3,Michael Cervantes,male,34.0,1,0,581072,20.525,,S
-378,0,3,Daniel Lyons,male,28.0,0,0,8026164,15.5,,C
-379,1,3,Holly Roberts,female,22.0,0,0,351958,8.05,,S
-380,0,3,Stephen Harris,male,,0,0,447530,7.05,,C
-381,0,3,Craig Parsons,male,,0,0,MNS/M 2988,13.5,,S
-382,0,3,Shawn Jacobs,male,,0,0,334551,7.775,,C
-383,0,3,James Jones,male,1.0,8,2,75139,83.1583,,S
-384,1,2,Janice Lowery,female,18.0,0,1,708769,79.2,G91,C
-385,1,3,Lisa Thompson,female,21.0,0,0,242288,7.75,M2,S
-386,0,3,Alexander Garcia,male,23.0,0,0,69755,12.35,,S
-387,0,3,Ryan Davis,male,,0,0,9085,8.4333,,Q
-388,1,3,Johnny Brown,male,29.0,0,0,9020,7.0458,,C
-389,0,3,Danny Thomas,male,59.0,0,0,J.A./V.7. 21628,8.85,,S
-390,1,2,Stephanie Allison,female,30.0,0,0,697270,26.0,,S
-391,1,2,Christina Hernandez,female,26.0,0,2,N/4 4661,76.2917,,C
-392,1,1,Richard Nichols,male,22.0,1,1,3601,247.5208,A48,C
-393,0,3,Samantha Norton,female,23.0,0,0,MX 79588,9.5,,C
-394,0,1,Joshua Morgan,male,34.0,0,0,869371,30.6958,,S
-395,0,1,David Fletcher,male,50.0,0,0,SG 78813,31.275,,S
-396,0,3,Randy Holland,male,,0,0,6757,9.5,L66,S
-397,1,2,Megan Lynch,female,42.0,0,0,302533,26.0,,S
-398,0,3,Alexander Mullen,male,,0,0,58578,7.8958,,S
-399,1,2,David Campbell,male,30.0,1,0,414382,52.5542,,S
-400,0,1,Chad Richard,male,58.0,0,1,35192,90.0,,S
-401,1,1,Brittany Brown,female,,1,0,N.Y. 37705,76.7292,,S
-402,1,1,Vincent Fowler,male,30.0,1,0,8786621,135.6333,,C
-403,0,1,Billy Sherman,male,,0,0,21689,81.8583,,S
-404,1,1,Ashley Golden,female,42.0,0,2,OIKOO/D.D. 9417575,153.4625,E148,S
-405,0,3,Robert Walker,male,34.0,2,0,8747,16.0,D47,S
-406,1,3,Charles Madden,male,28.0,1,1,DHGZN/JK 217493,26.0,,S
-407,0,3,Jason Lopez,male,17.0,5,3,427586,78.85,V432,S
-408,1,3,Misty Munoz,female,,0,0,315101,8.05,,C
-409,0,2,Darin Lynch,male,30.0,0,0,J.N.J. 5670,0.0,,S
-410,1,2,Vanessa Banks,female,1.0,1,2,8415,56.9292,,S
-411,0,3,Eric Johnson,male,46.0,0,2,1971,26.25,,S
-412,0,3,Zachary Wise,male,24.0,0,0,45923,7.75,,S
-413,0,3,Suzanne Kent,female,21.0,1,0,Y.V./PE 476,7.75,R42,S
-414,1,1,Christine Lane,female,61.0,0,2,55533,56.4958,H56,S
-415,0,3,Philip Bautista,male,34.0,0,0,432353,7.7333,,S
-416,1,3,Debra Harris,female,,1,0,200341,19.5,O7,C
-417,0,3,Kristen Larson,female,,2,1,235178,23.25,,S
-418,0,3,Monique Acosta,female,21.0,0,1,1220,20.25,,C
-419,1,3,David Bowman,male,18.0,0,0,974746,13.0,U13,C
-420,1,1,Warren Brady,male,49.0,0,0,187315,106.425,U30 Y19 D68,C
-421,1,2,Abigail Johnson,female,22.0,2,1,521628,26.0,,S
-422,0,3,Jason David,male,,0,0,RNOF/D 8. 3434332,9.5,O77,C
-423,1,2,Deanna Howard,female,16.0,0,1,253971,16.1,,S
-424,0,2,Joshua Wright,male,,0,0,TG. 4407,8.05,B84,S
-425,0,3,Anthony Potter,male,,1,0,LMVT/Q 8. 7402771,19.2583,,S
-426,1,2,Kristin Bryant,female,40.0,0,0,6095273,10.5,,S
-427,1,3,Samantha Willis,female,,1,0,338085,14.5,V29,C
-428,0,2,Phillip Cox,male,34.0,0,0,352974,26.0,,S
-429,1,2,Martha Diaz,female,23.0,1,1,9830,76.7292,,Q
-430,1,3,Kayla Bond,female,16.0,0,0,G.O./E.N. 8,7.8542,D9,C
-431,0,3,Eric Drake,male,51.0,0,1,157989,9.5,,S
-432,0,3,Joshua Baker,male,,0,0,WHWBP/HO 3176930,14.4542,,S
-433,0,3,Christopher Gill,male,11.0,0,0,215883,7.75,,S
-434,0,3,Susan Adams,female,24.0,0,3,CHYO,22.525,,S
-435,0,3,Brandon Simmons,male,,0,0,KQ 73803,8.6625,,Q
-436,0,3,Benjamin Campbell,male,21.0,0,0,139322,10.4625,L39,S
-437,0,3,Brian Smith,male,43.0,2,1,573484,25.4667,,S
-438,0,3,Emma Smith,female,30.0,1,0,D/7. 7873,19.9667,,S
-439,0,3,Corey Duncan,male,,2,2,1445,120.0,V388,S
-440,0,3,Marc Moss,male,,1,0,AR 70247,26.25,,C
-441,0,3,David Gonzalez,male,,0,0,Z 6084,7.925,,Q
-442,1,2,Stuart Nielsen,male,24.0,0,0,87863,7.7417,,S
-443,0,3,Logan Ruiz,male,,0,0,NA 58527,10.5,,Q
-444,0,3,Jesus Lam,male,34.0,0,0,766339,7.7292,,S
-445,0,1,Daniel Hudson,male,34.0,0,3,XM/Qgdzh 6030,512.3292,J23 G19,C
-446,1,2,Lindsey Campbell,female,52.0,0,0,QA 8197,15.2458,O70 W54,S
-447,0,3,Andre Thompson,male,18.0,0,0,989712,7.8958,L4,S
-448,0,3,Darrell Martinez,male,28.0,0,0,423102,10.5,,C
-449,0,3,Christopher Jenkins,male,29.0,0,0,486515,7.225,,S
-450,0,3,Kevin Frazier,male,45.0,2,0,6325980,29.125,,S
-451,0,3,Mario Pratt,male,,0,0,41931,12.275,,S
-452,1,3,Courtney Lee,female,,0,0,770191,21.6792,,S
-453,0,3,Jay Soto,male,21.0,1,0,62245,18.7875,,S
-454,1,3,Eric Burnett,male,16.0,0,0,623906,7.8958,,Q
-455,0,2,Jared Perez,male,71.0,0,0,A/3 1707,26.55,,Q
-456,0,3,Micheal Stafford,male,42.0,0,0,Y/8 36947,8.05,,S
-457,1,3,Daniel Koch,male,23.0,0,0,708454,23.0,,S
-458,0,3,Carlos Williams,male,24.0,0,0,O/3 5841,10.5,,S
-459,0,3,David Mcgee,male,42.0,0,0,J.P. 56319,13.0,,S
-460,1,3,Roberto Smith,male,52.0,0,0,274882,7.8,,S
-461,1,1,Stacey Travis,female,34.0,0,0,607492,75.25,,S
-462,1,3,Richard Lane,male,34.0,0,0,H./G. 2502,7.75,O94,S
-463,1,2,Randy Garza,male,2.0,1,1,4255,26.2875,,S
-464,1,1,Tonya Ortiz,female,34.0,1,0,95538,39.6875,,S
-465,1,3,Heather Moran,female,24.0,0,1,573876,24.15,Y201,S
-466,1,1,Stephanie Williams,female,34.0,1,1,K.P. 8119,61.9792,,S
-467,1,1,Elizabeth Berg,female,24.0,0,0,893895,211.3375,T19,S
-468,0,3,Jeff Rhodes,male,43.0,0,0,C.N. 7683,8.6625,L56,S
-469,1,1,Christopher Lopez,male,54.0,0,0,MH 85350,66.6,,S
-470,0,3,William Graves,male,34.0,0,0,8622,8.6625,,Q
-471,0,3,Anthony Ryan,male,,0,0,3125,12.2875,,C
-472,1,2,John Hines,male,23.0,0,0,T/1 4196,24.0,,S
-473,0,3,Michael Roberson,male,,1,0,928,33.5,,Q
-474,1,2,Karen Ward,female,26.0,0,0,5140,10.5,,S
-475,1,1,Virginia Chaney,female,,1,1,25859,247.5208,,C
-476,1,3,Victoria Jones,female,,1,0,22519,13.0,,C
-477,1,2,Joann Walsh,female,25.0,0,0,ME 96819,7.775,,Q
-478,0,1,Dale Patton,male,60.0,0,0,V.X.N. 17268,20.25,,S
-479,0,3,Jonathon Johnston,male,,0,0,3836,8.05,J95,S
-480,1,1,Michelle Cunningham,female,21.0,0,0,798011,46.9,,S
-481,0,1,Aaron Young,male,57.0,0,0,687572,78.2667,,S
-482,1,3,Candice Mcclure,female,2.0,0,1,351,7.8958,,S
-483,0,3,Jonathan Chavez,male,16.0,0,0,PX 20846,10.5,G94,C
-484,1,1,Erin Rice,female,3.0,1,2,748670,73.5,,S
-485,1,3,Scott Dixon,male,,0,0,U.L.T. 4926,9.5875,,S
-486,0,3,Javier Calhoun,male,5.0,3,2,47836,26.0,N3,S
-487,0,3,Jason Harrison,male,34.0,0,0,153740,7.775,C55,S
-488,0,3,Clarence Robertson,male,24.0,0,0,657021,7.8542,,S
-489,1,2,Sherry Cisneros,female,34.0,0,2,222015,23.0,,S
-490,0,1,Shawn Sims,male,34.0,1,0,692039,69.55,,S
-491,0,3,Brad Stokes,male,42.0,0,0,57096,7.75,,C
-492,1,3,Thomas Shields,male,18.0,0,0,142011,7.925,,C
-493,0,3,Robert Reyes,male,,0,0,479640,7.8958,,C
-494,0,3,Kenneth Willis,male,23.0,0,0,556233,13.0,,S
-495,1,3,Lisa Johnson,female,2.0,0,1,IX 14099,10.5,C0,S
-496,0,3,Jeremy Collins,male,42.0,0,0,420824,7.05,,S
-497,0,3,Taylor Bradford,female,25.0,2,3,10230,26.0,,S
-498,0,3,Samantha Hill,female,9.0,1,0,675089,13.0,,S
-499,0,3,Kerry Day,male,34.0,0,0,121705,7.8542,K75,C
-500,1,2,Amanda Powell,female,40.0,0,0,44412,16.7,,S
-501,0,3,William Casey,male,34.0,1,0,XO 34749,10.1708,R61,S
-502,0,1,Gary Rodriguez,male,34.0,0,1,659920,57.9792,,S
-503,0,2,Nicole Russell,female,30.0,1,0,Q.A. 8388,41.5792,,Q
-504,0,3,Andrew Martinez,male,26.0,0,0,6124,7.125,,S
-505,0,3,Craig Mendez,male,,0,0,4709,8.05,K387,C
-506,0,3,James Williams,male,34.0,0,0,1913,6.4958,,S
-507,0,3,Larry Johnson,male,56.0,0,0,323989,7.8958,,S
-508,1,1,Jeremy Parker,male,50.0,1,0,9568,77.2875,,S
-509,1,3,Jesus Wallace,male,,0,0,72796,15.5,,C
-510,1,1,Rachel Ford,female,21.0,0,0,6662,93.5,X49,S
-511,1,2,Mary Beck,female,29.0,0,0,AK 65364,34.375,,S
-512,0,3,Robert Jensen,male,29.0,0,0,AH 98887,7.125,R44,S
-513,0,2,Ricardo Montgomery,male,47.0,0,1,M/9 98291,25.5875,,S
-514,0,3,James Stephens,male,34.0,0,0,Q/2 5257,11.2417,,S
-515,0,3,Stephanie Noble,female,,1,0,907571,13.0,G,C
-516,1,3,Sarah Anderson,female,24.0,0,0,79668,0.0,,S
-517,0,3,Jared Thomas,male,,0,0,R.X. 62564,14.4583,B20,C
-518,0,3,Stephanie Haas,female,,4,1,380864,37.0042,J57,S
-519,0,1,Alexander Cherry,male,54.0,1,2,WL/XWASH 4187,512.3292,,S
-520,0,2,Jack Smith,male,26.0,2,2,976207,38.5,,S
-521,1,1,Emily Wilcox,female,,1,0,285271,133.65,B10,S
-522,0,3,John Gardner,male,30.0,0,0,9932000,7.775,,S
-523,1,3,Robert Blake,male,9.0,1,0,261135,27.9,,C
-524,1,2,Paul Boyle,male,43.0,1,0,424986,39.6,,S
-525,0,3,Anthony Scott,male,,1,0,7200,26.0,,C
-526,1,3,Sue Mcmahon,female,34.0,0,0,409283,0.0,,S
-527,0,3,Garrett Snow,male,26.0,0,0,112934,15.55,,S
-528,0,3,Jeff Greene,male,21.0,0,0,1812,7.05,A73,S
-529,0,1,Brian Roth,male,64.0,0,0,137597,29.7,,S
-530,0,3,Amber Smith,female,4.0,1,0,T.C.V. 64934,15.2458,,S
-531,0,3,Nicholas Waters,male,54.0,0,3,2643,9.8375,Y75,S
-532,1,3,Bailey Johnston,female,24.0,0,0,AY 59066,7.775,A23 C37,S
-533,0,3,Paige Conway,female,23.0,0,0,538281,8.6625,S13,S
-534,1,2,Darlene Huffman,female,18.0,0,0,2564716,23.45,,S
-535,1,3,Garrett Webb,male,34.0,0,0,8303,13.0,G27,Q
-536,1,1,Michael Mack,male,,0,0,71571,56.4958,,Q
-537,0,3,Warren Thomas,male,34.0,0,0,1871,7.775,,C
-538,0,3,Carol Sparks,female,45.0,0,2,C.P.O. 10555,7.2292,,C
-539,1,3,Joseph Jones,male,2.0,2,1,9643,26.0,,S
-540,0,3,Matthew Prince,male,21.0,0,0,747672,12.475,,S
-541,0,3,Stephen Johnson,male,0.83,4,2,4800,29.0,,S
-542,0,3,Charles Hudson,male,,0,0,923784,13.7917,W64,Q
-543,0,3,James Cox,male,9.0,0,0,MK 97539,13.0,,S
-544,0,3,Rose Goodwin,female,,0,3,3144,26.55,,S
-545,1,1,Raymond Richard,male,2.0,0,2,IK/XLKVW 6170,263.0,,C
-546,1,1,Natalie Powers,female,11.0,1,2,916134,108.9,T81,S
-547,1,1,Virginia Foster,female,34.0,0,0,537996,31.3875,,C
-548,0,3,Nicole Erickson,female,0.83,5,2,425263,46.9,,S
-549,0,3,Chad Ruiz,male,43.0,0,0,J.C. 27457,8.05,,Q
-550,1,1,Russell Clark,male,18.0,1,0,C.D.F. 72405,91.0792,,S
-551,0,3,James Banks,male,,0,0,UP 99907,12.875,,C
-552,1,3,Taylor Vaughan,female,21.0,0,0,575143,7.925,,S
-553,1,2,Jennifer Miller,female,,1,0,870702,30.5,M2,S
-554,1,2,Russell Hansen,male,34.0,0,0,KPHYH/RQ 2216061,15.2458,,C
-555,0,3,Martin Brooks,male,34.0,0,0,363823,8.6625,,S
-556,0,3,Derek Williams,male,19.0,1,1,178383,13.0,,C
-557,0,1,John Andrews,male,61.0,0,0,735341,16.1,,S
-558,0,3,Ruben Lewis,male,27.0,0,0,N/3 8118,14.4542,P5,S
-559,0,2,James Thomas,male,,0,0,256171,7.75,,S
-560,0,3,Dan Jones,male,,5,2,VU 66191,35.5,,S
-561,1,2,Danielle Harris,female,34.0,0,0,706944,31.3875,T678,S
-562,1,3,Lynn Stevens,female,,0,0,1251,7.2292,,C
-563,0,1,Gary Vaughan,male,34.0,1,1,83045,221.7792,,C
-564,1,1,Samuel Hardin,male,50.0,0,0,W.I. 4048,46.9,,Q
-565,0,3,Ian Escobar,male,34.0,0,0,G.G.R. 67131,7.75,C5,S
-566,0,3,Arthur Patrick,male,23.0,1,0,K.X./A.P. 1,8.1375,,C
-567,0,3,Edward Forbes,male,47.0,0,0,294885,13.0,,S
-568,0,3,Richard Martin,male,,1,0,758724,30.5,,S
-569,0,3,James Payne,male,,0,0,133469,0.0,,S
-570,1,2,Robert Allen,male,34.0,2,1,21346,69.55,,S
-571,0,3,Andrew Hoffman,male,,0,0,89695,10.5,,C
-572,0,3,Chad Thompson,male,,0,0,562880,15.7417,,Q
-573,1,1,Yvette Henderson,female,26.0,0,1,185123,55.9,,S
-574,0,3,James Martinez,male,34.0,0,0,AJJD/E6. 7744965,9.5,,S
-575,0,2,Isaiah Brown,male,34.0,0,0,WM 48380,11.5,,S
-576,1,3,Sarah Santana,female,7.0,1,1,418523,11.2417,,S
-577,0,3,Daniel Rodriguez,male,,0,0,640088,7.2292,,Q
-578,0,3,Scott Brown,male,16.0,0,0,471391,7.25,,S
-579,1,3,Dennis Moreno,male,40.0,0,0,1227,7.8958,,S
-580,1,1,Tammy Gibbs,female,21.0,1,0,51739,52.0,L56 P52,S
-581,1,3,Ann Hunter,female,29.0,0,0,30528,0.0,,S
-582,1,3,Katherine Medina,female,,0,0,60060,7.25,N525,C
-583,1,1,Pamela Mills,female,34.0,0,1,176656,55.0,,S
-584,0,3,Shawn Forbes,male,66.0,0,0,990379,16.1,,S
-585,0,3,Richard Kim,male,16.0,3,2,346077,30.0,,S
-586,0,3,Richard Santana,male,34.0,0,0,NP 54384,13.0,,S
-587,1,3,Carla Brady,female,9.0,0,0,K.Q. 57996,7.25,H20,S
-588,0,3,Michael Brooks,male,19.0,0,0,38418,8.05,,S
-589,1,3,Herbert Morales,male,15.0,0,0,856020,7.225,,C
-590,0,3,Aaron Cortez,male,5.0,0,0,896212,30.5,,S
-591,1,3,Jay Banks,male,26.0,0,0,40317,8.1583,,C
-592,1,3,Lisa Torres,female,,1,0,524404,9.5,,C
-593,0,3,Bryan Donovan,male,,0,0,HG 74166,7.8958,,Q
-594,1,3,Shannon Collins,female,,2,0,36598,17.8,,S
-595,0,3,Christopher Stewart,male,34.0,0,0,X.V.B. 46329,8.05,,C
-596,0,3,John Hanson,male,5.0,4,1,B/0 8173,26.25,,C
-597,1,3,Kelly Robinson,male,21.0,0,0,8287,7.8958,,S
-598,1,3,Sierra Wall,female,,1,2,801920,25.9292,,C
-599,0,2,Collin Sutton,male,52.0,0,0,NL/A 41781,26.3875,,C
-600,0,3,Tanner Roy,male,5.0,2,0,395301,27.7208,,S
-601,0,3,Zachary Jackson,male,,0,0,789275,9.475,,S
-602,0,3,Malik Dyer,male,42.0,0,2,27994,26.0,,S
-603,1,3,Robin Schmitt,female,16.0,0,0,5873,8.05,,S
-604,0,3,Marcus Jones,male,27.0,0,0,848114,11.1333,,S
-605,0,3,Sarah Williams,female,21.0,0,0,V/1. 29803,7.75,,S
-606,0,3,Kathleen Norman,female,22.0,4,2,7098,33.0,,Q
-607,0,3,David Harper,male,,0,0,9839,15.5,,S
-608,1,2,Sandra Snyder,female,28.0,0,0,DU 48332,21.075,W50 B89 P76,C
-609,0,3,David Moore,male,26.0,0,0,42308,7.25,,S
-610,0,3,Jackson Jackson,male,26.0,0,0,262203,7.8542,,S
-611,0,3,Michael Perkins,male,61.0,0,1,K/2. 9923,12.65,F74,S
-612,1,3,Jason Thompson,male,23.0,1,0,934245,9.225,V779,S
-613,0,3,Michael Burgess,male,,0,0,364835,7.8958,,S
-614,0,1,Justin Mahoney,male,42.0,0,0,945803,69.3,,S
-615,0,3,Kyle Costa,male,34.0,0,0,1560,7.8958,,S
-616,0,3,Ashley Hall,female,24.0,2,2,577036,26.0,I43,S
-617,0,3,Richard Knight,male,34.0,0,0,U.Q. 1769,26.0,,S
-618,0,3,Kathy Thompson,female,,0,0,4853,8.05,V27,S
-619,1,3,Michele Reynolds,female,,1,0,96747,7.8542,,Q
-620,0,3,Seth Riley,male,45.0,0,0,98731,7.25,,S
-621,1,1,Jose Payne,male,21.0,0,0,549672,31.0,,S
-622,0,3,Shane Carey,male,,0,0,350062,7.0542,Q56,C
-623,1,3,Tammy Miller,female,5.0,0,1,28462,9.225,,S
-624,0,3,Ryan Palmer,male,15.0,1,0,GY 27796,16.1,,S
-625,1,1,Rhonda Aguilar,female,34.0,0,0,6839,80.0,,S
-626,0,1,Chad Trujillo,male,51.0,0,0,567771,0.0,,S
-627,1,3,Ashley Vincent,female,19.0,0,2,362087,0.0,,S
-628,0,2,Jeffrey Proctor,male,,0,0,WF 9076,30.0,,S
-629,0,3,Thomas Barnett,male,25.0,0,0,516982,10.5,V92 W62 U20,S
-630,1,1,Dustin Thomas,male,34.0,0,0,44526,79.2,,C
-631,0,3,Frank Beasley,male,,0,0,210211,7.8958,,S
-632,1,2,Sarah Nelson,female,34.0,0,0,1480,7.75,,S
-633,1,1,Bryan Schneider,male,34.0,0,0,88248,82.1708,,S
-634,0,3,Michael Sanders,male,17.0,0,0,90363,7.925,L38,S
-635,0,3,Shawn Vasquez,male,47.0,0,0,645340,10.5,,C
-636,1,3,Robert Mason,male,2.0,0,1,301298,27.9,,C
-637,1,3,Brendan Salas,male,5.0,0,0,104196,7.925,O232,S
-638,1,3,Tammy Chapman,female,30.0,1,2,SU/Xanif 6726,31.3875,,S
-639,1,3,Katherine Brown,female,18.0,2,1,383868,26.0,,S
-640,0,3,James Burch,male,45.0,0,0,634499,7.75,,S
-641,1,2,Theresa Chambers,female,14.0,0,0,800227,7.8958,,S
-642,1,1,Kimberly Marshall,female,25.0,0,0,5940,77.9583,,S
-643,0,3,Roger Schmitt,male,,0,0,6513,7.25,,C
-644,0,3,Matthew Gray,male,34.0,0,1,571114,24.15,B47,S
-645,0,3,Scott Mann,male,34.0,0,0,843055,7.8958,V12,S
-646,0,3,Thomas Moore,male,58.0,0,0,43582,7.4958,,S
-647,1,1,Lisa Hernandez,female,34.0,0,0,954553,32.3208,A64 I96,C
-648,0,3,Michael Braun,male,22.0,0,0,73403,7.2292,,S
-649,1,3,Matthew Taylor,male,29.0,0,0,823898,7.8958,,S
-650,0,2,Gabriel Montes,male,,0,0,61134,6.4958,Z777,S
-651,0,1,Dalton Hayes,male,48.0,0,0,772224,26.55,F99,C
-652,1,1,Kyle Higgins,male,55.0,0,0,234574,52.0,,S
-653,1,2,Melissa Green,female,29.0,0,0,953853,14.4583,,S
-654,0,3,Timothy Smith,male,18.0,0,0,HW 69689,7.775,S16,S
-655,0,3,Samantha Novak,female,,0,0,JLFL,11.5,,S
-656,1,3,Kelly Cochran,female,34.0,0,0,CZ 42926,8.4583,,C
-657,1,1,Teresa Watson,female,34.0,0,0,57052,71.2833,N35,S
-658,0,3,Adam Bell,male,24.0,0,0,W./O. 4245,15.85,,S
-659,1,1,Crystal Vasquez,female,45.0,0,0,477802,31.275,,S
-660,0,3,Vernon Davis,male,34.0,1,0,51040,7.775,,S
-661,0,3,Benjamin Mueller,male,11.0,0,0,72054,7.8542,M6,S
-662,0,2,Robert Gomez,male,14.0,0,0,FN 32977,14.5,,S
-663,0,3,John Davis,male,34.0,0,0,6974,10.5,,S
-664,0,1,Paul Holland,male,46.0,0,0,ZP 61465,7.75,I67,S
-665,0,1,Andrew Henry,male,34.0,0,0,158477,30.0,,S
-666,0,3,Matthew Gray,male,25.0,0,0,6488,7.8958,,S
-667,0,1,John Wells,male,16.0,0,0,40588,36.75,U9,S
-668,0,3,Ricky Byrd,male,,0,0,7905,0.0,,Q
-669,0,3,Eric Chandler,male,34.0,0,0,476315,14.4583,,S
-670,0,3,Dawn Hall,female,43.0,0,0,352011,7.75,I69,S
-671,0,3,Jay Li,male,24.0,0,0,IQ 20599,7.7958,D28,S
-672,0,2,Ryan Williams,male,,0,0,40607,13.0,,C
-673,1,1,Kimberly Williams,female,,0,0,801102,73.5,E45,C
-674,1,3,Jeffrey Lowe,male,34.0,0,0,89836,7.2292,,S
-675,0,3,Shannon Vasquez,female,,2,1,R.P.L. 82207,34.6542,Z21,S
-676,1,2,Lance Murphy,male,22.0,1,0,622761,7.8792,,Q
-677,0,3,William Johnson,male,23.0,0,0,132026,6.75,Y71,S
-678,0,1,Michael Murray,male,,0,0,OK 3656,7.2292,,S
-679,1,1,Rose Page,female,34.0,0,0,428475,30.0708,,C
-680,0,3,Jeremy Williams,male,34.0,3,1,348004,25.4667,N77,S
-681,1,3,Patricia Olson,female,58.0,0,0,7997,7.25,,S
-682,0,3,Jeremy Melton,male,55.0,0,0,627222,8.6833,,C
-683,0,3,Kyle Jacobson,male,64.0,0,0,2839,7.8542,,S
-684,0,3,David Gonzalez,male,34.0,0,0,LD 99504,18.7875,,S
-685,0,1,Jose Brown,male,47.0,0,1,453053,164.8667,Q47,S
-686,1,3,Tammy Bailey,female,5.0,2,2,844360,7.225,,S
-687,0,3,Robert Brown,male,24.0,0,0,441500,7.8958,,Q
-688,0,3,Dylan Bruce,male,2.0,0,0,4553,21.0,,Q
-689,1,3,Marc Chambers,male,,0,0,604051,15.5,,S
-690,1,3,Sabrina Ruiz,female,,0,0,Q.W. 25305,22.3583,,C
-691,0,3,Jordan Landry,male,18.0,0,0,ZQFF/L3. 4216090,7.7958,I97,S
-692,1,3,Paul Gray,male,46.0,0,0,264326,6.95,F77,S
-693,0,3,Michael Brown,male,28.0,0,0,275254,7.2292,,S
-694,0,3,Tyler Coleman,male,,1,0,4743307,26.25,,Q
-695,1,1,Keith Reese,male,34.0,0,0,39478,77.2875,,S
-696,0,3,Shaun Sharp,male,,0,0,1689,7.65,,S
-697,0,1,Francisco Walker,male,,0,0,2486,31.275,,S
-698,0,3,Jeffrey Martinez,male,34.0,0,0,337573,6.2375,,S
-699,0,2,Crystal Green,female,42.0,2,2,81588,113.275,,C
-700,0,3,Tyler Sims,male,,0,0,604688,13.5,,C
-701,0,3,Whitney Wright,female,34.0,1,0,397686,27.0,,S
-702,0,3,James Jarvis,male,25.0,8,2,346050,53.1,,S
-703,0,3,Travis Martin,male,19.0,0,0,E./I. 5876,7.925,,S
-704,0,3,Matthew Washington,male,,0,0,425319,7.8958,,S
-705,0,3,Nicholas Cobb,male,17.0,0,0,AT 83514,13.0,,Q
-706,1,2,Brenda Barker,female,30.0,0,0,7136,9.825,N73,S
-707,0,3,Alexander Rollins,male,40.0,0,0,SM 24270,11.1333,,C
-708,1,1,Cindy Monroe,female,18.0,1,0,348814,134.5,,Q
-709,1,3,John Campbell,male,34.0,0,0,G./O. 88655,7.925,,C
-710,1,3,Lisa Richardson,female,18.0,0,0,G./C. 9995,10.5,,C
-711,1,3,Pamela Oconnor,female,,0,0,12456,7.925,N44 R15,Q
-712,0,3,Andrew Hernandez,male,24.0,1,3,632277,34.375,,S
-713,0,3,Seth Lopez,male,48.0,0,0,A.Y./A.U. 752,8.6625,,Q
-714,0,3,Richard Farley,male,,0,0,R/0 2146,13.0,,S
-715,0,3,Darryl Brandt,male,25.0,0,0,545434,8.05,Q40,S
-716,1,3,Jennifer Owen,female,24.0,0,0,92037,7.75,,S
-717,1,2,Christine Colon,female,,0,0,G.D. 70056,34.375,,S
-718,1,2,Justin Wall,male,,1,0,6182,61.3792,,S
-719,0,3,Susan Ortiz,female,34.0,0,0,367289,7.75,,C
-720,0,3,Robert Baker,male,34.0,0,0,ND 61905,7.75,J20,S
-721,0,3,Leonard Pearson,male,,0,0,64065,26.0,,S
-722,0,3,Henry Burgess,male,8.0,4,2,223966,26.2875,B48,S
-723,1,2,Tommy Salazar,male,50.0,1,0,118946,57.0,,S
-724,1,3,Melanie Horn,female,30.0,2,0,3392,7.8542,,S
-725,0,1,Matthew Mitchell,male,46.0,0,0,KY 99090,56.4958,,S
-726,0,3,Mark Munoz,male,,0,0,2411,9.0,,C
-727,0,1,William Welch,male,,0,0,3987,15.9,,S
-728,1,3,Elizabeth Clark,female,24.0,1,2,24122,26.2833,D26,S
-729,0,1,Brett Luna,male,24.0,2,0,7785,108.9,,S
-730,0,3,Justin Frye,male,34.0,0,0,506886,7.75,,S
-731,0,3,Brian Graham,male,26.0,0,0,196108,8.05,,S
-732,0,3,Julie Thompson,female,19.0,2,0,646661,7.8542,,S
-733,1,3,Tamara Johnson,female,,1,0,24426,20.525,,C
-734,1,3,Daniel Ford,male,4.0,1,2,K.A./F.E. 6,24.15,,Q
-735,0,1,Joel Garcia,male,,0,0,9945,51.8625,,S
-736,1,1,Charlene Decker,female,34.0,2,2,585457,227.525,G21,S
-737,0,3,Chad May,male,,0,0,55292,8.1125,,C
-738,0,3,Julian Myers,male,18.0,0,0,30743,13.0,,S
-739,0,3,Alexandria Rodgers,female,,0,0,J.U. 61715,13.0,,Q
-740,1,2,Jeffery Mendez,male,,2,0,24601,21.075,,S
-741,0,3,Matthew Scott,male,18.0,0,0,227998,8.05,F79,C
-742,1,1,Gail Hamilton,female,50.0,0,0,120646,61.175,,S
-743,0,3,Michael Lozano,male,28.0,0,0,927608,7.2292,,Q
-744,0,3,David Cook,male,19.0,0,0,344723,7.8792,,C
-745,1,2,Rachel Turner,female,21.0,0,1,282053,26.55,,C
-746,1,2,David Foster,male,34.0,0,0,O.W.W. 77971,13.8625,R3,S
-747,0,3,Valerie Shaw,female,22.0,0,0,291307,13.0,,S
-748,0,3,Isabella Ortega,female,34.0,0,4,962795,29.7,,S
-749,1,1,Michael Jensen,male,34.0,0,0,XW. 6011,151.55,,S
-750,0,3,Steven Gutierrez,male,,0,0,NY/CLZDJ 9802,7.75,,S
-751,1,3,Timothy Garcia,male,,0,0,QF. 3105,8.05,,Q
-752,0,3,Brian Williams,male,11.0,1,0,HA/Iljbu 7522,26.0,,S
-753,1,3,Dylan Weber,male,24.0,2,0,NMJDP/VN 5974704,26.0,W30,S
-754,0,1,Mark White,male,52.0,0,0,8813,49.5042,,S
-755,1,3,Samantha Gonzalez,female,18.0,0,2,412865,10.5,F67,S
-756,0,3,Michael Goodman,male,11.0,0,0,4534,10.5,,S
-757,1,2,Claudia Hart,female,15.0,1,1,85418,24.15,,S
-758,1,3,Kenneth Mcdowell,male,7.0,0,0,AO 9901,12.0,,C
-759,0,1,Zachary Marshall,male,34.0,2,0,547094,211.3375,Z40,S
-760,0,3,Andrew Chase,male,34.0,0,0,18669,7.775,,S
-761,1,1,Renee Bradshaw,female,24.0,0,1,R.F.X. 67298,151.55,,C
-762,0,3,Samuel Thomas,male,21.0,0,0,OI. 2626,8.05,,S
-763,0,3,Calvin English,male,25.0,0,0,XHHZ/H 8. 4379169,8.6625,,S
-764,1,1,Danielle Spears,female,50.0,0,0,80127,13.0,,S
-765,1,1,Ashley Edwards,female,11.0,1,1,84366,263.0,,C
-766,0,3,Thomas Knight,male,22.0,0,0,7569,7.7375,,S
-767,0,1,Brendan Jones,male,34.0,0,0,966363,79.65,,S
-768,0,3,Jonathan Lara,male,18.0,0,0,203272,14.4542,,S
-769,1,1,Jeffrey Mcgrath,male,,0,0,803225,57.9792,,C
-770,1,2,Mallory Sanchez,female,34.0,0,1,979763,36.75,,S
-771,0,2,Dennis Nash,male,28.0,0,0,AS 20246,26.0,D37,Q
-772,0,3,Daniel Middleton,male,40.0,0,0,768262,13.4167,,S
-773,0,3,Joshua Parks,male,,8,1,EF/Q 5641,66.6,,S
-774,1,3,Tina Perkins,female,,0,0,14242,7.925,,C
-775,1,1,Olivia Patel,female,,0,0,999522,26.0,,S
-776,1,1,Jessica Smith,female,70.5,1,0,QN/Lfsoi 2471,263.0,,C
-777,0,1,Nathaniel Roth,male,30.0,0,0,1491,86.5,,C
-778,1,3,Trevor Reed,male,34.0,0,0,XA 31928,18.75,,S
-779,1,1,Martin Rodriguez,male,48.0,0,1,310435,211.5,,C
-780,0,3,Christopher Morton,male,21.0,2,1,56657,27.7208,,S
-781,0,3,Matthew Moore,male,24.0,0,0,CU 12749,8.05,P43,C
-782,0,1,Adam Castaneda,male,34.0,0,0,9970,53.1,M67,S
-783,0,3,Douglas Keller,male,18.0,4,2,RF 13337,69.55,,S
-784,1,1,Rhonda Carney,female,48.0,0,0,70012,69.55,,S
-785,0,3,Christian Andrews,male,19.0,1,0,570773,27.75,A4,S
-786,0,2,Kevin Perkins,male,42.0,0,1,LY/NF 90016,25.4667,,S
-787,0,3,Andrew Oconnor,male,,0,0,174975,12.35,,S
-788,1,3,Maria Greene,female,1.0,1,1,376126,8.6625,T,S
-789,0,3,Travis Jackson,male,34.0,0,0,602947,12.525,,S
-790,0,3,Eric Haynes,male,,0,0,72857,13.0,,S
-791,0,2,Barry Wilson,male,,2,2,JZ 59745,120.0,,C
-792,0,2,Patrick Cox,male,,0,0,M 3688,39.0,,S
-793,0,3,Sean Harris,male,21.0,0,0,V./R. 2207,8.05,,C
-794,0,3,Rachel Baker,female,,1,0,UL 57779,15.2458,,C
-795,0,3,Jeffrey Phillips,male,,0,0,524848,7.05,N59 S60,S
-796,1,3,Robert Burgess,male,,0,0,965559,39.4,,S
-797,0,3,John Wilkins,male,4.0,0,0,221719,7.8958,,S
-798,1,3,Jennifer Conrad,female,42.0,0,2,DK 44487,0.0,N84 S14,S
-799,0,3,Donald Reyes,male,,0,0,BC 40550,17.4,,S
-800,0,2,John Bennett,male,19.0,0,0,309226,19.9667,,S
-801,0,3,Jonathon Krueger,male,7.0,1,0,56846,20.2125,,S
-802,0,3,Randall Meyer,male,34.0,0,0,184774,7.925,,S
-803,0,3,Sean Wilson,male,34.0,1,0,416148,18.0,,C
-804,1,1,Christopher Lozano,male,15.0,0,1,B.C.Y. 13263,51.4792,,S
-805,1,1,Luke Thompson,male,34.0,0,0,958445,33.0,,S
-806,1,3,Christopher Hamilton,male,34.0,0,0,738885,13.0,,C
-807,0,1,Theodore Jones,male,,0,0,BT. 4050,26.0,J321,S
-808,1,1,Shelby Meyers,female,24.0,0,0,IU 18513,65.0,,S
-809,0,2,Theodore Ayala,male,48.0,0,0,825572,20.2125,S,C
-810,0,3,Daniel Kim,male,,8,2,51883,71.0,,S
-811,1,3,Brandon Rivera,male,25.0,0,2,551856,7.75,,S
-812,0,3,Jose Moore,male,,0,0,397412,19.2583,,Q
-813,0,1,Joseph Robinson,male,51.0,0,0,769353,8.05,U,S
-814,1,3,Jackie Cohen,female,19.0,1,1,F./2. 9097,8.05,V54,C
-815,1,3,Tammy Klein,female,,0,0,470375,13.0,,Q
-816,0,3,Vincent Clayton,male,34.0,0,0,979784,7.225,Y996,S
-817,0,3,Jimmy Leon,male,34.0,0,0,656249,16.1,,S
-818,0,3,Joshua Mathews,male,34.0,1,1,9028,10.5,H28,S
-819,0,3,Bill Webster,male,,4,2,481014,69.55,,S
-820,0,3,Todd Reed,male,21.0,0,0,914122,7.7333,Z28 W11 U74,S
-821,0,3,Keith Page,male,,2,1,179520,77.9583,,S
-822,0,3,Dan Brown,male,16.0,1,0,140008,15.05,,S
-823,0,3,Gerald Jones,male,,0,0,80931,7.8958,,C
-824,1,3,Alexis Hayes,female,9.0,0,0,939459,0.0,,C
-825,1,3,Tim Lee,male,22.0,0,0,96967,15.85,,S
-826,0,3,Tracy Harper,male,28.0,2,0,812767,24.0,,Q
-827,1,2,Mary Crawford,female,,0,0,V.U. 36217,15.7417,,Q
-828,0,3,David Henson,male,56.0,0,0,NO 70971,20.575,A66 D36 M34 T52,S
-829,1,1,David Wilson,male,71.0,0,0,470736,39.0,,S
-830,0,3,Nathan Sanchez,male,,0,0,468670,8.05,,S
-831,1,3,Katherine Alvarez,female,34.0,0,0,781855,18.0,Z47,S
-832,1,1,Cindy Wong,female,59.0,1,0,431147,227.525,F66,C
-833,1,2,Mary Brown,female,2.0,1,0,483472,56.4958,,C
-834,1,3,Gary Nelson,male,16.0,1,1,164729,7.7875,,S
-835,0,3,Justin Perry,male,28.0,0,0,FS 44090,8.6625,W461,S
-836,0,3,Kenneth Ward,male,24.0,0,0,2116,27.7208,,S
-837,1,3,Kayla Sloan,female,21.0,0,0,243410,10.5,T14 G13 Q85,S
-838,0,3,Jacob Stewart,male,34.0,0,0,1796,9.35,,S
-839,1,2,Tracy Camacho,female,34.0,0,0,EU 55275,10.5,,S
-840,0,2,Richard Rios,male,56.0,0,1,394810,26.55,,S
-841,1,1,Ray Burke,male,34.0,1,2,483351,211.3375,,S
-842,0,3,Andrew West,male,34.0,0,0,KN 20090,9.825,,S
-843,0,2,Jonathan Summers,male,52.0,0,0,847569,26.2875,,S
-844,0,3,Pedro Wagner,male,34.0,0,0,911923,8.05,,S
-845,0,2,Chase Rodriguez,male,,0,0,6581,52.0,,C
-846,0,3,Michael Lopez,male,,0,0,715569,14.1083,,S
-847,1,3,Derek Chang,male,34.0,0,0,951361,4.0125,B41,S
-848,1,1,Maria Pope,female,24.0,0,0,HD 71721,83.1583,K0,S
-849,0,3,Justin Cameron,male,59.0,0,1,3137,16.1,,S
-850,0,3,Sabrina Salinas,female,,0,0,KV 55311,26.0,,Q
-851,0,3,Alejandro Craig,male,48.0,0,0,865232,7.225,,S
-852,0,3,Jonathan White,male,19.0,0,0,444839,7.2292,N983,S
-853,0,3,Kyle Rosales,male,26.0,4,2,687517,37.0042,,S
-854,0,3,Gregory Mcclure,male,16.0,5,2,778444,59.4,,S
-855,1,3,Ivan Cross,male,2.0,2,1,111179,26.55,E60,S
-856,1,1,Amy Ware,female,,0,0,8868,90.0,,S
-857,0,1,Michael Lewis,male,40.0,0,0,28026,26.0,,S
-858,0,3,Christopher Cox,male,,0,0,474380,15.75,,S
-859,0,3,James Castaneda,male,34.0,0,0,SK/Alprm 5775,7.7375,,C
-860,1,1,Marissa Morrow,female,23.0,0,0,EI 36404,46.9,,S
-861,0,3,Ronald Cobb,male,,0,0,981288,15.85,,Q
-862,1,3,Justin Collins,male,19.0,0,0,54085,7.4958,,S
-863,1,1,Shaun Taylor,male,50.0,0,0,545571,78.2667,H92,C
-864,0,1,Keith Faulkner,male,40.0,1,0,649978,86.5,X426,S
-865,1,2,Alicia White,female,51.0,0,2,CN 15938,146.5208,,S
-866,0,3,Michael Petersen,male,34.0,1,3,Rg 699909,30.5,,S
-867,0,3,Matthew Decker,male,34.0,0,0,7591,7.8542,,S
-868,1,3,Amy Rasmussen,female,19.0,0,0,89940,7.75,I49,Q
-869,1,2,Lisa Miller,female,42.0,0,0,358884,13.0,,S
-870,0,3,Stacy Wilson,female,26.0,0,0,RZ 38052,7.8958,S92,S
-871,1,1,Olivia Henderson,female,22.0,0,0,162692,69.55,,S
-872,0,2,Robert King,male,18.0,2,2,30211,52.0,,S
-873,1,2,Timothy Lowery,male,46.0,0,0,150414,7.8958,,S
-874,0,3,Michael Johnson,male,34.0,0,0,3838,9.5875,V42,S
-875,0,2,Jeffrey Evans,male,,0,0,9276,35.5,U68,S
-876,1,3,Julia Oliver,female,,0,0,7508,14.5,,S
-877,0,2,Jonathan Wilson,male,52.0,0,0,70059,30.0,,C
-878,0,3,Anthony Kennedy,male,,0,0,907059,32.5,,Q
-879,0,3,Kristy Larson,female,34.0,2,2,BL 16966,39.6,,S
-880,1,3,Danielle Clark,female,,0,0,588612,8.05,,S
-881,0,3,Andrew Thompson,male,,1,0,381769,26.0,,C
-882,1,1,Taylor Jimenez,female,34.0,0,0,691711,55.0,,S
-883,0,3,David Price,male,34.0,0,2,4605,7.7958,,C
-884,1,3,Jeffery Morrow,male,4.0,1,1,5011,7.925,,C
-885,0,3,Benjamin Ross,male,34.0,0,0,3360,7.225,,C
-886,0,3,Tamara Martin,female,25.0,1,0,138751,16.1,,S
-887,0,3,Adam Garner,male,4.0,2,1,927926,14.4542,,C
-888,0,3,John Jones,male,,2,0,QZNW/N 8. 5735292,18.0,,C
-889,1,1,Lisa Dominguez,female,4.0,0,0,706645,91.0792,,C
-890,0,3,Donald Riggs,male,2.0,5,2,239255,120.0,,S
-891,0,3,Julie Barnes,female,21.0,0,0,80288,13.0,,S
+1,0,1,Leroy Johnson,male,45.0,1,0,96103,59.4,P70,S
+2,0,1,Tyler Duncan,male,62.0,0,0,866561,26.25,E69,S
+3,0,3,Andrew Peters,male,29.0,0,0,332515,7.775,,S
+4,1,2,Scott Wallace,male,1.0,0,1,7709862,35.5,,C
+5,1,3,Krystal Rosario,female,,0,0,L/L 79585,13.0,,S
+6,0,3,David Sloan,male,,0,0,XONCP/R7 8656017,0.0,U19,S
+7,0,2,Kimberly Bradley,female,,0,0,683323,7.6292,K88,S
+8,1,3,Janet Cruz,female,24.0,0,0,913800,7.2292,,S
+9,1,3,Ronald Martin,male,29.0,0,0,1371,7.05,,S
+10,1,1,William Hughes,male,24.0,2,1,30244,52.5542,T63,S
+11,1,3,Kevin Hammond,male,,0,0,15334,7.8958,M86,S
+12,0,1,Joseph Mason,male,41.0,0,0,8294,26.0,,S
+13,0,3,Carl George,male,22.0,0,0,31790,7.2292,,S
+14,0,3,Samuel Sanders,male,21.0,0,0,617521,7.0542,,S
+15,0,3,Jerome Howell,male,,0,0,950378,7.7333,H39,S
+16,1,3,Richard Ray,male,29.0,0,2,4754,7.75,,C
+17,1,1,Brenda Hampton,female,61.0,1,2,881282,110.8833,,S
+18,0,3,Erin Cohen,female,47.0,1,2,NS/Sfhgr 1184,16.1,,S
+19,1,1,Michael George,male,29.0,0,0,740579,83.475,,C
+20,1,2,Brenda Horton,female,,0,0,145975,10.5,,C
+21,1,1,Diane Garcia,female,20.0,0,0,663161,79.65,,C
+22,1,2,Christina Rhodes,female,,0,0,189573,12.35,,C
+23,1,1,Christopher Moss,male,,0,0,612764,10.5,,S
+24,0,3,Bradley Willis,male,,0,0,45732,7.8542,F36,C
+25,0,1,James Roth,male,61.0,0,1,603673,221.7792,,C
+26,0,3,Debra Holt,female,17.0,0,0,730441,7.75,,S
+27,0,3,Ryan Anderson,male,39.0,0,0,6480,7.25,N60,S
+28,1,1,Rebecca Taylor,female,63.0,2,2,638625,512.3292,,C
+29,1,1,Caitlyn Stone,female,47.0,0,0,614682,27.9,M98,S
+30,0,3,Edward Cook,male,29.0,0,0,182573,7.8542,,S
+31,0,3,Jessica Duncan,female,19.0,3,2,1956,20.575,,S
+32,0,3,Courtney Blevins,female,24.0,0,0,134331,8.05,,S
+33,1,1,Nancy Herrera,female,24.0,1,2,914434,78.85,,S
+34,1,3,Andrew Gross,male,14.0,1,0,5388,11.5,,C
+35,1,3,Sean Clay,male,,0,0,320673,6.75,,S
+36,0,3,William Vance,male,,0,2,537498,21.0,,S
+37,1,1,Corey Lam,male,64.0,0,0,481288,19.5,,S
+38,0,3,Benjamin Carroll,male,,0,0,6997,7.925,S23,S
+39,0,3,Brendan Miller,male,21.0,0,0,I.W.T. 15081,10.5,,S
+40,1,2,Samuel Blair,male,16.0,0,0,599750,30.0,,S
+41,1,1,Brianna Jackson,female,36.0,0,0,JMFCA/D.K. 8646345,26.0,,S
+42,0,3,Ronald Estes,male,29.0,0,1,5017,12.65,M55,S
+43,0,3,George Cobb,male,17.0,0,0,296446,7.75,,S
+44,0,3,Herbert Patrick,male,36.0,0,0,VD 12488,9.0,,S
+45,0,3,Nathaniel Chavez,male,29.0,0,0,AR/OYSQV 1558,7.8542,,C
+46,0,3,Michael Gilbert,male,16.0,0,0,8745,7.75,V62,S
+47,1,2,Daniel Short,male,36.0,0,2,436307,10.5,A32,S
+48,0,3,David Taylor,male,,0,0,6114,9.2167,,S
+49,0,3,David Thomas,male,20.0,0,0,502478,7.25,,S
+50,0,3,Jacob Fox,male,,0,0,IJ 83866,6.4958,T55,S
+51,0,3,Benjamin Turner,male,38.0,0,0,636159,7.2292,Y93,S
+52,1,3,Kimberly Woods,female,24.0,0,3,GK 21543,10.5,,S
+53,1,1,Robert Weiss,male,29.0,0,0,533393,31.3875,,S
+54,0,3,Andrew Turner,male,,0,0,80689,16.1,,S
+55,0,2,Devon Stout,male,71.0,4,2,6813,69.3,W74 I76,S
+56,0,3,Joseph White,male,24.0,2,0,QBI/N 9128,7.8958,,S
+57,1,2,Keith Gibson,male,40.0,2,2,R/E 82061,146.5208,,C
+58,1,1,Dana Morales,female,45.0,2,1,265494,79.65,,C
+59,0,2,Brandon Reynolds,male,41.0,1,0,KM/JSTGN 8566,14.5,,S
+60,1,1,Johnathan Joseph,male,29.0,2,0,6310,73.5,P79,C
+61,0,2,John Morales,male,36.0,0,0,5399,8.85,I36,C
+62,1,1,Amy Whitaker,female,,1,0,943240,51.8625,,Q
+63,1,1,Sydney Watson,female,65.0,1,0,252275,135.6333,,C
+64,0,3,Matthew Sanchez,male,,0,0,56912,6.4958,,C
+65,1,2,Brian Robbins,male,23.0,0,3,X.Y.N. 67128,47.1,,S
+66,0,3,Ronald Cain,male,36.0,1,2,425916,13.0,,S
+67,0,1,Mark Barnes,male,29.0,0,0,140434,33.0,,C
+68,0,3,Karl Lawson,male,,0,0,947973,8.05,,S
+69,1,3,Alex Morales,male,29.0,0,0,939075,7.8875,Q1,S
+70,1,3,Sara Peters,female,9.0,1,0,5247,7.8958,,C
+71,1,1,Jessica Rodriguez,female,29.0,2,1,NU 18632,227.525,,C
+72,1,3,Jason Carlson,male,10.0,0,0,281801,5.0,,C
+73,0,3,Alyssa Boyd,female,48.0,0,3,NE 98892,8.05,P31,S
+74,1,1,Robert Moreno,male,47.0,1,0,325778,82.1708,J25 Y34,C
+75,0,3,Adam York,male,29.0,0,0,HT 72993,8.6625,Q27,S
+76,1,1,John May,male,,0,0,833038,56.4958,,C
+77,0,1,Jordan Adams,male,47.0,0,0,9928,7.25,,S
+78,0,1,Christopher Owens,male,17.0,1,0,192578,83.1583,,C
+79,0,2,Victoria Green,female,65.0,1,2,C.Y. 3799,26.25,P64,S
+80,1,2,Casey Schaefer,male,71.0,1,1,574930,13.0,,S
+81,1,1,Morgan Massey,female,36.0,1,2,W.R.M. 4868,52.0,,S
+82,0,1,Gregory King,male,58.0,0,0,8895,28.7125,,S
+83,0,2,Daniel Lopez,male,36.0,0,0,8533,8.6625,B48,C
+84,0,3,Eduardo Pratt,male,,0,0,351441,7.2292,,Q
+85,1,3,James Kelly,male,3.0,0,0,722049,7.8958,,S
+86,0,3,Stephanie Holt,female,29.0,0,0,243299,13.0,,S
+87,1,1,Catherine Lewis,female,17.0,0,0,3077,69.55,,Q
+88,1,2,Andrea Thomas,female,29.0,0,1,3048,26.0,,S
+89,1,3,Laura Ryan,female,,1,1,DX 86651,27.75,,Q
+90,0,3,John Franco,male,,0,0,M.X./D.H. 8,13.0,,C
+91,0,1,Christopher Brooks,male,,0,0,98201,35.0,C15 T74 A31,S
+92,0,3,Joshua Vance,male,29.0,2,0,986408,13.5,,S
+93,0,3,James Gardner,male,29.0,0,0,467566,8.05,Z89 X32 E16 K41,S
+94,1,3,Cassandra Figueroa,female,24.0,2,1,271224,19.9667,,C
+95,0,3,Marvin Doyle,male,,0,0,V/8. 25701,12.525,Q29 V62 I11,S
+96,1,1,Christian Carrillo,male,,0,0,690107,27.0,,C
+97,0,3,Brandon Hall,male,45.0,0,0,571615,6.975,,S
+98,0,3,Aaron Walker,male,11.0,1,1,WL 73231,13.0,,S
+99,1,2,Kelly Garcia,female,57.0,0,0,468274,8.05,E98,S
+100,1,1,Rachel Keller,female,65.0,1,1,241445,79.2,K46,S
+101,0,1,Christopher Li,male,21.0,0,0,U.X.T. 76081,18.0,,Q
+102,1,2,Kaitlyn Booth,female,9.0,1,0,832708,52.0,S11,C
+103,0,3,Melissa Carter,female,29.0,1,0,757998,15.5,,S
+104,1,3,Tony Gay,male,2.0,0,2,269043,7.125,,S
+105,1,1,Theresa Everett,female,0.83,0,1,603214,77.2875,,S
+106,1,3,Michael Carroll,male,4.0,1,2,172196,7.225,,S
+107,0,3,Kevin Duarte,male,38.0,0,0,DU 98314,8.05,,S
+108,0,2,Gregory Hernandez,male,55.0,0,0,295816,31.275,,S
+109,1,3,Justin Rosales,male,16.0,0,0,6411,15.75,,S
+110,0,3,Joseph Smith,male,,0,0,290052,9.5,,S
+111,0,2,Patrick Thompson,male,21.0,0,0,191440,13.0,,C
+112,0,3,Hayley Adams,female,18.0,0,0,B.Z.R. 14648,7.8542,U49,C
+113,0,3,Shane Hamilton,male,45.0,0,0,948554,7.775,,S
+114,0,1,Michael Parker,male,29.0,0,0,1973,71.2833,,S
+115,1,3,Ashley Delgado,female,35.0,0,0,4825,7.925,,S
+116,0,2,Johnathan Burgess,male,29.0,0,0,FV 11584,26.25,,Q
+117,1,1,John Young,male,35.0,0,0,761989,30.5,,S
+118,1,2,Jill Daugherty,female,20.0,0,2,66990,30.0708,,S
+119,0,3,Anthony Acosta,male,29.0,0,0,CYUGS/OL 840616,9.5,,S
+120,1,1,John Mckinney,male,29.0,1,0,25511,113.275,,C
+121,1,3,Michele Thompson,female,63.0,0,0,B./X. 2449,7.8958,,S
+122,1,2,Joseph Carlson,male,1.0,1,1,7031,21.0,,Q
+123,0,2,Joseph Patterson,male,20.0,0,0,566256,14.4583,,Q
+124,1,2,Willie Colon,male,,0,0,411768,66.6,,C
+125,1,1,Amy Garcia,female,29.0,0,0,476,76.7292,,C
+126,0,3,Xavier Marshall,male,29.0,0,0,27177,7.75,,S
+127,0,3,Tanya Dominguez,female,18.0,1,0,938460,10.5,,S
+128,0,3,Brandon Phillips,male,16.0,3,1,584682,13.5,,C
+129,1,3,Kimberly Sullivan,female,11.0,0,4,946104,14.5,,S
+130,1,3,Jason Yoder,male,,0,0,531098,23.0,,S
+131,0,1,Jeffrey Figueroa,male,9.0,1,0,803602,110.8833,S59,C
+132,0,3,Matthew Frazier,male,,0,0,X.Z. 81835,11.5,,S
+133,0,3,Paul Cruz,male,24.0,0,0,Z.C. 83792,8.05,,C
+134,1,1,Jennifer Clements,female,,2,2,OW/SIFMY 7868,211.5,P73,Q
+135,1,1,Erika Ramsey,female,36.0,2,2,B.T./B.E. 2,110.8833,P28,S
+136,0,3,Matthew Anderson,male,11.0,0,0,PD 26804,0.0,,S
+137,1,1,Melinda White,female,23.0,0,0,36348,29.7,,C
+138,0,3,Bryan Brooks,male,29.0,0,0,3615,7.75,,C
+139,1,2,Cynthia Martinez,female,18.0,0,0,GH 82118,8.05,,S
+140,1,1,Alexandra Gomez,female,39.0,0,0,4526308,34.375,,S
+141,1,1,Casey Carroll,male,47.0,0,0,24914,57.9792,V280,C
+142,1,2,Joseph Blake,male,,0,0,2388,7.775,,S
+143,1,1,Albert Hale,male,24.0,0,1,745343,26.55,R85,S
+144,0,1,Albert Williams,male,45.0,0,0,P./P. 9095,23.0,R19,S
+145,0,3,Michael Leonard,male,21.0,0,0,135167,7.8958,,S
+146,0,3,William Anderson,male,29.0,0,0,316775,7.25,,S
+147,0,3,Samuel Tran,male,,0,0,387240,10.5,,C
+148,0,2,David Spears,male,35.0,0,2,988647,13.0,,S
+149,0,1,Curtis Franco,male,42.0,0,0,749375,31.275,,S
+150,1,1,Holly Wilson,female,35.0,0,0,65184,24.15,D1,S
+151,1,2,Lisa Crane,female,,0,0,91446,22.3583,,Q
+152,1,1,Kyle Rivera,male,24.0,2,0,497479,76.7292,F4,S
+153,0,2,Mark Howard,male,55.0,2,2,77265,39.6,,S
+154,1,3,Tim Cook,male,54.0,0,2,73697,15.2458,,S
+155,0,3,Tina Anderson,female,29.0,2,2,505696,24.15,,S
+156,0,3,Anna Jacobs,female,,0,0,888986,7.925,,S
+157,1,3,John Miller,male,15.0,0,0,AZ 18310,7.7875,,S
+158,1,1,Anthony Velasquez,male,21.0,1,0,6089,73.5,,S
+159,1,1,Jackie Schultz,female,29.0,0,0,KM 89482,50.0,,C
+160,0,1,Michael Little,male,49.0,1,0,158683,49.5042,,S
+161,1,1,Desiree Parrish,female,49.0,2,2,ZXXJI/XV 350505,211.3375,,C
+162,0,2,Joseph Weaver,male,,0,0,513751,7.7958,N69,S
+163,1,1,Katrina Galvan,female,23.0,0,0,A6. 67569,73.5,,C
+164,0,3,Kayla Merritt,female,38.0,0,0,927565,13.0,,S
+165,1,1,Monica Taylor,female,24.0,0,0,735930,69.55,,C
+166,0,3,Jason Warren,male,,0,0,TX 15476,7.8958,,C
+167,0,3,Dustin Davis,male,24.0,0,0,263878,8.3,,C
+168,0,1,Oscar Cross,male,29.0,0,0,453208,24.15,,S
+169,0,2,Brett Reyes,male,,0,0,610517,15.7417,,C
+170,1,1,James Hancock,male,16.0,1,1,887049,31.0,,S
+171,1,2,Victoria Wilson,female,,0,0,I.T./I.B. 2,13.0,N39,S
+172,1,1,Kayla Morgan,female,29.0,1,3,34849,164.8667,E0,S
+173,0,3,Matthew Cox,male,29.0,0,0,EA 38723,6.95,,C
+174,1,3,Charles Morris,male,,0,0,2362,26.0,,C
+175,0,2,Gregory Benson,male,18.0,2,2,G.J. 78812,26.55,,C
+176,0,3,Seth Stephens,male,35.0,0,0,4575,9.5,J25,S
+177,0,2,Bryan Butler,male,,0,0,3663,13.0,,C
+178,0,1,Steven Brown,male,36.0,0,0,60770,32.5,,C
+179,1,1,Susan Walton,female,42.0,1,0,C.M.N. 55957,34.6542,,S
+180,0,1,Donald Smith,male,29.0,4,1,NV 4199,86.5,P97 J96 R11,S
+181,1,2,James Wolf,male,18.0,0,0,915343,41.5792,Z660,C
+182,1,1,Ricky Silva,male,,0,0,14842,151.55,,C
+183,0,3,Antonio Barron,male,55.0,0,0,357466,9.225,,S
+184,1,3,Jeremy Collins,male,,4,2,631959,21.075,,S
+185,1,3,Breanna Knight,female,22.0,0,0,853858,6.4375,,S
+186,1,1,Nathan Brooks,male,50.0,0,0,IV 62256,26.2875,,S
+187,1,3,Ronnie Cruz,male,35.0,1,0,394178,12.475,,S
+188,0,3,Thomas Fields,male,29.0,0,0,YY 35484,7.775,,S
+189,1,3,Olivia Johnson,female,18.0,0,2,151633,7.925,Y687,S
+190,0,1,Michael Woods,male,39.0,0,0,TL 5305,27.7208,F19,C
+191,1,1,David Walter,male,29.0,1,1,201955,46.9,,C
+192,1,2,Michelle Sullivan,female,16.0,0,0,883203,8.3625,,S
+193,0,3,Daniel Silva,male,19.0,0,0,81366,7.2292,,S
+194,1,3,Amanda Lewis,female,19.0,0,0,811604,7.7958,,S
+195,0,3,Jon May,male,,0,0,U.P.P. 29237,7.225,,S
+196,0,1,Ian Park,male,29.0,0,0,B.U. 44601,49.5042,,C
+197,1,3,Amanda Hill,female,,0,0,77199,10.5,,S
+198,1,3,Kristy Lawrence,female,,0,0,168193,13.0,,Q
+199,0,3,Casey Kelly,male,18.0,0,0,Y.T. 37624,7.75,,S
+200,0,1,Jason Medina,male,29.0,2,0,QH 66659,79.2,,S
+201,1,3,Steven Brown,male,19.0,0,0,9909,8.05,,S
+202,1,1,Brian Young,male,,0,0,N.M. 96319,30.0,,C
+203,0,1,Joshua Fuller,male,36.0,0,0,811786,15.7417,,S
+204,0,3,Mary Scott,female,,5,4,812857,133.65,,S
+205,0,1,Thomas West,male,49.0,0,0,716027,30.6958,,S
+206,1,3,Misty Villarreal,female,,0,0,762382,8.05,,C
+207,0,3,Kelly Palmer,male,,0,0,11556,10.5,,S
+208,0,3,Craig Richardson,male,,0,0,W.C./YX 253,7.8958,M56,Q
+209,1,1,Victor Galloway,male,29.0,0,0,583824,52.0,I53,C
+210,0,3,Jacob Harrell,male,14.0,0,0,498510,7.775,,C
+211,0,3,Heather Jones,female,17.0,3,2,377715,29.0,,S
+212,0,3,Matthew Floyd,male,,0,0,178989,7.225,,S
+213,1,1,Brenda Kelley,female,47.0,3,2,326199,263.0,,C
+214,0,3,Scott Anderson,male,,0,0,QEF/S 8344,10.5,C89,C
+215,0,3,Brandon Allen,male,16.0,3,2,50321,15.5,,S
+216,0,1,Richard Mendoza,male,57.0,0,0,60158,33.5,W16,S
+217,1,2,Jo Maddox,female,,0,0,X.G. 44672,15.5,,Q
+218,0,3,Scott Kerr,male,23.0,0,0,722175,18.7875,,S
+219,1,3,Cindy Hogan,female,20.0,0,3,M.I.T. 53522,26.0,,S
+220,1,2,Darrell Gonzales,male,45.0,1,0,725426,31.275,,S
+221,0,1,Michael Richard,male,29.0,1,0,157156,37.0042,P12,S
+222,1,3,Natasha Young,female,3.0,0,1,39033,7.925,,C
+223,1,3,Nicole Peterson,female,35.0,0,0,2052,9.8375,,S
+224,0,3,Tammy Payne,female,5.0,0,0,M.I. 93696,7.3125,,C
+225,1,3,Ricardo Hunter,male,29.0,0,0,446654,7.05,T953,S
+226,0,3,Willie Crawford,male,29.0,0,0,324803,7.25,A72 X18 X38,S
+227,1,3,Micheal Scott,male,22.0,0,0,878759,7.25,,Q
+228,1,2,Jessica White,female,,0,0,YC 33815,21.075,,C
+229,1,3,Loretta Roberts,female,19.0,0,0,TTEJ,8.1583,,C
+230,0,3,William Ramirez,male,,0,0,47114,8.05,,S
+231,1,2,Olivia Duke,female,22.0,3,1,13155,211.3375,,S
+232,1,1,Michael Estrada,male,2.0,2,2,412901,106.425,,C
+233,0,1,Keith Mayo,male,49.0,0,0,160748,56.4958,,C
+234,1,2,Rachel Cruz,female,17.0,1,0,54268,26.0,,C
+235,0,2,Dylan Ward,male,23.0,0,0,774448,21.6792,T369,S
+236,1,1,Valerie Myers,female,24.0,0,2,98830,26.55,,S
+237,0,3,Derrick Blankenship,male,17.0,0,0,45216,7.55,N15 E49 T72,S
+238,1,3,Rhonda Mckenzie,female,,0,0,18015,8.6625,,C
+239,0,3,Mary Mccarty,female,29.0,1,2,798099,16.7,,Q
+240,1,3,Sara Montes,female,21.0,0,0,7003,7.7958,,S
+241,0,3,Andrew Martinez,male,9.0,0,0,70709,8.05,,S
+242,0,3,Jonathan Mahoney,male,,0,0,341940,7.7333,,C
+243,0,3,Stacey Sosa,female,,0,1,401031,9.35,,S
+244,1,3,Michelle Sandoval,female,18.0,0,0,843864,7.75,,S
+245,0,1,Leonard Brown,male,51.0,0,0,4168034,35.5,Q60 Z48 M87,S
+246,1,1,Leah Scott,female,,1,0,88593,120.0,O46,C
+247,0,3,Douglas Torres,male,,1,0,343925,9.475,,C
+248,0,3,Donna Porter,female,29.0,1,2,285573,27.75,,S
+249,0,3,Matthew Wright,male,18.0,0,0,812977,7.7958,,S
+250,0,1,Paul Oliver,male,,0,0,967029,0.0,,S
+251,1,1,Joyce Anderson,female,18.0,0,2,O.M. 59798,16.1,,S
+252,0,3,Daniel Miller,male,35.0,0,0,74022,9.825,O402,S
+253,0,3,Brian Fox,male,49.0,0,0,MM. 7127,10.4625,W268,C
+254,1,2,Margaret Harris,female,58.0,1,0,G.R. 66171,26.0,,S
+255,1,2,Lee Ramos,male,,0,0,486998,24.15,X68,C
+256,1,1,Raven Mann,female,29.0,0,0,575036,227.525,,C
+257,1,1,Kathleen Morris,female,50.0,2,1,990291,106.425,,S
+258,1,2,Stephanie Simpson,female,36.0,0,2,340296,34.0208,C19,S
+259,0,1,John Norris,male,29.0,0,1,75307,27.9,,S
+260,0,1,Brett Knox,male,,0,0,11087,31.0,,C
+261,0,3,Hector Carter,male,20.0,0,0,416649,8.05,,S
+262,1,3,Andrew Aguilar,male,19.0,0,0,816614,4.0125,,S
+263,0,3,Zachary Miller,male,,0,0,933274,7.925,,C
+264,1,3,Robert Mason,male,,0,0,518000,8.05,,S
+265,1,3,Amy Proctor,female,29.0,0,0,M.C./EM 128,7.8542,,S
+266,0,3,Joshua Ramirez,male,29.0,0,0,598280,6.975,,S
+267,1,1,Cindy Harris,female,49.0,1,0,16620,79.2,,S
+268,0,2,Kevin Byrd,male,47.0,0,0,Y.I.C. 61092,13.4167,,S
+269,0,3,Tyler Brown,male,17.0,0,0,176183,7.8958,,S
+270,0,3,Jacob Smith,male,,0,0,524247,7.55,,Q
+271,1,1,Terry Mills,female,38.0,2,1,458435,91.0792,,S
+272,0,1,Anthony Moore,male,,0,0,410656,26.0,,S
+273,1,3,Taylor Johnson,female,16.0,0,0,HPKG/E 8. 7525177,15.05,,S
+274,1,2,Heather Walker,female,,0,0,GQUE/U 8. 6429778,23.45,,S
+275,0,3,Johnny Jackson,male,40.0,0,0,X/6. 20337,7.7333,,S
+276,0,2,Corey Jordan,male,,0,0,541326,15.5,,C
+277,1,1,Erin Howard,female,61.0,2,2,439752,512.3292,,S
+278,1,1,Stacy Webb,female,2.0,0,2,625858,56.4958,,S
+279,0,3,Bradley Hill,male,44.0,0,0,233617,7.75,,S
+280,0,3,Shawn Gutierrez,male,19.0,0,0,951789,8.05,,S
+281,0,3,Ryan Sims,male,,0,0,584497,7.8958,,S
+282,0,3,Matthew Reynolds,male,29.0,0,0,907352,7.925,Q97,S
+283,1,2,Kevin Reynolds,male,38.0,0,0,696868,24.15,,S
+284,1,2,Gregory Watts,male,45.0,0,0,313096,7.8958,,S
+285,0,2,Joseph Wright,male,,0,0,8367,26.3875,,S
+286,1,3,Danielle Cannon,female,,2,0,7338,39.0,I6,C
+287,0,3,Richard Merritt,male,,0,0,IP 91733,10.5,,S
+288,1,3,Jake Juarez,male,0.75,0,2,POXH/H1. 5842751,7.8,,S
+289,0,3,Gregory Ellis,male,24.0,1,0,648215,23.0,,S
+290,1,1,Julie Stanley,female,36.0,0,1,368662,227.525,,S
+291,1,1,Trevor Martinez,male,44.0,1,1,42466,32.3208,,C
+292,0,3,Sean Best,male,,0,0,F.S. 47266,7.0458,,S
+293,0,1,Michael Cole,male,,0,0,589101,17.8,,S
+294,1,1,Kelli Higgins,female,29.0,0,0,623140,25.925,,S
+295,1,3,Ryan Smith,male,,0,0,656561,13.0,,C
+296,1,1,Charles Hayes,male,21.0,0,0,924780,134.5,,C
+297,0,1,Jesse Randolph,male,,0,0,917129,31.0,,C
+298,1,1,Kathy Woodard,female,29.0,2,2,2536,113.275,,C
+299,0,3,Stephanie Evans,female,,0,0,515048,8.05,N81 J93,S
+300,0,2,Garrett Crawford,male,,0,0,522197,7.8958,,Q
+301,0,3,Joel Guzman,male,,5,2,341419,26.0,,S
+302,0,3,Trevor Mccarthy,male,,0,0,BS 25722,7.225,,S
+303,1,1,Austin Mitchell,male,59.0,0,0,236216,14.4,,S
+304,0,1,Kevin Lopez,male,58.0,0,0,PF/FFLJI 8674,0.0,,S
+305,1,1,Mary Bowers,female,51.0,1,0,361338,78.85,D27,S
+306,0,1,Joshua Davis,male,29.0,1,0,132485,26.55,,S
+307,1,3,Sydney Spencer,female,17.0,0,0,429245,7.2292,,S
+308,0,3,Daniel Watts,male,39.0,1,0,883856,10.5,,S
+309,1,1,Caleb Jenkins,male,,2,0,786873,80.0,,C
+310,0,3,Aaron Allen,male,,0,0,27282,8.05,N9,C
+311,0,1,Paul Cox,male,,0,0,F/CG 8630,26.0,E492,S
+312,0,3,David Buck,male,20.0,1,0,879952,7.8958,,S
+313,0,3,Daniel Mckinney,male,22.0,0,0,665733,7.75,,S
+314,0,3,Nicholas Ford,male,,0,0,34826,7.75,,S
+315,0,1,Kenneth Wang,male,36.0,0,0,VERSQ/X.G. 172482,42.4,,S
+316,0,3,Mark Marquez,male,29.0,0,0,440712,7.75,,S
+317,0,3,Jeffrey Cabrera,male,36.0,0,0,LU 2393,7.55,Z7,S
+318,0,3,Gregory Thompson,male,16.0,1,0,G.T. 83033,13.5,X36,C
+319,0,3,Mark Barber,male,12.0,2,1,10051,15.1,,S
+320,1,3,April Floyd,female,29.0,0,0,779287,6.8583,T80,S
+321,0,3,Samantha James,female,21.0,3,3,114043,46.9,P210,S
+322,0,3,Brian Pierce,male,29.0,0,0,770742,7.225,,C
+323,0,2,Aaron Wright,male,35.0,0,0,89411,13.0,W35,C
+324,0,3,Natasha Bradley,female,,1,2,654132,8.6625,,C
+325,0,3,Anthony Johnson,male,20.0,0,0,897566,7.8958,,Q
+326,0,3,Joshua Hall,male,24.0,0,0,G/6. 698,7.75,,S
+327,1,2,Bradley Kim,male,0.75,3,1,792759,77.2875,,C
+328,1,1,Marcus Barnes,male,50.0,0,1,34053,55.0,,S
+329,0,3,Michael Martinez,male,,0,0,514549,13.8625,,S
+330,0,3,Victor Collins,male,21.0,2,0,K.E. 52577,14.5,,S
+331,1,3,Nicholas Nolan,male,23.0,0,0,970215,7.75,A46,S
+332,1,3,Maurice Gregory,male,9.0,0,0,431987,29.125,,S
+333,1,2,Natasha Mccarthy,female,29.0,0,1,YCWI/A7. 3896202,14.4583,,S
+334,1,2,Sherry Torres,female,0.92,0,2,181672,120.0,,S
+335,0,3,Samuel Cherry,male,41.0,0,0,966060,8.7125,,S
+336,1,2,Jimmy Armstrong,male,47.0,0,0,171339,9.5875,,S
+337,1,2,David Morris,male,24.0,0,0,OF 4992,15.2458,,C
+338,1,1,Anna Stephenson,female,29.0,0,0,S.U./DYXRR 3387,77.9583,,S
+339,1,2,Jacob Morgan,male,29.0,1,0,5847,39.6875,,S
+340,0,3,Stephanie Singh,female,,2,0,7300,26.0,,C
+341,0,2,Amber Smith,female,20.0,3,2,196314,146.5208,,S
+342,0,3,Courtney Robinson,female,,1,0,692171,12.475,,S
+343,1,3,Michael Schmidt,male,22.0,0,0,6481,8.05,,S
+344,0,3,Kevin Torres,male,,0,0,SQ. 3085,7.75,O56,C
+345,0,2,Justin Keith,male,4.0,0,0,727016,10.5,M58,S
+346,0,1,Matthew Ritter,male,50.0,0,0,165041,29.125,Q4,S
+347,1,2,Gerald Sellers,male,34.0,1,0,548786,14.4542,,S
+348,0,3,Dalton Ruiz,male,29.0,0,0,66441,8.05,R9,S
+349,1,3,Tiffany Hall,female,35.0,0,0,5330,7.2292,C11,S
+350,0,3,Thomas Roberts,male,29.0,3,3,918677,16.1,Z66,S
+351,1,3,Andre Williams,male,2.0,1,0,948208,16.1,,S
+352,1,1,Maria Wheeler,female,36.0,1,1,347368,90.0,X W87,S
+353,1,1,Thomas Reyes,male,23.0,0,0,27465,26.0,,S
+354,1,2,Teresa Stewart,female,40.0,1,1,25359,26.0,,S
+355,1,1,David Griffin,male,23.0,2,0,101968,120.0,,S
+356,0,3,Susan Branch,female,74.0,0,3,MS 86893,26.55,,S
+357,1,1,Sherry Smith,female,47.0,1,2,242886,61.175,,S
+358,1,1,Taylor Atkins,female,29.0,0,0,K./Z. 9592,31.3875,,S
+359,1,3,Brian May,male,,0,0,439345,8.05,,C
+360,1,2,Kenneth Sutton,male,20.0,0,1,530018,29.125,,C
+361,1,1,Mallory Kelly,female,17.0,0,2,80427,30.0,W87,S
+362,1,3,Mary Fowler,female,24.0,0,0,461419,10.4625,,S
+363,0,3,Darius Mitchell,male,38.0,0,0,503746,7.8958,Y150,S
+364,0,3,Erik Howard,male,18.0,0,0,PT 70249,7.1417,,C
+365,1,2,Nancy Kline,female,51.0,0,0,609499,9.8417,,Q
+366,0,3,Cory Caldwell,male,,0,0,TTFI,7.8958,,C
+367,0,3,Mike Brown,male,36.0,0,0,547652,7.8542,,S
+368,1,1,Anthony Kirk,male,,0,0,QU 58167,38.5,D19,S
+369,1,3,Kelly Jackson,female,19.0,0,1,8400,0.0,,S
+370,1,2,Joanne Levine,female,44.0,3,3,283948,77.9583,,C
+371,1,2,April Daniel,female,29.0,0,1,7031973,21.0,,S
+372,1,3,Elizabeth Anderson,female,,0,0,2969,13.0,,S
+373,0,3,Richard Castro,male,,0,0,ES 49698,7.8292,,S
+374,0,3,Brian Gomez,male,29.0,1,0,454436,21.075,,C
+375,0,2,Matthew Williams,male,36.0,0,0,270728,13.0,,Q
+376,1,3,Alexandria Jones,female,,0,0,733629,9.4833,,Q
+377,1,2,Adam Johnson,male,34.0,1,0,10288,29.125,,S
+378,0,3,Ronald Stewart,male,20.0,0,0,42734,11.1333,,C
+379,1,2,Melissa Jackson,female,29.0,1,0,178777,22.3583,T7,S
+380,0,3,Patrick Evans,male,,0,0,2158,7.125,,C
+381,0,3,Andre Michael,male,,0,0,VHTP/B 9. 9042555,8.05,,S
+382,0,3,Corey Johnson,male,,0,0,7076,7.875,,C
+383,0,3,Eric Davis,male,1.0,5,2,BC. 2268,55.9,W71 N23,Q
+384,1,1,Tracy Mitchell,female,29.0,0,1,501950,227.525,P63,C
+385,1,3,Anna Gardner,female,23.0,0,0,279641,7.925,E736,S
+386,0,3,Jordan Barton,male,24.0,0,0,599075,8.05,,S
+387,0,3,Tyler Carey,male,,0,0,80438,7.8542,,Q
+388,1,3,Daniel Walsh,male,16.0,0,0,833938,7.05,Y24,C
+389,0,3,Jeffrey Carlson,male,51.0,0,0,984283,8.05,,S
+390,1,1,Jessica Lee,female,41.0,1,0,5878,29.125,,S
+391,1,1,Yvette Davis,female,40.0,0,2,740354,263.0,,C
+392,1,1,Zachary Ramos,male,24.0,1,1,SD/NU 9247,247.5208,A53,C
+393,0,2,Mike Williamson,male,23.0,0,0,X.K. 62339,16.1,,C
+394,0,1,Philip Lozano,male,29.0,0,0,8020,27.9,,S
+395,0,1,Todd Davenport,male,45.0,0,0,111714,40.125,,S
+396,0,3,Christopher Smith,male,,0,0,JE/Ftpea 4159,7.225,R48,S
+397,1,1,Amber Young,female,70.0,1,0,531872,31.3875,,S
+398,0,3,Harold Hammond,male,,0,0,339937,7.7375,,S
+399,1,2,Brett Cordova,male,29.0,0,0,999137,30.0,,S
+400,0,1,Andrew Arias,male,52.0,1,2,W.I.E. 66930,90.0,,S
+401,1,1,Charles Stevens,male,,1,0,LZ 90334,31.3875,,Q
+402,1,1,Johnathan Owens,male,29.0,1,0,352821,91.0792,,C
+403,0,1,James Ross,male,,0,0,742219,46.9,,S
+404,1,1,Miranda Johnson,female,49.0,0,2,FLDRM/G.H. 5792648,247.5208,L5,C
+405,0,3,Jason Burnett,male,29.0,2,0,535322,11.2417,,S
+406,1,2,Richard Mckinney,male,38.0,0,2,269722,23.45,H86,S
+407,0,1,Randy Carney,male,29.0,4,4,565967,120.0,,S
+408,1,3,Chelsea Griffin,female,,0,0,O.D. 93779,10.5,,C
+409,0,1,Charles Garcia,male,29.0,0,0,58277,0.0,,S
+410,1,1,Stacy Zimmerman,female,2.0,2,2,704313,61.3792,,S
+411,1,2,Johnny Thomas,male,24.0,0,2,9592,31.275,,Q
+412,0,3,Adam Carter,male,29.0,0,0,570764,7.775,,S
+413,0,3,Morgan Moore,female,23.0,1,2,511852,8.05,,S
+414,1,1,Traci Murillo,female,66.0,1,3,367460,69.55,,S
+415,0,3,John Russell,male,40.0,0,0,EO. 7480,7.55,,S
+416,1,2,Shannon Williams,female,29.0,1,0,490460,26.55,,C
+417,1,3,Dorothy Reeves,female,29.0,2,2,BEXGU/ZL 339153,11.1333,,S
+418,0,3,Breanna Johnson,female,17.0,2,2,813026,26.55,,C
+419,1,3,Joel Dominguez,male,4.0,0,0,3933,12.875,,C
+420,0,1,Javier Norton,male,38.0,0,0,671422,82.1708,,C
+421,1,2,Kathryn Foster,female,36.0,2,1,526227,30.0708,,S
+422,0,3,Scott Allen,male,,0,0,YZ/A 3264,7.925,,C
+423,1,2,Maria Miller,female,22.0,0,2,24840,26.55,,S
+424,0,2,Joseph Scott,male,,0,0,33587,8.05,,S
+425,0,3,Andrew Keller,male,,1,0,462476,7.775,,S
+426,1,2,Margaret Robinson,female,55.0,1,0,2780,15.2458,,S
+427,1,3,Heather Williams,female,,1,0,197939,13.0,,C
+428,0,1,Gregory Barker,male,,0,0,387254,25.4667,,Q
+429,1,1,Sharon Houston,female,29.0,2,1,620586,90.0,,C
+430,1,2,Jennifer Walker,female,17.0,0,0,KM 37326,13.0,,C
+431,1,3,Thomas Melendez,male,24.0,0,2,9831,12.0,,S
+432,0,3,Andrew Singleton,male,,0,0,AH 7837,13.0,,S
+433,0,3,Daniel Cummings,male,4.0,3,1,CE/Pqzwi 1669,13.0,,S
+434,1,3,Lori Holmes,female,17.0,0,2,6650,20.525,,S
+435,0,3,Eric Johnson,male,,0,0,78740,7.8792,,S
+436,0,2,Nathan Williams,male,24.0,0,0,246602,18.75,N868,S
+437,0,2,Martin Fisher,male,45.0,1,1,8298,20.525,,C
+438,0,3,Anthony Clayton,male,36.0,1,0,Z.G. 91221,13.0,,S
+439,1,2,Jennifer Barnett,female,6.0,0,3,228702,83.475,,S
+440,0,2,John Aguilar,male,56.0,1,2,34437,36.75,W241,C
+441,0,3,Aaron Berger,male,,0,0,HYJD/W0. 1208219,7.8958,,Q
+442,1,2,David Graham,male,20.0,0,0,401582,7.05,,S
+443,0,3,Bryan Gray,male,,0,0,992610,8.05,,Q
+444,0,2,Calvin Alvarado,male,49.0,0,2,WV. 3917,8.05,,S
+445,0,1,Robert Pope,male,29.0,0,2,712417,512.3292,L36 K33,C
+446,1,2,Sarah Little,female,61.0,0,0,VE 41261,26.0,,S
+447,1,3,Ryan Cunningham,male,7.0,0,0,875273,7.75,,S
+448,0,3,Timothy Stuart,male,21.0,0,0,Z/9. 77847,13.0,,C
+449,0,2,Sean Leach,male,29.0,0,0,226777,8.05,,Q
+450,0,1,Travis Robinson,male,62.0,2,1,4174,69.55,,S
+451,0,3,Colin Zuniga,male,,0,0,45566,7.8958,,S
+452,1,3,Kimberly Woodard,female,,1,0,17520,15.2458,,S
+453,0,2,David Wells,male,29.0,1,0,86575,26.0,,S
+454,1,3,Mark Johnson,male,9.0,0,0,7324,7.775,,Q
+455,0,1,Carlos Salas,male,61.0,0,0,449103,35.5,Z144,C
+456,0,3,Isaac Dawson,male,40.0,0,0,533156,7.8792,,S
+457,1,3,Andrew Gutierrez,male,20.0,0,0,606895,24.15,,S
+458,0,3,James Erickson,male,,0,0,971968,9.35,,S
+459,0,3,Todd Smith,male,36.0,0,0,3257,8.4042,,S
+460,1,2,Kenneth Warner,male,41.0,0,0,M./Q. 12369,8.4333,H47,Q
+461,1,1,Amanda Hoffman,female,29.0,0,0,2596495,81.8583,,C
+462,1,2,Joshua Abbott,male,39.0,0,0,2860,7.2292,F27,S
+463,1,1,Nicholas Taylor,male,14.0,1,1,V/2. 8343,26.2833,C19,S
+464,1,1,Catherine Lopez,female,56.0,1,0,Q.F. 49099,41.5792,,S
+465,1,2,Michelle Robbins,female,29.0,1,1,35558,46.9,,S
+466,1,1,Alyssa Flores,female,35.0,1,2,5957,31.275,,S
+467,1,1,Catherine Whitney,female,29.0,1,0,920438,113.275,,Q
+468,0,3,Shawn Orozco,male,45.0,0,0,VA 92603,8.05,,S
+469,1,1,William Calhoun,male,42.0,0,0,705,27.75,,S
+470,0,3,Jeffrey Lewis,male,29.0,0,0,93981,7.8958,,S
+471,0,3,Jacob Jones,male,,0,0,87940,9.5,,C
+472,1,1,Ryan Ramsey,male,18.0,0,0,732495,25.4667,,S
+473,0,3,David Hernandez,male,,0,0,797953,8.6625,,Q
+474,1,2,Anna Carroll,female,29.0,0,0,784859,13.0,,S
+475,1,1,Anne Jennings,female,29.0,0,1,W/Z 67450,164.8667,F52,C
+476,1,3,Amy Barry,female,,1,0,74868,14.4583,,C
+477,1,2,Sarah Johnson,female,29.0,0,0,EN 32797,12.35,E56,C
+478,0,1,Bradley Robinson,male,58.0,0,0,819165,18.0,,S
+479,0,3,David Diaz,male,,0,0,959929,7.8792,,S
+480,1,1,Leslie Gallagher,female,29.0,1,1,751235,76.7292,,S
+481,0,1,Gordon Ramirez,male,50.0,0,0,17278,53.1,,S
+482,1,3,Scott White,male,0.83,1,1,W.E. 8678,7.925,,S
+483,0,3,John Sanford,male,6.0,0,0,234303,12.475,,C
+484,1,1,Julia Jones,female,14.0,1,2,7942,69.55,,S
+485,1,3,Maurice Hamilton,male,,0,0,205983,7.75,,S
+486,1,3,Robert Thomas,male,0.67,1,2,99618,7.925,S14,S
+487,0,3,James Alexander,male,29.0,0,0,D.I. 68462,7.65,,S
+488,0,3,Evan Clark,male,24.0,0,0,7131,7.75,,S
+489,1,1,Rhonda Mendoza,female,29.0,0,2,Z.A.E. 54650,26.55,,C
+490,0,1,Steven Jones,male,29.0,1,0,889638,39.4,,S
+491,0,3,Eric Lewis,male,29.0,0,0,472284,7.25,,C
+492,1,3,Nathan Taylor,male,2.0,0,0,3868,7.8958,R35,C
+493,0,3,Brad Tate,male,,0,0,901683,7.75,,C
+494,0,3,Phillip Smith,male,24.0,0,0,459704,8.05,G7,S
+495,1,3,Kimberly Boyle,female,22.0,0,0,944090,11.2417,,S
+496,0,2,Bruce Walters,male,45.0,0,0,2192,7.775,,S
+497,1,3,Nicole Olson,female,20.0,2,2,U.T. 8278,15.85,,S
+498,0,3,Jessica Wagner,female,18.0,1,0,YOXL/C 1. 7048270,14.4542,Z89,S
+499,0,3,Samuel Cruz,male,29.0,0,1,29880,8.6542,,C
+500,1,1,Leah Hull,female,45.0,0,0,529485,26.25,,S
+501,0,3,Troy Gomez,male,29.0,0,0,9542088,7.775,,S
+502,0,1,Edwin Jacobs,male,29.0,0,1,96416,69.3,,S
+503,0,1,Laura Peters,female,29.0,1,0,PUTOM/F.L. 9467439,77.9583,,Q
+504,0,3,Manuel Hawkins,male,29.0,0,0,58286,7.225,,S
+505,0,3,Paul Stewart,male,18.0,0,0,45024,10.5,,C
+506,0,3,Alexander Roberts,male,29.0,0,0,838167,7.2292,,S
+507,0,3,William Burns,male,49.0,0,0,319516,7.75,,S
+508,1,1,Thomas Morgan,male,52.0,2,0,449851,46.9,,S
+509,1,3,Dana Flores,female,,0,0,454974,10.5,,Q
+510,1,1,Rebecca Simmons,female,17.0,0,0,6537702,83.1583,,S
+511,1,2,Andrea Brown,female,29.0,0,0,57142,23.25,K36,S
+512,0,3,Philip Moore,male,,0,0,9220,6.2375,,S
+513,0,1,William Stewart,male,54.0,0,1,617640,66.6,,S
+514,0,3,Steven Dodson,male,29.0,0,0,9875,13.0,,S
+515,0,3,Robert Estes,male,,0,0,782982,7.225,,C
+516,1,3,Anne Johnson,female,29.0,0,0,796251,0.0,Q70,S
+517,0,1,Nicholas Reed,male,,0,0,X.V. 9872,31.275,,C
+518,1,3,Deborah Chandler,female,,1,1,W.J.V. 54462,26.0,,S
+519,1,1,Vincent Peterson,male,42.0,1,2,391632,512.3292,,Q
+520,0,1,Gabriel Armstrong,male,42.0,1,2,76521,53.1,,C
+521,1,1,Kayla Potter,female,,1,0,4095,73.5,K91,S
+522,0,3,Christian Clark,male,29.0,0,0,945781,7.75,,S
+523,1,2,Brian Michael,male,5.0,1,0,X/9 8091,52.0,,C
+524,1,2,David Russell,male,44.0,2,0,37485,29.7,,S
+525,0,2,Joel Flores,male,,2,0,2110,28.5,,C
+526,1,3,Angel Nelson,female,42.0,0,0,VFRBZ/T.W. 5353207,0.0,,S
+527,0,3,Charles Johnson,male,22.0,0,0,865938,12.275,,S
+528,0,3,Lisa York,female,21.0,0,0,5447,7.2292,,S
+529,0,1,Keith Lopez,male,40.0,0,0,J.F. 62715,30.5,,C
+530,0,3,Sandra Yu,female,18.0,1,0,415192,15.0,,S
+531,0,3,Charlene Mendoza,female,38.0,0,3,HJ 31750,10.5,,S
+532,1,3,Tina Martinez,female,29.0,0,0,179803,7.925,,S
+533,0,3,Marc Hunter,male,,0,0,Y/6. 34883,10.5,,S
+534,1,1,Andrea Mcdonald,female,23.0,1,0,4032,30.5,,S
+535,1,3,Barry Gallagher,male,23.0,0,0,483846,15.5,,C
+536,1,1,Alec Taylor,male,,0,0,TN. 5609,39.0,,C
+537,0,3,Daniel Bell,male,,0,0,24541,7.775,,C
+538,0,3,Karen Cortez,female,36.0,0,2,415481,7.8542,,C
+539,1,3,Steven Wilson,male,1.0,2,1,9933,13.0,Y74,S
+540,0,3,Eric Abbott,male,20.0,0,0,447858,9.0,,S
+541,0,3,Kenneth Cook,male,1.0,4,2,17366,26.0,,S
+542,0,3,Francisco Davis,male,,0,0,9564191,14.5,V4,S
+543,0,3,Melissa Santiago,female,20.0,0,0,906128,13.0,,S
+544,1,3,Tamara Hatfield,female,40.0,0,3,4102942,26.55,,S
+545,1,1,Joseph Stone,male,20.0,0,0,QK 13633,151.55,,C
+546,1,1,Regina Brown,female,9.0,0,2,166896,75.25,,Q
+547,1,1,Michael Bowman,male,29.0,0,0,512919,26.0,,C
+548,0,3,Julie Galloway,female,1.0,5,3,YXNN/J 3. 8502934,39.6,S72,S
+549,0,3,David Tyler,male,29.0,0,0,693049,7.75,K41,C
+550,1,1,James Gomez,male,10.0,1,0,550295,52.0,,S
+551,0,3,Christopher Watkins,male,,0,0,350933,8.6625,,Q
+552,1,3,Stephanie Mccullough,female,29.0,0,0,GV 99117,8.1375,,S
+553,1,1,Willie Walker,male,,0,0,S.K. 92202,9.5,,S
+554,1,2,Chad Harmon,male,29.0,0,0,90011,27.9,W61,C
+555,0,3,Scott Huff,male,35.0,0,2,305721,26.0,,S
+556,0,3,Jesse Bridges,male,20.0,0,1,269549,7.775,R66 X18,C
+557,0,1,Jonathan Neal,male,54.0,0,0,245351,19.9667,,S
+558,0,2,Bradley Reed,male,29.0,0,0,619302,20.525,,S
+559,0,2,Raymond Owens,male,39.0,0,0,97271,11.5,,S
+560,1,2,Joseph Carrillo,male,,2,2,72349,17.4,,S
+561,1,2,Holly Stone,female,,0,0,643143,26.0,,S
+562,1,3,Kevin Warren,male,,0,0,96040,8.6833,,C
+563,0,1,Steven Graves,male,47.0,1,1,CA 44907,151.55,,C
+564,0,1,Adam Joseph,male,35.0,0,0,LN 68179,51.4792,,C
+565,0,3,Justin Larson,male,42.0,0,0,936072,7.7333,,S
+566,0,3,Brian Kelly,male,19.0,1,0,500903,10.1708,,C
+567,0,3,James Bush,male,45.0,0,0,265330,8.6625,,S
+568,0,3,Brian Hughes,male,,1,0,69737,26.55,,S
+569,0,3,Riley Williams,male,,0,0,TV 28361,0.0,,S
+570,1,1,Shawn Brandt,male,64.0,2,2,766511,78.2667,,S
+571,0,3,Michael Parker,male,,0,0,38893,8.1125,,C
+572,0,3,Jackson Bishop,male,,0,0,R./C. 4669,11.1333,Q35,Q
+573,1,1,Ana Trevino,female,29.0,0,2,9082525,57.9792,,S
+574,0,3,David Villanueva,male,,0,0,103803,7.8958,P36,S
+575,0,3,Jeffrey Beasley,male,29.0,0,0,G./6. 8769,8.05,,S
+576,1,3,Karen Cervantes,female,21.0,1,2,X.V./JE 449,10.5,,S
+577,0,3,Tyler Fuentes,male,,0,0,242841,7.225,,Q
+578,0,3,Dylan Mcgee,male,16.0,0,0,7118,7.05,,Q
+579,1,2,Carl Barnes,male,38.0,0,0,561572,7.75,,S
+580,1,1,Dawn Smith,female,29.0,1,0,995150,49.5,,S
+581,1,2,Dawn Mills,female,40.0,0,0,6991,7.65,,S
+582,1,3,Melissa Owens,female,,0,0,1385,7.75,,C
+583,1,1,Kelsey Hickman,female,29.0,0,2,MYNQR/CR 334994,52.0,,S
+584,0,3,Jason Gonzalez,male,,0,0,OL/UDBEU 6282,14.4542,,S
+585,1,3,Jamie Serrano,female,16.0,1,2,846180,15.9,,S
+586,0,2,Jonathan Hall,male,39.0,0,0,550893,18.75,L68,Q
+587,1,2,Melissa Gordon,female,21.0,0,1,157749,8.6625,X Z35,S
+588,0,3,Jeffrey Cardenas,male,24.0,0,0,AJ 31225,7.8958,,S
+589,1,3,Arthur Martin,male,2.0,0,0,RP 93527,7.75,,C
+590,0,2,Steven Graham,male,2.0,4,2,904932,86.5,,S
+591,0,3,Robert Williams,male,24.0,0,0,V/6 9439,7.925,,Q
+592,1,3,Cindy Smith,female,,2,2,9071,13.5,,C
+593,0,3,Donald Hall,male,,0,0,2670,7.8542,,S
+594,1,2,Meghan Hughes,female,23.0,3,1,E./A. 5363,24.0,I58,S
+595,0,3,William Gray,male,29.0,0,0,88099,8.6625,O73,C
+596,0,3,Randy Cox,male,14.0,0,1,914798,8.5167,,C
+597,1,3,John Perez,male,23.0,0,0,312805,8.4583,J857,S
+598,1,3,John Morrow,male,36.0,0,3,AU 5545,22.525,I11,C
+599,0,1,James Ramos,male,42.0,0,0,71589,52.5542,Q58,C
+600,0,3,James Robbins,male,17.0,2,0,3297,23.0,,S
+601,0,3,Sean Butler,male,,0,0,TKF/I 5285,8.05,,S
+602,0,2,Benjamin Whitney,male,45.0,1,2,939744,55.4417,,Q
+603,1,3,Rita Johnson,female,20.0,2,0,IX/B 60957,20.575,,S
+604,0,3,George Moore,male,29.0,0,0,31819,8.05,,S
+605,1,3,Tammie Miller,female,23.0,0,0,117637,7.75,A96,S
+606,1,3,Hailey Massey,female,17.0,2,2,92636,18.75,,C
+607,0,3,William Franklin,male,,0,0,418290,7.925,,S
+608,1,2,Renee Cruz,female,29.0,0,0,24669,26.0,I58,C
+609,0,3,James Butler,male,24.0,0,0,KH 68747,7.25,,S
+610,0,3,James Booth,male,29.0,0,0,CC 26880,7.75,,S
+611,0,3,Gregory Thomas,male,49.0,0,1,2335,8.6625,M71 O77 D24,Q
+612,1,3,Terry Miranda,male,16.0,1,0,UK 88132,8.0292,,S
+613,0,3,Brent Avery,male,,0,0,551427,7.7417,I16,S
+614,0,1,James Holland,male,29.0,0,0,175826,56.9292,,S
+615,0,3,Stacey Lee,female,51.0,0,2,44960,14.4542,,S
+616,1,2,Taylor Mcdonald,female,29.0,1,2,8568,21.075,,S
+617,0,3,Scott Henry,male,35.0,0,0,357029,15.9,,S
+618,0,3,Kevin Nash,male,29.0,0,0,33960,7.925,H31,S
+619,1,3,Samantha Martin,female,,1,0,X.U.G. 9678,7.775,,C
+620,0,3,Brett Montgomery,male,39.0,0,0,942876,7.25,,S
+621,1,1,Lauren Barber,female,16.0,0,0,432059,26.0,,S
+622,0,2,Jeffrey Rodriguez,male,,0,0,MD/YB 375,7.8958,S18 Y84 C81,C
+623,1,3,Vanessa Robbins,female,5.0,0,1,Z/1. 65341,13.0,F43,C
+624,0,3,Victor Miller,male,16.0,1,0,27828,13.0,,S
+625,1,1,Barbara King,female,39.0,1,0,233352,93.5,,Q
+626,0,1,William Moyer,male,56.0,0,1,417026,26.55,,Q
+627,1,3,Katherine Dodson,female,4.0,0,2,896186,0.0,,S
+628,0,1,Stephen Johnson,male,,0,0,3175,26.25,J81,S
+629,1,1,Charles Gonzalez,male,29.0,0,0,9717576,26.0,N25,S
+630,1,1,Peter Riley,male,29.0,0,0,ZZ 9679,76.2917,,C
+631,0,3,Jeffrey Rodriguez,male,,0,0,314671,7.4958,Q70,S
+632,1,2,Raven Smith,female,36.0,0,0,RWMVG/U.U. 3283510,8.05,,S
+633,1,1,Catherine Powers,female,29.0,0,0,521743,69.55,,S
+634,0,3,Donald Wilson,male,18.0,0,0,845884,7.8958,,S
+635,0,3,Anthony Myers,male,29.0,0,1,999973,14.4,C71,C
+636,0,2,Paul Lopez,male,21.0,0,1,PR/QUEQS 4159,46.9,,C
+637,1,3,Suzanne Rivera,female,14.0,0,0,497338,7.8958,B34 A76,S
+638,1,2,Christine Smith,female,36.0,1,3,65188,39.0,K S80,S
+639,1,2,Michelle Allen,female,29.0,3,1,30203,41.5792,,S
+640,0,3,Christopher Zimmerman,male,42.0,0,0,801395,7.75,I50,S
+641,1,2,Erica Ryan,female,21.0,1,0,252935,25.9292,,S
+642,1,1,Nicole Snyder,female,29.0,1,0,7654,69.55,,S
+643,0,3,Brian Smith,male,,0,0,PR 62144,7.25,,C
+644,0,2,Martin Maynard,male,29.0,0,2,9445,30.0,V,S
+645,0,3,Edward Lyons,male,29.0,0,0,HM 38881,7.725,,Q
+646,0,3,Kent Richard,male,50.0,0,0,7353,7.05,,S
+647,1,1,Tracy Flores,female,29.0,0,0,165456,26.0,U39 Q54 O10 S64,C
+648,0,3,Kevin Willis,male,19.0,0,0,123195,7.125,,S
+649,1,3,Aaron Avila,male,29.0,0,0,YH/LA 34493,7.75,,S
+650,0,2,Vincent Medina,male,,0,0,PG. 8420,7.8542,,S
+651,1,1,Shelby Heath,female,29.0,0,1,H/9. 32496,79.2,,C
+652,1,1,Alec Taylor,male,54.0,0,0,2889285,26.55,,S
+653,1,2,Michelle Martinez,female,35.0,0,0,664218,9.825,,S
+654,1,2,Ivan Andrade,male,17.0,0,0,65357,8.05,,S
+655,0,3,Laurie Jones,female,,0,0,U/4 43640,10.5,,S
+656,1,2,Ashlee Sanchez,female,23.0,0,1,ITKRF/RH 560583,34.375,,C
+657,1,1,Jessica Lewis,female,29.0,0,0,L./4. 2657,39.6875,L,S
+658,0,3,Joseph Wang,male,29.0,0,0,172061,13.0,,S
+659,1,2,Eileen Schaefer,female,,0,0,94036,14.0,A4,S
+660,0,3,Clinton Alexander,male,36.0,0,0,IJ 34713,7.225,,S
+661,0,3,Mark Stuart,male,15.0,0,0,FM/ZG 4935,7.75,A41,S
+662,0,1,John Edwards,male,19.0,0,0,JY 74651,25.4667,,S
+663,0,3,Timothy Anderson,male,29.0,0,0,277570,7.925,,S
+664,0,1,James Clark,male,40.0,0,0,782823,13.7917,,S
+665,0,1,Johnny Thomas,male,36.0,0,0,QU 39373,30.0,G72,Q
+666,0,3,Wesley Johnson,male,24.0,0,0,593927,7.8292,,S
+667,0,1,Mark Powell,male,16.0,2,0,366016,71.0,,S
+668,0,3,Eugene Sanchez,male,,0,0,44762,0.0,,Q
+669,0,3,Kyle Gutierrez,male,38.0,0,0,201471,9.8458,F39,S
+670,0,3,William Oneill,male,54.0,0,0,SG 6656,7.8542,,S
+671,0,3,Thomas Dickson,male,23.0,0,0,869774,7.7375,E242,S
+672,0,1,Matthew Mcdaniel,male,,0,0,689268,24.0,K35,C
+673,1,1,Jane Vaughn,female,,1,0,292871,90.0,,C
+674,1,3,Charles Pham,male,29.0,0,0,323318,7.2292,,S
+675,0,3,Caitlin Barron,female,,2,2,646741,26.0,,S
+676,1,1,James Sanchez,male,19.0,0,0,86530,8.05,K12 C48,C
+677,0,3,William Galloway,male,21.0,0,0,8370,6.45,R58,S
+678,1,1,Brent Harris,male,,0,0,UV 66137,20.2125,,S
+679,1,1,Michelle Morales,female,36.0,0,0,4824,27.7208,,C
+680,0,3,Lucas Pace,male,35.0,2,1,363629,14.4542,,S
+681,1,2,Susan Wolf,female,61.0,0,0,535395,7.8958,,S
+682,0,1,Roy Nelson,male,42.0,0,0,KLZH/Z2. 8549256,26.55,,C
+683,1,2,Stephen Munoz,male,59.0,0,0,642807,7.8958,,S
+684,0,2,James Owens,male,48.0,0,0,956487,26.0,H51,S
+685,1,1,Dennis Rosales,male,24.0,0,1,325055,135.6333,,S
+686,1,3,Connie Evans,female,9.0,2,2,YF 14710,7.5208,,S
+687,0,3,Benjamin Hill,male,24.0,0,0,175893,7.75,,Q
+688,0,2,Nathaniel Morgan,male,4.0,0,0,592535,18.7875,,C
+689,1,3,Trevor Johnson,male,,0,0,864318,8.05,,S
+690,1,3,Tammy Logan,female,,0,0,905155,12.475,,Q
+691,0,3,David Davis,male,,0,0,2873,7.8958,P0,S
+692,1,3,Jeremy Webb,male,41.0,0,0,BKISE/Q.O. 2276553,0.0,,S
+693,0,3,Ian Garcia,male,29.0,0,0,70622,7.2292,,S
+694,0,3,Aaron Randolph,male,,1,0,404333,15.5,C995,C
+695,1,1,Gary Rodriguez,male,29.0,0,0,2572,39.6875,,S
+696,0,3,Richard Petersen,male,,0,0,5040,7.75,,S
+697,0,1,Kyle Short,male,,0,0,977032,27.0,,S
+698,0,3,Clarence Cox,male,29.0,0,0,W.H. 4058,7.0542,,S
+699,0,1,Lisa Norris,female,47.0,2,1,442608,133.65,,C
+700,0,2,Jim Hester,male,,0,0,2951611,15.5,Q71,C
+701,0,2,Kayla Webster,female,49.0,1,4,30648,55.9,K0,S
+702,0,3,Jennifer Bauer,female,29.0,5,3,79444,35.5,,S
+703,0,3,Matthew Smith,male,19.0,0,0,XY 83764,7.775,,Q
+704,0,3,Henry Carroll,male,,0,0,653930,7.4958,,S
+705,0,2,Jeff Wilson,male,16.0,0,0,52903,15.55,,C
+706,1,2,Debbie Knight,female,38.0,0,0,OF 4019,13.0,,S
+707,0,2,Paul Willis,male,29.0,0,0,466577,14.1083,,C
+708,1,1,Anna Johnson,female,24.0,1,1,TC 56833,153.4625,,C
+709,1,1,Ronnie Huber,male,41.0,2,0,3226,71.0,,C
+710,1,2,Cheryl Gibson,female,20.0,0,0,990943,26.0,,C
+711,1,3,Rachel Green,female,,0,0,Q.B. 27495,13.0,,Q
+712,1,3,Thomas Thompson,male,6.0,1,3,192492,24.15,,S
+713,0,1,Eric Newton,male,38.0,0,0,S.R./PCHQQ 5989,26.2875,L59 K77,C
+714,0,3,David Webster,male,,0,0,ISCV/B3. 3571885,8.05,F5,S
+715,0,3,Michael Holt,male,24.0,0,0,JOS/F 2150,7.8792,,S
+716,1,3,Heather Riley,female,29.0,0,0,100362,7.7958,,S
+717,1,1,Savannah Thompson,female,,0,0,XC 32566,29.0,I19,S
+718,1,2,William Freeman,male,,0,0,126071,16.1,T62 Z96,S
+719,0,3,Lisa Webster,female,29.0,0,0,OV 55251,7.75,C62,C
+720,0,3,Jonathan Farmer,male,29.0,0,0,B./X. 5026,7.65,E18,S
+721,0,3,Grant Smith,male,,0,0,266649,13.0,,S
+722,0,3,Troy Davis,male,9.0,4,2,76779,19.2583,C R10,S
+723,1,1,Tyrone Smith,male,58.0,1,1,595600,73.5,,S
+724,1,3,Shelia Hill,female,38.0,2,0,918850,10.5,,S
+725,0,1,Christopher Holloway,male,29.0,0,0,9602,56.4958,,C
+726,0,2,Shawn Woodard,male,,0,0,ND 50472,13.0,Q45,C
+727,0,1,Jaime Scott,male,,0,0,947088,21.0,,S
+728,1,2,Rebecca Phillips,female,35.0,1,2,C/1 7728,39.6875,,S
+729,0,1,William Salazar,male,29.0,2,0,W.D. 66122,83.1583,,C
+730,0,3,Thomas Murphy,male,29.0,0,0,398837,7.25,,S
+731,0,3,Shawn Chambers,male,29.0,0,0,953943,7.8958,I35,S
+732,0,3,Kim Beard,female,24.0,2,0,O.A. 37563,7.8958,N67,S
+733,1,3,Lisa Bryant,female,3.0,1,1,74188,16.1,,C
+734,1,2,Jim Ross,male,7.0,2,2,462459,39.6875,,C
+735,0,1,Jeffrey Thomas,male,29.0,0,1,73724,57.0,,S
+736,1,1,Melanie Weber,female,54.0,2,2,98735,153.4625,,Q
+737,0,2,Eric White,male,,0,0,20803,15.85,O47,C
+738,0,3,Philip Johnson,male,18.0,0,0,QUQC/E7. 5161929,9.225,,S
+739,0,3,Daniel Walker,male,,0,0,666876,12.35,,S
+740,1,3,Jeffrey Jones,male,,0,0,JA 34030,7.125,,S
+741,0,3,Michael Sosa,male,7.0,0,0,859,7.8958,Y48,C
+742,1,1,Terri Adams,female,36.0,0,0,NC 34281,56.9292,O628,C
+743,0,3,Nicholas Callahan,male,22.0,0,0,7032378,7.7292,,C
+744,0,3,Robert Burns,male,16.0,0,0,521,7.65,,C
+745,1,1,Whitney Turner,female,29.0,1,1,1427,78.2667,,C
+746,1,2,Brian Lee,male,41.0,0,0,102660,19.2583,A11,S
+747,0,3,Rita Holland,female,,0,0,82737,20.25,,S
+748,1,2,Cheryl Harris,female,20.0,0,2,GH 1058,34.375,,S
+749,1,1,Christopher Gutierrez,male,36.0,0,0,9926,110.8833,H58,S
+750,0,2,Christopher Fletcher,male,,0,0,1322765,7.775,,S
+751,1,3,Timothy Greene,male,,0,0,3418,7.2292,N41,Q
+752,1,2,Ana Martinez,female,9.0,2,1,930920,36.75,,S
+753,1,3,Andre Brown,male,18.0,2,1,243723,26.55,Q O82,S
+754,1,1,Andrew Price,male,29.0,0,1,ILOMM/J.Q. 6749352,63.3583,,S
+755,1,2,Shannon Gonzalez,female,22.0,0,2,835753,16.7,,S
+756,1,3,Sean Robinson,male,,0,0,911505,10.5,,S
+757,1,2,Catherine Harris,female,29.0,1,1,5951,27.9,,S
+758,1,3,Charles Massey,male,2.0,0,0,911125,9.5,E40 F57 U70 K79,C
+759,0,1,Mark Hubbard,male,29.0,2,0,G/9 2466,108.9,,S
+760,0,3,Michael Christian,male,29.0,0,0,37671,7.75,Z840,S
+761,1,1,Kristin Gomez,female,29.0,0,0,47638,134.5,O Z88,C
+762,0,3,Bruce Pena,male,21.0,0,0,727801,7.8958,,S
+763,1,2,Maria Duncan,female,29.0,0,0,865438,14.5,,S
+764,1,1,Charlene Beck,female,50.0,0,0,843979,7.775,,S
+765,1,1,Kristin Meadows,female,20.0,1,1,47062,262.375,,C
+766,0,3,Collin George,male,21.0,0,0,405092,7.8958,A11 Z28,S
+767,1,1,Allison White,female,29.0,0,0,192662,80.0,,S
+768,0,2,Nicolas Hall,male,18.0,0,0,38162,19.2583,,S
+769,1,1,Jonathan Campbell,male,,0,0,73450,50.4958,,C
+770,1,2,Katelyn Grimes,female,45.0,0,1,F 93976,29.7,,S
+771,0,1,Rose Nunez,female,29.0,0,0,30880,53.1,,C
+772,0,3,Charles Kim,male,38.0,0,0,178139,8.6625,,S
+773,0,3,Robert Jenkins,male,,5,1,308614,27.7208,,S
+774,1,3,Jessica Boyer,female,,0,0,26568,8.05,,C
+775,1,1,Jennifer Wilson,female,,0,0,364482,9.5,,S
+776,1,1,Shane Morris,male,61.0,1,0,I/2. 81155,151.55,,C
+777,0,1,Jeffrey Brown,male,,0,0,976264,52.5542,,C
+778,1,3,Michael Pham,male,38.0,0,0,859647,15.2458,,S
+779,1,1,John Buchanan,male,49.0,0,1,NNPLX/I.V. 9044853,211.3375,,C
+780,0,3,Erik Pruitt,male,24.0,3,2,325614,25.4667,,S
+781,0,3,Joshua Macias,male,17.0,0,0,59708,7.8542,,C
+782,0,1,Andre Vaughan,male,23.0,0,0,I 56422,53.1,Q97,C
+783,0,3,Michael Chapman,male,9.0,3,2,BE 68832,33.0,,S
+784,1,1,Andrea Ortiz,female,36.0,0,0,278588,56.4958,,C
+785,0,3,Justin George,male,21.0,1,0,410988,16.1,,S
+786,1,2,James Conley,male,18.0,0,1,4162,13.0,Z D48,S
+787,0,3,Joseph Vega,male,,0,0,15462,10.5167,,S
+788,1,3,Brooke Hawkins,female,3.0,1,2,VJ/WTCER 8087,12.2875,,S
+789,0,3,Joshua Gutierrez,male,29.0,0,0,UT 4021,8.05,,S
+790,1,3,Tyler Patel,male,,0,0,523239,17.8,,S
+791,1,1,Alexander Serrano,male,42.0,2,2,9755,135.6333,,C
+792,0,2,Paul Santiago,male,,0,0,595156,27.7208,,S
+793,0,2,David Johnston,male,17.0,0,0,DFTH,13.0,,C
+794,0,3,Danielle Scott,female,,1,0,9804,9.5,,C
+795,0,3,Denise Peterson,female,,0,0,94206,7.05,,S
+796,1,3,Steven Chapman,male,,0,0,384679,30.5,U14 V72,S
+797,0,3,Stephen Davis,male,3.0,0,0,JMFY/B 8. 4160242,7.8958,,S
+798,1,3,Brandon Rodriguez,male,40.0,0,2,O/5 60617,0.0,,S
+799,0,3,Richard Collins,male,,0,0,835290,13.0,,S
+800,0,2,Daniel Torres,male,19.0,0,0,785017,19.5,,S
+801,0,3,Tony Parker,male,5.0,1,0,7268030,14.4542,U21 Y36,Q
+802,0,3,Richard Smith,male,29.0,0,0,DU 75676,7.7958,,S
+803,0,3,Jared Stewart,male,29.0,0,0,478898,7.8958,,C
+804,1,1,Joshua Parsons,male,4.0,0,1,371183,39.6875,,S
+805,1,1,Daniel Taylor,male,29.0,0,0,Z.T. 37312,24.15,,S
+806,1,2,Jacob Blake,male,29.0,0,0,736646,27.7208,,C
+807,0,1,Paul Martinez,male,36.0,0,1,970731,52.0,,Q
+808,1,1,Denise Clark,female,29.0,0,0,TM. 7151,33.0,,S
+809,0,1,Rodney Wright,male,29.0,0,0,8809,26.2875,L17 C26,C
+810,0,3,Timothy Jenkins,male,,8,3,A.Q.A. 34370,61.9792,,S
+811,1,2,Kristen Jacobs,female,29.0,0,2,162861,15.85,I630,S
+812,0,3,Robert Valdez,male,,0,0,474248,13.0,X97,S
+813,0,1,Christopher Golden,male,49.0,0,0,29742,15.0458,,S
+814,1,3,Stacy Ross,female,18.0,1,1,1782,8.6625,P12,C
+815,1,3,John Jones,male,,0,0,IW/CV 529,18.0,,S
+816,0,3,Ricardo Johnson,male,29.0,0,0,9684,7.225,P6,S
+817,0,3,Steven Wells,male,29.0,0,0,107409,11.5,N68 X97,S
+818,0,3,Mark Hunter,male,41.0,0,1,QF 36279,7.25,,Q
+819,0,3,Christopher Rogers,male,55.0,2,2,221640,25.5875,,S
+820,0,3,Derek Monroe,male,21.0,0,0,9709,7.4958,,S
+821,0,3,Frank Haynes,male,29.0,3,2,78548,31.275,,S
+822,0,3,Robert Tate,male,17.0,0,0,619521,7.8958,U89,S
+823,0,3,James Robinson,male,,0,0,566757,7.8958,G47,Q
+824,1,2,Lisa Marshall,female,17.0,0,0,844351,16.0,H25,C
+825,1,3,Jesse Casey,male,1.0,0,2,502654,27.9,,S
+826,0,3,Bradley Pope,male,29.0,2,0,20711,14.5,,Q
+827,1,3,Jacqueline Pitts,female,,0,0,XI 57544,9.5,,S
+828,0,3,Scott Jenkins,male,,0,0,18700,13.8583,,S
+829,1,1,Leroy Austin,male,70.5,0,0,665571,23.25,,S
+830,0,2,Juan Graves,male,42.0,0,1,22470,20.25,,S
+831,1,3,Shari Ray,female,41.0,0,0,950043,15.85,,S
+832,1,1,Elizabeth Callahan,female,55.0,2,0,541865,153.4625,,C
+833,1,1,Karina Wu,female,16.0,1,0,185322,89.1042,V1,C
+834,1,3,John White,male,3.0,0,0,4607213,0.0,,C
+835,0,2,Michael Butler,male,,0,0,OJJHH/W6 8819440,10.5,,S
+836,0,2,Robert Ward,male,29.0,0,0,J.B. 33729,30.6958,,Q
+837,1,3,Jennifer Herman,female,29.0,0,0,456403,9.5875,,S
+838,0,3,Joshua Price,male,41.0,0,0,401013,8.05,,S
+839,1,2,Linda Levine,female,36.0,0,0,9829,26.0,,S
+840,0,1,Adam Thomas,male,61.0,0,1,432583,37.0042,V724,Q
+841,1,1,Charles Rose,male,44.0,1,3,BZ. 6980,108.9,,S
+842,0,3,John Zimmerman,male,36.0,0,0,H./I. 1261,7.925,,S
+843,1,1,Brett Wall,male,54.0,0,0,81319,26.25,K39,S
+844,0,2,Johnny Newton,male,39.0,0,0,3288,13.0,,S
+845,0,2,Ronald Watts,male,,0,1,GLFL/I 7. 3619035,51.8625,,C
+846,0,3,Luis Rose,male,,0,0,552549,13.0,,S
+847,1,3,Donald Parks,male,29.0,0,0,17617,0.0,,S
+848,1,1,Kristin Walton,female,29.0,1,0,27040,89.1042,L26,S
+849,0,3,Bianca Richardson,female,51.0,0,2,324954,22.025,,S
+850,0,3,Carrie Navarro,female,29.0,1,0,519030,19.2583,H35,S
+851,0,2,Leslie Ayala,male,51.0,0,0,64504,7.8958,F P13,S
+852,0,3,Matthew Baldwin,male,17.0,0,0,7969,7.2292,,S
+853,0,3,Justin Peters,male,36.0,3,2,2030,21.0,,S
+854,0,3,Joseph Mitchell,male,14.0,5,2,496833,56.4958,,S
+855,1,3,Justin Stevens,male,2.0,3,1,740893,21.0,,S
+856,1,1,Brooke Smith,female,,0,0,E/2 1323,56.4958,C31,S
+857,0,1,Alexander Wright,male,29.0,0,0,7977,13.0,,S
+858,0,3,Kenneth Brown,male,,0,0,762487,13.0,,S
+859,0,2,Sean Pittman,male,24.0,0,0,60844,8.05,,C
+860,1,1,Kelli Anderson,female,29.0,1,0,3201,34.375,,S
+861,0,3,Matthew Little,male,,0,0,2572,13.0,,S
+862,1,3,Peter Henderson,male,15.0,0,0,222610,7.225,,S
+863,1,1,Lance Simon,male,29.0,0,0,852202,65.0,,C
+864,0,1,David Rosales,male,45.0,1,0,4571,86.5,B67,S
+865,1,1,Darlene Hobbs,female,70.0,1,2,87470,263.0,,S
+866,0,1,Alex Stewart,male,42.0,1,3,333533,55.0,,C
+867,0,3,John Price,male,35.0,0,0,6819,7.8542,C4,S
+868,1,3,Jennifer Clark,female,21.0,0,0,282532,7.925,,Q
+869,1,2,Kathryn Henry,female,54.0,0,0,41371,14.4542,,S
+870,0,3,Tracy Smith,female,,2,1,927371,20.2125,,S
+871,1,1,Brenda Ingram,female,21.0,0,0,L./Q. 9517,57.0,K2,Q
+872,0,1,Randall Schneider,male,29.0,1,2,FZ 5657,79.65,,C
+873,1,2,Victor Garza,male,45.0,0,0,LO 35089,7.25,,S
+874,1,3,Luis Ingram,male,34.0,0,0,896641,8.6625,,S
+875,0,2,Kyle Ferrell,male,,0,0,4962,25.9292,U433,S
+876,1,3,Anna Smith,female,,0,0,79465,14.5,H65,S
+877,1,1,Stephen Campbell,male,29.0,0,0,539092,65.0,W389,C
+878,1,3,Michael Smith,male,4.0,2,1,C/5. 2135,27.75,,C
+879,0,3,Leah Mendez,female,52.0,2,2,223525,26.0,,S
+880,1,3,Jennifer Brown,female,,0,0,96272,10.5,,S
+881,0,3,Justin Long,male,,0,0,15354,8.05,Y981,C
+882,1,1,Heather Russell,female,29.0,0,0,347783,53.1,,S
+883,0,2,Tanner Burton,male,44.0,0,2,886945,26.0,,C
+884,1,2,Joshua Landry,male,17.0,0,2,3058,26.0,M140,C
+885,0,3,Edward Gonzalez,male,24.0,0,0,270813,6.75,,C
+886,0,2,Angel Solis,female,29.0,1,0,504857,39.0,,S
+887,1,1,Lawrence Mata,male,11.0,1,1,1836,30.5,,C
+888,0,3,Tyler Wright,male,,0,0,ET 71218,7.2292,,C
+889,1,1,Karen Anderson,female,,0,0,459074,93.5,,C
+890,0,1,Charles Colon,male,17.0,4,2,Z.Z. 6059,262.375,,S
+891,1,2,Hannah Holland,female,29.0,0,0,342426,15.5,,S
