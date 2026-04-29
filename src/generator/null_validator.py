@@ -50,6 +50,12 @@ from analyzer.dataset_analyzer import DatasetProfile
 # If synthetic null rate deviates from real by more than this, emit a warning
 NULL_RATE_WARNING_THRESHOLD = 0.10  # 10 percentage points
 
+# If synth null rate exceeds real by this multiplier, clamp excess nulls back.
+# Example: real=20%, synth=35% → ratio=1.75 > 1.5 → re-impute excess nulls.
+# This corrects over-flagging by the Age_missing binary feature in the model
+# without touching nulls that are within a normal variance band.
+NULL_RATE_MAX_RATIO = 1.5
+
 
 # ── Data contract ─────────────────────────────────────────────────────────────
 
@@ -114,8 +120,32 @@ class NullValidator:
                 fixed = self._impute_column(df, col)
                 report.unexpected_nulls_fixed[col] = fixed
 
+            # ── Clamp excess nulls (over-flagging correction) ──────────────
+            # If the model generates significantly more nulls than the real
+            # ratio (e.g. Age: real=20%, synth=35%), re-impute the excess.
+            # Only applies when real_ratio > 0 (expected-null columns).
+            elif real_ratio > 0.0 and synth_rate > real_ratio * NULL_RATE_MAX_RATIO:
+                target_n_nulls = int(round(real_ratio * n))
+                excess         = n_nulls - target_n_nulls
+                if excess > 0:
+                    null_idx = df[col].isna()
+                    # Randomly keep only target_n_nulls of the nulls
+                    null_positions = df.index[null_idx].tolist()
+                    rng            = np.random.default_rng(seed=42)
+                    to_fill        = rng.choice(null_positions, size=excess, replace=False)
+                    if pd.api.types.is_numeric_dtype(df[col]):
+                        if col in self.original_df.columns:
+                            fill_val = float(self.original_df[col].median())
+                        else:
+                            fill_val = float(df[col].median())
+                    else:
+                        mode_vals = self.original_df[col].mode() if col in self.original_df.columns else df[col].mode()
+                        fill_val  = mode_vals.iloc[0] if len(mode_vals) > 0 else "UNKNOWN"
+                    df.loc[to_fill, col] = fill_val
+                    report.unexpected_nulls_fixed[col] = excess
+
             # ── Warn on large discrepancy ──────────────────────────────────
-            gap = abs(synth_rate - real_ratio)
+            gap = abs(df[col].isna().mean() - real_ratio)  # recalc after possible fix
             if gap > NULL_RATE_WARNING_THRESHOLD:
                 report.null_rate_warnings.append(col)
 

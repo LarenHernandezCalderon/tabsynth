@@ -108,11 +108,15 @@ class UtilityEvaluator:
         result    = evaluator.evaluate(real_df, synthetic_df, target_col)
     """
 
+    # Strategies whose output is comparable real vs synthetic for TSTR
+    _MEANINGFUL_STRATEGIES = {"diffusion_model", "sample_distribution"}
+
     def evaluate(
         self,
         real_df    : pd.DataFrame,
         synth_df   : pd.DataFrame,
         target_col : Optional[str] = None,
+        profile    = None,
     ) -> UtilityResult:
 
         # ── Auto-detect target column ──────────────────────────────────────
@@ -120,14 +124,29 @@ class UtilityEvaluator:
             target_col = self._detect_target(real_df)
 
         if target_col is None or target_col not in real_df.columns:
-            # No suitable target — return neutral result
             return UtilityResult(
                 target_column="none", model_results=[],
                 mean_gap=0.0, best_model="n/a", worst_model="n/a", score=1.0,
             )
 
+        # ── Filter features by generation strategy ─────────────────────────
+        # Columns generated externally (faker, regex, sequential) must NOT
+        # be used as features. The TSTR classifier would learn "unknown name
+        # = synthetic" and artificially inflate the gap.
+        excluded_cols: set = set()
+        if profile is not None:
+            for col_profile in profile.columns:
+                strat = getattr(col_profile, "generation_strategy", None) or ""
+                if strat and strat not in self._MEANINGFUL_STRATEGIES:
+                    excluded_cols.add(col_profile.column_name)
+            for col_name in getattr(profile, "id_columns", []):
+                excluded_cols.add(col_name)
+
         # ── Prepare features ───────────────────────────────────────────────
-        feature_cols = [c for c in real_df.columns if c != target_col]
+        feature_cols = [
+            c for c in real_df.columns
+            if c != target_col and c not in excluded_cols
+        ]
 
         X_real, y_real   = self._prepare(real_df,  feature_cols, target_col)
         X_synth, y_synth = self._prepare(synth_df, feature_cols, target_col)

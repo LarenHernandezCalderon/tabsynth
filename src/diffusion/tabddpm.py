@@ -3,17 +3,19 @@ tabddpm.py
 ─────────────────────────────────────────────────────────────────────────────
 Main orchestrator of the TabDDPM diffusion model (Phase 3).
 
-Single responsibility:
-    Coordinate NoiseScheduler, DenoisingMLP, and MixedLoss to train the model
-    and generate synthetic tabular data.
+Changes vs previous version:
+    - from_preprocessor() now accepts an optional `profile` (DatasetProfile)
+    - When profile is provided, critical_pairs are converted to tensor indices
+      and a CorrelationLoss is added to the training signal
+    - fit() reconstructs x_0_pred per batch and adds corr_loss * corr_weight
+      to the main MixedLoss — the model now has a direct incentive to preserve
+      the joint distribution between strongly correlated columns
 
-Public interface:
-    model = TabDDPM.from_preprocessor(preprocessor_output)
+Public interface (unchanged):
+    model = TabDDPM.from_preprocessor(preprocessor_output)              # no profile
+    model = TabDDPM.from_preprocessor(preprocessor_output, profile=p)   # with profile
 
-    # Fully automatic — no hyperparameters needed
     model.auto_tune(output.tensor_dataset)
-
-    # Manual — full control
     model.fit(output.tensor_dataset, n_epochs=1000, batch_size=128, lr=1e-3)
 
     synthetic_tensor = model.generate(n_samples=len(df))
@@ -33,18 +35,86 @@ from collections import Counter
 
 from .noise_scheduler import NoiseScheduler
 from .mlp             import DenoisingMLP, auto_hidden_dims
-from .loss            import MixedLoss
+from .loss            import MixedLoss, CorrelationLoss
 from .tuner           import HyperTuner, EarlyStopping
+
+
+# Methods from Phase 1 that represent numeric pairwise correlations.
+# Only these produce a signed Pearson-compatible score that makes sense
+# to enforce in the diffusion model's continuous feature space.
+_NUMERIC_METHODS = {"pearson", "spearman"}
+
+
+def _build_corr_pairs(
+    profile,
+    feature_names: list[str],
+    zero_inflated_map: dict[str, str],
+) -> list[tuple[int, int, float]]:
+    """
+    Converts DatasetProfile.critical_pairs into (idx_a, idx_b, target_corr)
+    tuples that reference tensor column indices.
+
+    Rules:
+        - Only numeric pairs (method == pearson or spearman) are included.
+          Cramér's V and Eta-squared use different scales and the correlation
+          signal would be misleading in the continuous feature space.
+        - Columns excluded from the tensor (PII, IDs, free text) are skipped.
+        - Zero-inflated columns use their _value feature for correlation.
+        - Direction is used to recover the sign: score is always positive in
+          CorrelationPair, but the model must know if the relation is inverse.
+    """
+    if profile is None or not profile.critical_pairs:
+        return []
+
+    # Build reverse map: original_col → _value feature name (zero-inflated)
+    orig_to_value: dict[str, str] = {}
+    for feat, orig in zero_inflated_map.items():
+        if feat.endswith("_value"):
+            orig_to_value[orig] = feat
+
+    # Build name → index map for fast lookup
+    name_to_idx: dict[str, int] = {name: i for i, name in enumerate(feature_names)}
+
+    def resolve(col_name: str) -> int | None:
+        if col_name in name_to_idx:
+            return name_to_idx[col_name]
+        # Zero-inflated: col not in tensor directly, use _value proxy
+        if col_name in orig_to_value:
+            proxy = orig_to_value[col_name]
+            return name_to_idx.get(proxy)
+        return None  # excluded from tensor
+
+    pairs: list[tuple[int, int, float]] = []
+
+    for cp in profile.critical_pairs:
+        # Only numeric methods carry a meaningful signed correlation
+        if cp.method not in _NUMERIC_METHODS:
+            continue
+
+        idx_a = resolve(cp.col_a)
+        idx_b = resolve(cp.col_b)
+
+        if idx_a is None or idx_b is None:
+            continue  # at least one column not in the tensor
+
+        # Recover the sign — CorrelationPair.score is always positive
+        sign        = -1.0 if cp.direction == "negative" else 1.0
+        target_corr = float(sign * cp.score)
+
+        pairs.append((idx_a, idx_b, target_corr))
+
+    return pairs
 
 
 class TabDDPM:
     """
     Denoising Diffusion Probabilistic Model for mixed tabular data.
 
-    Coordinates three internal components:
-        NoiseScheduler — mathematical noise calendar (forward + reverse)
-        DenoisingMLP   — neural network that learns to predict and undo noise
-        MixedLoss      — error function weighted by column type
+    Coordinates four internal components:
+        NoiseScheduler  — mathematical noise calendar (forward + reverse)
+        DenoisingMLP    — neural network that learns to predict and undo noise
+        MixedLoss       — error function weighted by column type
+        CorrelationLoss — penalizes joint correlation errors (when profile given)
 
     Args:
         n_features    : number of tensor features   (PreprocessorOutput.n_features)
@@ -55,6 +125,8 @@ class TabDDPM:
         schedule      : noise schedule type          ('cosine' or 'linear')
         hidden_dims   : MLP hidden layer sizes       (None = inferred from n_features)
         dropout       : MLP regularisation rate      (default: 0.0)
+        corr_pairs    : list of (idx_a, idx_b, target_corr) from _build_corr_pairs
+        corr_weight   : weight of CorrelationLoss relative to MixedLoss (default: 0.1)
     """
 
     def __init__(
@@ -62,11 +134,13 @@ class TabDDPM:
         n_features:    int,
         column_types:  dict[str, str],
         feature_names: list[str],
-        n_rows:        int              = 0,
-        T:             int              = 1000,
-        schedule:      str              = "cosine",
-        hidden_dims:   list[int] | None = None,
-        dropout:       float            = 0.0,
+        n_rows:        int                          = 0,
+        T:             int                          = 1000,
+        schedule:      str                          = "cosine",
+        hidden_dims:   list[int] | None             = None,
+        dropout:       float                        = 0.0,
+        corr_pairs:    list[tuple[int,int,float]]   = None,
+        corr_weight:   float                        = 0.1,
     ):
         self.n_features    = n_features
         self.column_types  = column_types
@@ -74,6 +148,8 @@ class TabDDPM:
         self.n_rows        = n_rows
         self.T             = T
         self.dropout       = dropout
+        self.corr_pairs    = corr_pairs or []
+        self.corr_weight   = corr_weight
 
         if hidden_dims is None:
             hidden_dims = auto_hidden_dims(n_features)
@@ -85,7 +161,7 @@ class TabDDPM:
         self._is_fitted = False
 
     def _build_components(self) -> None:
-        """Builds or rebuilds the three internal components."""
+        """Builds or rebuilds all internal components."""
         self.scheduler = NoiseScheduler(T=self.T, schedule="cosine")
 
         self.model = DenoisingMLP(
@@ -99,22 +175,59 @@ class TabDDPM:
             feature_names = self.feature_names,
         ).to(self.device)
 
+        # CorrelationLoss — only active when critical pairs are provided
+        if self.corr_pairs:
+            self.corr_loss_fn = CorrelationLoss(self.corr_pairs).to(self.device)
+        else:
+            self.corr_loss_fn = None
+
     # ── Alternative constructor ──────────────────────────────────────────────
 
     @classmethod
-    def from_preprocessor(cls, preprocessor_output, **kwargs) -> "TabDDPM":
+    def from_preprocessor(
+        cls,
+        preprocessor_output,
+        profile=None,          # DatasetProfile from Phase 1 (optional)
+        corr_weight: float = 0.1,
+        **kwargs,
+    ) -> "TabDDPM":
         """
         Builds a TabDDPM instance directly from a Phase 2 PreprocessorOutput.
 
+        Args:
+            preprocessor_output : PreprocessorOutput from Phase 2
+            profile             : DatasetProfile from Phase 1. When provided,
+                                  critical_pairs are used to build CorrelationLoss.
+            corr_weight         : weight of CorrelationLoss (default: 0.1)
+
         Usage:
+            # Without correlation loss (original behaviour)
             model = TabDDPM.from_preprocessor(output)
-            model = TabDDPM.from_preprocessor(output, T=1000, hidden_dims=[512,256])
+
+            # With correlation loss — recommended
+            model = TabDDPM.from_preprocessor(output, profile=profile)
         """
+        corr_pairs = _build_corr_pairs(
+            profile           = profile,
+            feature_names     = preprocessor_output.feature_names,
+            zero_inflated_map = preprocessor_output.zero_inflated_map,
+        )
+
+        if corr_pairs:
+            print(f"  CorrelationLoss active: {len(corr_pairs)} critical pairs")
+            for idx_a, idx_b, target in corr_pairs:
+                name_a = preprocessor_output.feature_names[idx_a]
+                name_b = preprocessor_output.feature_names[idx_b]
+                print(f"    {name_a} ↔ {name_b}  target={target:+.3f}")
+            print()
+
         return cls(
             n_features    = preprocessor_output.n_features,
             column_types  = preprocessor_output.column_types,
             feature_names = preprocessor_output.feature_names,
             n_rows        = len(preprocessor_output.tensor_dataset),
+            corr_pairs    = corr_pairs,
+            corr_weight   = corr_weight,
             **kwargs,
         )
 
@@ -127,32 +240,20 @@ class TabDDPM:
         batch_size: int   = 512,
         lr:         float = 1e-3,
         log_every:  int   = 100,
-        patience:   int   = 0,       # 0 = early stopping disabled
+        patience:   int   = 0,
         min_delta:  float = 1e-4,
     ) -> list[float]:
         """
-        Trains the diffusion model with manually specified hyperparameters.
+        Trains the diffusion model.
 
-        Optionally uses early stopping if patience > 0.
-
-        Per batch, per epoch:
-            1. Sample a random timestep t per data point
-            2. Add noise:        x_t, noise = scheduler.add_noise(x, t)
-            3. Predict noise:    noise_pred = model(x_t, t)
-            4. Compute loss:     loss = loss_fn(noise_pred, noise)
-            5. Update weights:   zero_grad → backward → step
-
-        Args:
-            tensor_dataset : PyTorch TensorDataset (from PreprocessorOutput)
-            n_epochs       : maximum number of training epochs
-            batch_size     : samples per gradient update
-            lr             : Adam learning rate
-            log_every      : print progress every N epochs
-            patience       : early stopping patience (0 = disabled)
-            min_delta      : minimum loss improvement to reset patience counter
-
-        Returns:
-            loss_history : mean loss per epoch
+        Per batch:
+            1. Sample random timestep t per sample
+            2. Add noise:         x_t, noise = scheduler.add_noise(x, t)
+            3. Predict noise:     noise_pred = model(x_t, t)
+            4. Main loss:         mixed_loss(noise_pred, noise)
+            5. Corr loss:         reconstruct x_0_pred, compute corr penalty
+            6. Total loss:        mixed_loss + corr_weight * corr_loss
+            7. Update weights
         """
         loader    = DataLoader(tensor_dataset, batch_size=batch_size, shuffle=True)
         optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
@@ -175,7 +276,19 @@ class TabDDPM:
                 noise = noise.to(self.device)
 
                 noise_pred = self.model(x_t, t)
-                loss       = self.loss_fn(noise_pred, noise)
+
+                # ── Main loss (noise prediction) ──────────────────────────────
+                main_loss = self.loss_fn(noise_pred, noise)
+
+                # ── Correlation loss (joint distribution) ─────────────────────
+                if self.corr_loss_fn is not None:
+                    ab       = self.scheduler.alpha_bar[t.cpu()].unsqueeze(1).to(self.device)
+                    x_0_pred = (x_t - torch.sqrt(1.0 - ab) * noise_pred) / (torch.sqrt(ab) + 1e-8)
+                    x_0_pred = torch.clamp(x_0_pred, 0.0, 1.0)
+                    corr_loss = self.corr_loss_fn(x_0_pred)
+                    loss = main_loss + self.corr_weight * corr_loss
+                else:
+                    loss = main_loss
 
                 optimizer.zero_grad()
                 loss.backward()
@@ -189,7 +302,6 @@ class TabDDPM:
                 status = f" | {stopper.status()}" if stopper else ""
                 print(f"  Epoch {epoch + 1:4d}/{n_epochs} | Loss: {mean_loss:.6f}{status}")
 
-            # Early stopping check
             if stopper and stopper.step(mean_loss, epoch):
                 print(f"\n  Early stop at epoch {epoch + 1} "
                       f"(no improvement for {stopper.patience} epochs)")
@@ -212,39 +324,11 @@ class TabDDPM:
         log_every:    int   = 100,
     ) -> list[float]:
         """
-        Fully automatic training — no hyperparameters needed from the user.
+        Fully automatic training — no hyperparameters needed.
 
-        Two-phase process:
-            Phase 1 — Grid search (quick):
-                Probes 5 candidate configurations for probe_epochs each.
-                Picks the winner based on lowest probe loss.
-                Automatically selects: hidden_dims, batch_size, lr.
-
-            Phase 2 — Full training with early stopping:
-                Rebuilds the model with the winning configuration.
-                Trains until the loss stops improving for `patience` epochs.
-                Never trains more than `max_epochs` epochs.
-
-        This is the recommended entry point for any new dataset.
-        The system adapts entirely to your data — just call auto_tune() and wait.
-
-        Args:
-            tensor_dataset : TensorDataset from PreprocessorOutput
-            probe_epochs   : epochs per candidate in the grid search (default: 50)
-            patience       : early stopping — stop if no improvement for N epochs (default: 50)
-            min_delta      : minimum loss change that counts as improvement (default: 1e-4)
-            max_epochs     : hard ceiling on training epochs (default: 2000)
-            log_every      : print interval during full training (default: 100)
-
-        Returns:
-            loss_history : mean loss per epoch of the full training run
-
-        Usage:
-            model = TabDDPM.from_preprocessor(output)
-            model.auto_tune(output.tensor_dataset)   # ← that's it
-            synthetic_tensor = model.generate(n_samples=len(df))
+        Grid search phase uses MixedLoss only (fast architecture selection).
+        Full training phase uses MixedLoss + CorrelationLoss if pairs exist.
         """
-        # ── Phase 1: find best config ────────────────────────────────────────
         tuner = HyperTuner(
             n_rows        = self.n_rows,
             n_features    = self.n_features,
@@ -253,12 +337,14 @@ class TabDDPM:
         )
         best = tuner.run(tensor_dataset, T=self.T, probe_epochs=probe_epochs)
 
-        # ── Phase 2: rebuild model with winner and train with early stopping ──
         self.hidden_dims = best.hidden_dims
         self._build_components()
 
         print(f"Starting full training — winner: {best.label}")
         print(f"  Early stopping: patience={patience}, max_epochs={max_epochs}")
+        if self.corr_loss_fn is not None:
+            print(f"  CorrelationLoss: weight={self.corr_weight}, "
+                  f"pairs={len(self.corr_pairs)}")
         print()
 
         return self.fit(
@@ -275,16 +361,6 @@ class TabDDPM:
 
     @torch.no_grad()
     def generate(self, n_samples: int) -> torch.Tensor:
-        """
-        Generates n_samples rows of synthetic data via the full reverse process.
-
-        Args:
-            n_samples : number of synthetic rows to generate
-
-        Returns:
-            tensor of shape (n_samples, n_features) with values in [0, 1]
-            ready for PreprocessorOutput.inverse_transform()
-        """
         if not self._is_fitted:
             raise RuntimeError(
                 "Model has not been trained yet. Call fit() or auto_tune() first."
@@ -292,9 +368,6 @@ class TabDDPM:
 
         self.model.eval()
 
-        # Fix the generation seed for reproducibility.
-        # The training seed is intentionally NOT fixed (we want stochastic training).
-        # Only the generation is fixed so results are reproducible across runs.
         torch.manual_seed(42)
         if self.device.type == "cuda":
             torch.cuda.manual_seed(42)
@@ -317,7 +390,6 @@ class TabDDPM:
     # ── Persistence ──────────────────────────────────────────────────────────
 
     def save(self, path: str) -> None:
-        """Saves the trained model and hyperparameters to disk."""
         torch.save({
             "model_state_dict": self.model.state_dict(),
             "n_features":       self.n_features,
@@ -327,12 +399,13 @@ class TabDDPM:
             "T":                self.T,
             "hidden_dims":      self.hidden_dims,
             "is_fitted":        self._is_fitted,
+            "corr_pairs":       self.corr_pairs,
+            "corr_weight":      self.corr_weight,
         }, path)
         print(f"Model saved to: {path}")
 
     @classmethod
     def load(cls, path: str) -> "TabDDPM":
-        """Loads a model previously saved with save()."""
         ckpt  = torch.load(path, map_location="cpu", weights_only=False)
         model = cls(
             n_features    = ckpt["n_features"],
@@ -341,6 +414,8 @@ class TabDDPM:
             n_rows        = ckpt.get("n_rows", 0),
             T             = ckpt["T"],
             hidden_dims   = ckpt["hidden_dims"],
+            corr_pairs    = ckpt.get("corr_pairs", []),
+            corr_weight   = ckpt.get("corr_weight", 0.1),
         )
         model.model.load_state_dict(ckpt["model_state_dict"])
         model._is_fitted = ckpt["is_fitted"]
@@ -350,7 +425,6 @@ class TabDDPM:
     # ── Utilities ────────────────────────────────────────────────────────────
 
     def summary(self) -> None:
-        """Prints a summary of the model architecture and training state."""
         n_params    = sum(p.numel() for p in self.model.parameters())
         type_counts = Counter(self.column_types.values())
 
@@ -364,6 +438,7 @@ class TabDDPM:
         print(f"  device       : {self.device}")
         print(f"  parameters   : {n_params:,}")
         print(f"  trained      : {self._is_fitted}")
+        print(f"  corr_pairs   : {len(self.corr_pairs)}")
         print()
         for col_type, count in sorted(type_counts.items()):
             print(f"  {col_type:<15}: {count} features")
@@ -384,4 +459,7 @@ class TabDDPM:
         print(f"  lr             : {lr}")
         print(f"  parameters     : {n_params:,}")
         print(f"  early stopping : {es_info}")
+        if self.corr_loss_fn is not None:
+            print(f"  corr_loss      : weight={self.corr_weight}, "
+                  f"pairs={len(self.corr_pairs)}")
         print()

@@ -1,62 +1,125 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300">
-  <!-- Background: clean white -->
-  <rect width="1200" height="300" fill="#FAFAFA"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360">
+  <defs>
+    <!-- Gradient: light blue → white at bottom -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E8F1FB"/>
+      <stop offset="50%" stop-color="#F0F6FD"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
 
-  <!-- Right panel: GitHub dark -->
-  <rect x="720" y="0" width="480" height="300" fill="#0D1117"/>
+    <!-- Subtle shadow for floating cards -->
+    <filter id="cardShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.15"/></feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
 
-  <!-- LEFT SIDE -->
+    <!-- Green pulse for the "synthetic" output -->
+    <filter id="greenGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feFlood flood-color="#3FB950" flood-opacity="0.3"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
 
-  <text x="80" y="80" font-family="Inter, -apple-system, system-ui, sans-serif" font-size="11" font-weight="600" fill="#6B7280" letter-spacing="3">
-    OPEN-SOURCE PROJECT
-  </text>
+  <!-- Background gradient -->
+  <rect width="1200" height="360" fill="url(#bgGrad)"/>
 
-  <text x="80" y="160" font-family="Inter, -apple-system, system-ui, sans-serif" font-size="72" font-weight="700" fill="#0D1117" letter-spacing="-2.5">
+  <!-- ========== FLOATING CARDS (the visual story) ========== -->
+  <!-- They represent the pipeline visually: input rows → noise → clean synthetic output -->
+
+  <!-- Far left: data rows (representing input CSV) -->
+  <g transform="translate(180, 70)" filter="url(#cardShadow)">
+    <rect x="0" y="0" width="120" height="80" rx="8" fill="#FFFFFF" stroke="#D6E4F5" stroke-width="1"/>
+    <!-- Mini table rows -->
+    <line x1="12" y1="20" x2="108" y2="20" stroke="#1F3864" stroke-width="2"/>
+    <line x1="12" y1="34" x2="80" y2="34" stroke="#9CA3AF" stroke-width="1.2"/>
+    <line x1="12" y1="46" x2="95" y2="46" stroke="#9CA3AF" stroke-width="1.2"/>
+    <line x1="12" y1="58" x2="70" y2="58" stroke="#9CA3AF" stroke-width="1.2"/>
+    <line x1="12" y1="70" x2="100" y2="70" stroke="#9CA3AF" stroke-width="1.2"/>
+    <text x="60" y="-10" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#5B6B7E">REAL DATA</text>
+  </g>
+
+  <!-- Middle-left: noisy/diffusion representation -->
+  <g transform="translate(370, 50)" filter="url(#cardShadow)">
+    <rect x="0" y="0" width="100" height="100" rx="10" fill="#FFFFFF" stroke="#D6E4F5" stroke-width="1"/>
+    <!-- Noisy dots pattern -->
+    <circle cx="20" cy="22" r="2" fill="#5B6B7E" opacity="0.7"/>
+    <circle cx="45" cy="18" r="2" fill="#5B6B7E" opacity="0.5"/>
+    <circle cx="70" cy="28" r="2" fill="#5B6B7E" opacity="0.8"/>
+    <circle cx="85" cy="45" r="2" fill="#5B6B7E" opacity="0.4"/>
+    <circle cx="30" cy="42" r="2" fill="#5B6B7E" opacity="0.6"/>
+    <circle cx="55" cy="50" r="2" fill="#5B6B7E" opacity="0.7"/>
+    <circle cx="15" cy="60" r="2" fill="#5B6B7E" opacity="0.5"/>
+    <circle cx="40" cy="68" r="2" fill="#5B6B7E" opacity="0.8"/>
+    <circle cx="75" cy="72" r="2" fill="#5B6B7E" opacity="0.6"/>
+    <circle cx="60" cy="85" r="2" fill="#5B6B7E" opacity="0.5"/>
+    <circle cx="25" cy="82" r="2" fill="#5B6B7E" opacity="0.7"/>
+    <circle cx="80" cy="88" r="2" fill="#5B6B7E" opacity="0.4"/>
+    <text x="50" y="-10" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#5B6B7E">DIFFUSION</text>
+  </g>
+
+  <!-- Middle: distribution curve / model -->
+  <g transform="translate(540, 60)" filter="url(#cardShadow)">
+    <rect x="0" y="0" width="120" height="90" rx="10" fill="#FFFFFF" stroke="#D6E4F5" stroke-width="1"/>
+    <!-- Bell curve representing learned distribution -->
+    <path d="M 15 75 Q 35 75, 45 50 T 60 25 Q 75 25, 85 50 T 105 75" fill="none" stroke="#1F3864" stroke-width="2"/>
+    <!-- Axis -->
+    <line x1="12" y1="75" x2="108" y2="75" stroke="#9CA3AF" stroke-width="1"/>
+    <text x="60" y="-10" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#5B6B7E">LEARNED</text>
+  </g>
+
+  <!-- Middle-right: evaluation metrics card -->
+  <g transform="translate(720, 75)" filter="url(#cardShadow)">
+    <rect x="0" y="0" width="100" height="80" rx="8" fill="#FFFFFF" stroke="#D6E4F5" stroke-width="1"/>
+    <!-- Mini bar chart representing evaluation scores -->
+    <rect x="15" y="48" width="10" height="20" fill="#1F3864" rx="1"/>
+    <rect x="32" y="35" width="10" height="33" fill="#1F3864" rx="1"/>
+    <rect x="49" y="28" width="10" height="40" fill="#1F3864" rx="1"/>
+    <rect x="66" y="22" width="10" height="46" fill="#3FB950" rx="1"/>
+    <rect x="83" y="38" width="10" height="30" fill="#1F3864" rx="1"/>
+    <line x1="12" y1="68" x2="95" y2="68" stroke="#9CA3AF" stroke-width="1"/>
+    <text x="50" y="-10" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#5B6B7E">EVALUATE</text>
+  </g>
+
+  <!-- Far right: synthetic output (highlighted with green) -->
+  <g transform="translate(870, 65)" filter="url(#cardShadow)">
+    <rect x="0" y="0" width="130" height="90" rx="8" fill="#FFFFFF" stroke="#3FB950" stroke-width="2"/>
+    <!-- Mini table rows (cleaner, all uniform) -->
+    <line x1="12" y1="22" x2="118" y2="22" stroke="#3FB950" stroke-width="2"/>
+    <line x1="12" y1="38" x2="90" y2="38" stroke="#9CA3AF" stroke-width="1.2"/>
+    <line x1="12" y1="50" x2="105" y2="50" stroke="#9CA3AF" stroke-width="1.2"/>
+    <line x1="12" y1="62" x2="78" y2="62" stroke="#9CA3AF" stroke-width="1.2"/>
+    <line x1="12" y1="74" x2="110" y2="74" stroke="#9CA3AF" stroke-width="1.2"/>
+    <text x="65" y="-10" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#2D7A3E">SYNTHETIC</text>
+  </g>
+
+  <!-- Subtle connecting flow line behind cards -->
+  <path d="M 305 110 Q 380 100, 425 100 Q 525 110, 555 105 Q 660 110, 720 115 Q 820 110, 875 110"
+        fill="none" stroke="#B8D4F0" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6"/>
+
+  <!-- ========== TITLE BLOCK (centered below cards) ========== -->
+
+  <text x="600" y="240" text-anchor="middle" font-family="Inter, -apple-system, system-ui, sans-serif" font-size="56" font-weight="700" fill="#0D1117" letter-spacing="-2">
     tabsynth
   </text>
 
-  <text x="82" y="200" font-family="Inter, -apple-system, system-ui, sans-serif" font-size="20" font-weight="400" fill="#1F2937" letter-spacing="-0.2">
-    Auto-adaptive synthetic
-  </text>
-  <text x="82" y="226" font-family="Inter, -apple-system, system-ui, sans-serif" font-size="20" font-weight="400" fill="#1F2937" letter-spacing="-0.2">
-    tabular data generation
-  </text>
+  <!-- Thin separator line -->
+  <line x1="540" y1="265" x2="660" y2="265" stroke="#D6E4F5" stroke-width="1.5"/>
 
-  <text x="82" y="258" font-family="ui-monospace, SFMono-Regular, monospace" font-size="12" font-weight="400" fill="#6B7280">
-    diffusion · GDPR-compliant · auto-tuned
+  <text x="600" y="295" text-anchor="middle" font-family="Inter, -apple-system, system-ui, sans-serif" font-size="18" font-weight="400" fill="#3A4453">
+    Auto-adaptive synthetic tabular data generation
   </text>
 
-  <!-- RIGHT SIDE: dark panel with diagram -->
-
-  <text x="755" y="60" font-family="Inter, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#6B7280" letter-spacing="3">
-    PIPELINE
+  <text x="600" y="325" text-anchor="middle" font-family="Inter, -apple-system, system-ui, sans-serif" font-size="14" font-weight="400" fill="#6B7280">
+    A diffusion-based pipeline with end-to-end statistical evaluation
   </text>
-
-  <!-- Diagram: 3 boxes, all consistent, fully monochrome -->
-  <g transform="translate(755, 100)" font-family="Inter, -apple-system, sans-serif" font-size="11">
-
-    <!-- Box 1: CSV input -->
-    <rect x="0" y="35" width="65" height="40" fill="none" stroke="#FAFAFA" stroke-width="1.2" rx="4"/>
-    <text x="32.5" y="59" text-anchor="middle" fill="#FAFAFA" font-weight="600" font-size="12">CSV</text>
-
-    <!-- Arrow -->
-    <line x1="68" y1="55" x2="86" y2="55" stroke="#6B7280" stroke-width="1"/>
-    <polygon points="86,55 80,52 80,58" fill="#6B7280"/>
-
-    <!-- Box 2: Pipeline core -->
-    <rect x="89" y="15" width="180" height="80" fill="none" stroke="#FAFAFA" stroke-width="1.2" rx="4"/>
-    <text x="179" y="35" text-anchor="middle" fill="#FAFAFA" font-weight="700" font-size="12">5-phase pipeline</text>
-    <line x1="120" y1="44" x2="238" y2="44" stroke="#FAFAFA" stroke-width="1" stroke-linecap="round"/>
-    <text x="179" y="60" text-anchor="middle" fill="#9CA3AF" font-size="10.5">analyze · preprocess</text>
-    <text x="179" y="74" text-anchor="middle" fill="#9CA3AF" font-size="10.5">diffuse · generate</text>
-    <text x="179" y="88" text-anchor="middle" fill="#9CA3AF" font-size="10.5">evaluate</text>
-
-    <!-- Arrow -->
-    <line x1="271" y1="55" x2="289" y2="55" stroke="#6B7280" stroke-width="1"/>
-    <polygon points="289,55 283,52 283,58" fill="#6B7280"/>
-
-    <!-- Box 3: synthetic CSV output -->
-    <rect x="292" y="35" width="115" height="40" fill="none" stroke="#FAFAFA" stroke-width="1.2" rx="4"/>
-    <text x="349.5" y="59" text-anchor="middle" fill="#FAFAFA" font-weight="600" font-size="12">synthetic CSV</text>
-  </g>
 </svg>

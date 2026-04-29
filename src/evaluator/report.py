@@ -137,8 +137,13 @@ class ReportFormatter:
         sem = _semaphore(r.score)
         w(f"  {'DETECTABILITY':<16} {bar}  {r.score:.2f}  {sem}  (not in overall)")
         w(f"  Accuracy={r.accuracy:.3f}  AUC={r.roc_auc:.3f}  (ideal ≈ 0.50)")
+        all_excluded = r.excluded_by_strategy + r.excluded_high_cardinality
+        if all_excluded:
+            w(f"  Excluded: {all_excluded}")
+        if r.excluded_by_strategy:
+            w(f"  → {len(r.excluded_by_strategy)} col(s) excluded by strategy (faker/regex/id — not model-generated)")
         if r.excluded_high_cardinality:
-            w(f"  Excluded: {r.excluded_high_cardinality}")
+            w(f"  → {len(r.excluded_high_cardinality)} col(s) excluded by cardinality heuristic")
         if r.accuracy > 0.75:
             w("  ⚠️  Some detectable patterns — see DETECTABILITY DETAIL")
         else:
@@ -241,9 +246,14 @@ class ReportFormatter:
         w(f"\n  Classifier : RandomForest (real vs synthetic label)")
         w(f"  n_real     : {r.n_real}   n_synthetic: {r.n_synthetic}")
         w(f"  Features used      : {r.n_features_used} columns")
+        if r.excluded_by_strategy:
+            w(f"  Excluded by strategy (not model-generated):")
+            w(f"    {r.excluded_by_strategy}")
+            w(f"  → These columns use faker/regex/sequential generation.")
+            w(f"    Comparing them would penalise the score unfairly —")
+            w(f"    the model never saw the real values, so it cannot replicate them.")
         if r.excluded_high_cardinality:
-            w(f"  Excluded (high cardinality): {r.excluded_high_cardinality}")
-            w(f"  → Names/codes/IDs excluded — trivially distinguishable by construction")
+            w(f"  Excluded by cardinality heuristic: {r.excluded_high_cardinality}")
         w()
         w(f"  Accuracy : {r.accuracy:.4f}  (ideal ≈ 0.50)  score={_pct(r.accuracy_score)}")
         w(f"  ROC-AUC  : {r.roc_auc:.4f}  (ideal ≈ 0.50)  score={_pct(r.auc_score)}")

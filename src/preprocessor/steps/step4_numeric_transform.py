@@ -64,6 +64,14 @@ class NumericTransformer:
                 continue
 
             transform = col_profile.recommended_transform or "none"
+            if (
+                col_profile.detected_type == "ordinal"
+                and df[col].nunique() <= 10
+                and transform != "none"
+            ):
+                if self.verbose:
+                    print(f"  {col:<30} → none  (ordinal override)")
+                transform = "none"
             series    = df[col].copy()
 
             if transform == "log":

@@ -107,6 +107,7 @@ class Evaluator:
     Usage:
         ev     = Evaluator()
         result = ev.evaluate(real_df, synth_df)
+        result = ev.evaluate(real_df, synth_df, profile=profile)  # recommended
         ev.report(result)
     """
 
@@ -118,6 +119,7 @@ class Evaluator:
         real_df    : pd.DataFrame,
         synth_df   : pd.DataFrame,
         target_col : Optional[str] = None,
+        profile    = None,   # Optional[DatasetProfile] from Phase 1
     ) -> EvaluatorOutput:
 
         if self.verbose:
@@ -126,6 +128,32 @@ class Evaluator:
             print("=" * 55)
             print(f"\n  Evaluating {len(synth_df)} synthetic rows against "
                   f"{len(real_df)} real rows...")
+
+        # ── PII safety filter ──────────────────────────────────────────────
+        # CRITICAL: columns flagged as direct_identifier (DNI, Name, SSN…)
+        # must NEVER be passed to any evaluator in their real form.
+        # Even for detectability — comparing real DNIs against fake regex-
+        # generated DNIs would expose actual personal data to the classifier.
+        #
+        # Rule: drop from BOTH real_df and synth_df any column whose
+        # pii_category is 'direct_identifier'. These are generated externally
+        # (faker / regex) and carry zero statistical signal for evaluation.
+        # quasi_identifier columns (Age, Sex…) are kept — they are generated
+        # by the diffusion model and their distributions must be evaluated.
+        pii_direct_cols: list[str] = []
+        if profile is not None:
+            for col_profile in profile.columns:
+                if getattr(col_profile, "pii_category", "") == "direct_identifier":
+                    pii_direct_cols.append(col_profile.column_name)
+
+        if pii_direct_cols:
+            if self.verbose:
+                print(f"\n  🔴 PII safety filter: dropping {len(pii_direct_cols)} "
+                      f"direct_identifier column(s) from ALL evaluators")
+                print(f"     {pii_direct_cols}")
+                print(f"     → Real values of these columns never enter any evaluator.")
+            real_df  = real_df.drop(columns=[c for c in pii_direct_cols if c in real_df.columns])
+            synth_df = synth_df.drop(columns=[c for c in pii_direct_cols if c in synth_df.columns])
 
         # ── Run all evaluators ─────────────────────────────────────────────
         if self.verbose:
@@ -138,10 +166,10 @@ class Evaluator:
         relationships = RelationshipsEvaluator().evaluate(real_df, synth_df)
 
         self._log("  [3/6] Utility        (TSTR — 3 models)...")
-        utility = UtilityEvaluator().evaluate(real_df, synth_df, target_col)
+        utility = UtilityEvaluator().evaluate(real_df, synth_df, target_col, profile=profile)
 
         self._log("  [4/6] Detectability  (RandomForest real vs synthetic)...")
-        detectability = DetectabilityEvaluator().evaluate(real_df, synth_df)
+        detectability = DetectabilityEvaluator().evaluate(real_df, synth_df, profile=profile)
 
         self._log("  [5/6] Privacy        (Nearest-neighbour distances)...")
         privacy = PrivacyEvaluator().evaluate(real_df, synth_df)
