@@ -1,24 +1,20 @@
-        # Environment variables — NEVER commit this
-        .env
+# Environment variables — NEVER commit this
+.env
 
-        # Python
-        __pycache__/
-        *.pyc
-        *.pyo
-        .venv/
-        venv/
-        env/
-
-        # Data files — often too large or sensitive for git
-        data/
-        output/
-
-        # Jupyter
-        .ipynb_checkpoints/
-
-        # OS
-        .DS_Store
-        Thumbs.db
-
-        # Models
-        models/
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+# Data files — often too large or sensitive for git
+data/
+output/
+# Jupyter
+.ipynb_checkpoints/
+# OS
+.DS_Store
+Thumbs.db
+# Models
+models/

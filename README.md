@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/27113552/README.md)
 <div align="center">
   <img src="assets/banner.svg" alt="tabsynth" width="100%"/>
 </div>
@@ -186,23 +185,25 @@ Validated on three public datasets covering different challenges: small dataset 
 
 | Dataset | Rows | Cols | Fidelity | Relationships | Utility (TSTR) | Privacy | Diversity | **Overall** |
 |---------|------|------|----------|---------------|----------------|---------|-----------|-------------|
-| **Titanic** | 891 | 12 | 0.78 | 0.95 | 0.91 | 1.00 | 0.99 | **0.89** 🟢 |
-| **Plane Crashes** | 2,709 | 8 | 0.74 | 0.87 | 1.00 | 1.00 | 0.95 | **0.89** 🟢 |
+| **Titanic** | 891 | 12 | 0.78 | 0.84 | 0.81 | 1.00 | 0.96 | **0.84** 🟡 |
+| **Plane Crashes** | 2,709 | 8 | 0.80 | 0.98 | 1.00 | 1.00 | 0.98 | **0.93** 🟢 |
 | **Diamonds** | ~54k | 10 | — | — | — | — | — | **pending** |
 
 > 🟢 ≥ 0.85 production-ready · 🟡 ≥ 0.70 suitable for most use cases · 🟠 ≥ 0.55 use with caution
 
-Seeds used (reproducible): `titanic.csv → 512`, `plane.csv → 123`
+All results use `SEED = 12` — fully reproducible. Run `python main.py` with the dataset of your choice.
 
 **What the numbers mean in practice:**
 
-**Utility (TSTR) = 1.00 on Plane** — three classifiers (LogisticRegression, RandomForest, GradientBoosting) trained on synthetic data and tested on real data achieve **identical accuracy** to models trained on real data. Zero gap.
+**Utility (TSTR) = 1.00 on Plane Crashes** — three classifiers (LogisticRegression, RandomForest, GradientBoosting) trained on synthetic data and tested on real data achieve **identical accuracy** to models trained on real data. Zero measurable gap.
 
-**Utility (TSTR) = 0.91 on Titanic** — mean accuracy gap of 0.9% across three models. A RandomForest trained on synthetic Titanic data achieves 81.6% accuracy on real holdout vs 80.5% on real training data — the synthetic data is actually slightly *more* generalisable.
+**Utility (TSTR) = 0.81 on Titanic** — mean accuracy gap of 1.9% across three models on a notoriously hard dataset: 891 rows, 20% missing Age values, PII columns, zero-inflated distributions, and exponential Fare. LogisticRegression trained on synthetic data achieves identical accuracy (80.45%) to training on real data.
 
-**Relationships ≥ 0.87 on all datasets** — correlation structure preserved. The `CorrelationLoss` keeps critical pairs like `Pclass ↔ Fare` (Spearman 0.688) and `aboard ↔ fatalities` (Spearman 0.763) within tight tolerance in the synthetic data.
+**Relationships = 0.98 on Plane Crashes** — **10/10 critical pairs** preserved within tolerance, including the key physical correlation `aboard ↔ fatalities` (Spearman 0.763 real → 0.734 synthetic, delta=0.029). The `CorrelationLoss` term during training is directly responsible for this.
 
-**Privacy = 1.00 on all datasets** — Distance Ratio ≥ 1.40 on both validated datasets, confirming synthetic records are further from real records than real records are from each other. No re-identification risk detected.
+**Privacy = 1.00 on both datasets** — Distance Ratio of 1.71 (Titanic) and 1.20 (Plane) confirms synthetic records are further from real records than real records are from each other. No re-identification risk detected.
+
+**Dataset size effect is visible and expected** — Titanic (891 rows) scores 0.84 GOOD while Plane Crashes (2,709 rows) scores 0.93 EXCELLENT. More data gives the diffusion model more signal to learn from. Diamonds (~54k rows) results pending.
 
 ---
 
