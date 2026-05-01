@@ -16,16 +16,18 @@ load_dotenv()
 
 # ── Dataset selection — change only this line ─────────────────────────────
 # DATASET = "titanic.csv"
-DATASET = "plane.csv"
+# DATASET = "plane.csv"
 # DATASET = "diamonds.csv"
 # DATASET = "social_media.csv"
+DATASET = "housing.csv"
 
 # ── Semillas por dataset (encontradas con find_best_seed) ─────────────────
 SEEDS = {
     "titanic.csv"      : 12,
-    "plane.csv"        : 12,   #12
+    "plane.csv"        : 12,
     "diamonds.csv"     : 42,   # pendiente — actualizar tras find_best_seed
     "social_media.csv" : 42,   # pendiente — actualizar tras find_best_seed
+    "housing.csv"      : 12,   # pendiente — actualizar tras find_best_seed
 }
 
 SEED = SEEDS.get(DATASET, 42)
@@ -56,6 +58,9 @@ def prepare_dataset(name: str) -> tuple[pd.DataFrame, str]:
 
     elif name == "social_media.csv":
         target = "addicted_score"
+
+    elif name == "housing.csv":
+        target = "median_house_value"
 
     else:
         target = df.columns[-1]

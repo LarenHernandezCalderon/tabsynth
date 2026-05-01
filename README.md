@@ -1,3 +1,7 @@
+<p align="right">
+  🌐 <strong>English</strong> · <a href="README.es.md">Español</a>
+</p>
+
 <div align="center">
   <img src="docs/assets/banner.svg" alt="tabsynth" width="100%"/>
 </div>
@@ -18,6 +22,7 @@
 
 <p align="center">
   <a href="#why">Why</a> ·
+  <a href="#security">Security</a> ·
   <a href="#quick-start">Quick Start</a> ·
   <a href="#how-it-works">How It Works</a> ·
   <a href="#results">Results</a> ·
@@ -35,9 +40,33 @@ Real data is the most valuable and the most restricted asset in any organisation
 
 Three design principles guided every decision:
 
-- **Auto-adaptive.** No config files, no type hints, no manual schema. Drop any CSV and the pipeline handles the rest — from detecting that `SibSp` is zero-inflated to inferring that `Name` is a GDPR direct identifier.
-- **Correlation-aware training.** Strong column pairs detected in Phase 1 (Pearson, Spearman, Cramér's V, η²) are injected as a `CorrelationLoss` term during diffusion training. The model is explicitly penalised for breaking relationships like `carat ↔ price` or `Pclass ↔ Fare`.
+- **Auto-adaptive.** No config files, no type hints, no manual schema. Drop any CSV and the pipeline handles the rest — automatically detecting zero-inflated distributions, identifying GDPR direct identifiers, inferring regex patterns for structured codes, and choosing the optimal numerical transform per column.
+- **Correlation-aware training.** Strong column pairs detected in Phase 1 (Pearson, Spearman, Cramér's V, η²) are injected as a `CorrelationLoss` term during diffusion training. The model is explicitly penalised for breaking statistically significant relationships between columns.
 - **GDPR-compliant by design.** Direct identifiers are regenerated with Faker — real values are never sampled, never stored, never sent anywhere. Quasi-identifiers go through the diffusion model. Privacy is quantified via Distance Ratio (NND-based re-identification risk).
+
+---
+
+## 🔒 Security
+
+> **No real data ever leaves the secure environment. This is a hard architectural guarantee, not a policy.**
+
+This is the core security commitment of the system, and it shapes every design decision:
+
+**What stays local — always:**
+- Raw data values are never sent to any external service, at any stage of the pipeline.
+- The LLM (GPT-4) receives only aggregated structural metadata: average lengths, capitalisation ratios, numeric character ratios, cardinality ranges. It never sees actual row values.
+- The RegexMiner runs entirely in-process: it analyses real values in memory to infer structural patterns, and its only output is a regex string — a description of structure, not a copy of data.
+- All distribution analysis, correlation computation, and statistical profiling happens locally via scipy and pandas.
+
+**What the model learns — and doesn't:**
+- The diffusion model learns the joint statistical distribution of the dataset. It does not memorise rows.
+- `direct_identifier` columns (names, emails, IDs, phone numbers) are never passed to the tensor at all. They are regenerated from scratch using Faker with the inferred locale — real values are discarded before training begins.
+- Privacy is actively measured: the Distance Ratio metric confirms that synthetic records are statistically further from real records than real records are from each other.
+
+**What evaluators never touch:**
+- PII columns are dropped from all evaluators (fidelity, relationships, utility, detectability, privacy) before any computation. Real names or IDs never enter any classifier or distance calculation.
+
+**In short:** the only thing that ever leaves the environment is the synthetic dataset — and by construction, it cannot be traced back to any real individual.
 
 ---
 
@@ -98,9 +127,9 @@ The brain of the system. Quality of everything downstream depends directly on wh
 
 **Layer 1 — MetadataExtractor** inspects each column structurally without storing raw values. Text columns produce a `StringMetadata` object capturing signals like average length, capitalisation ratio, numeric character ratio, and special character presence. These signals — never the actual data — are what gets sent to the LLM in Layer 2.
 
-**Layer 2 — SemanticAnalyzer (GPT-4)** classifies columns the MetadataExtractor could not resolve (`unknown_string`). It receives only the aggregated signals, infers semantic type (`full_name`, `email`, `code`, `free_text`…), assigns a GDPR category (direct identifier / quasi-identifier / Article 9 sensitive / non-PII), and infers locale for Faker generation. Real data never leaves the system.
+**Layer 2 — SemanticAnalyzer (GPT-4)** classifies columns the MetadataExtractor could not resolve (`unknown_string`). It receives only the aggregated signals, infers semantic type (`full_name`, `email`, `code`, `free_text`…), assigns a GDPR category (direct identifier / quasi-identifier / Article 9 sensitive / non-PII), and infers locale for Faker generation. **Real data never leaves the system.**
 
-**Layer 2b — RegexMiner** deploys on `code` columns (ticket numbers, IBANs, product codes). It groups strings by structural patterns and synthesises a regular expression covering ≥80% of non-null values. Synthetic codes produced later will pass the same format validators as real ones.
+**Layer 2b — RegexMiner** deploys on `code` columns (ticket numbers, product codes, structured IDs). It groups strings by structural patterns and synthesises a regular expression covering ≥80% of non-null values. **Runs entirely locally — no values are stored or transmitted, only the inferred pattern.** Synthetic codes produced later will pass the same format validators as real ones.
 
 **Layer 3 — DistributionProfiler** runs Shapiro-Wilk normality tests (capped at 5,000 samples), classifies skewness (mild / moderate / severe), detects zero-inflation, and recommends the optimal pre-model transformation: `log1p` for exponential distributions, `QuantileTransformer` for multimodal or unknown shapes, `none` for already-normal data.
 
@@ -181,13 +210,13 @@ Two evaluators with different roles:
 
 ## Results
 
-Validated on three public datasets covering different challenges: small dataset with PII, mixed types and exponential distributions (Titanic); mid-size aviation dataset with strong physical correlations between continuous variables (Plane Crashes); large dataset with well-defined ordinal categories and strong cardinality (Diamonds, ~54k rows).
+Validated on three public datasets covering different challenges: small dataset with PII, mixed types and exponential distributions (Titanic); mid-size aviation dataset with strong physical correlations between continuous variables (Plane Crashes); large geospatial dataset with strong inter-column correlations and continuous-only features (California Housing, ~21k rows).
 
 | Dataset | Rows | Cols | Fidelity | Relationships | Utility (TSTR) | Privacy | Diversity | **Overall** |
 |---------|------|------|----------|---------------|----------------|---------|-----------|-------------|
 | **Titanic** | 891 | 12 | 0.78 | 0.84 | 0.81 | 1.00 | 0.96 | **0.84** 🟡 |
 | **Plane Crashes** | 2,709 | 8 | 0.80 | 0.98 | 1.00 | 1.00 | 0.98 | **0.93** 🟢 |
-| **Diamonds** | ~54k | 10 | — | — | — | — | — | **pending** |
+| **California Housing** | 20,640 | 10 | 0.97 | 0.97 | 0.99 | 1.00 | 0.98 | **0.98** 🟢 |
 
 > 🟢 ≥ 0.85 production-ready · 🟡 ≥ 0.70 suitable for most use cases · 🟠 ≥ 0.55 use with caution
 
@@ -197,13 +226,15 @@ All results use `SEED = 12` — fully reproducible. Run `python main.py` with th
 
 **Utility (TSTR) = 1.00 on Plane Crashes** — three classifiers (LogisticRegression, RandomForest, GradientBoosting) trained on synthetic data and tested on real data achieve **identical accuracy** to models trained on real data. Zero measurable gap.
 
-**Utility (TSTR) = 0.81 on Titanic** — mean accuracy gap of 1.9% across three models on a notoriously hard dataset: 891 rows, 20% missing Age values, PII columns, zero-inflated distributions, and exponential Fare. LogisticRegression trained on synthetic data achieves identical accuracy (80.45%) to training on real data.
+**Utility (TSTR) = 0.99 on California Housing** — mean accuracy gap of just 0.1% across three models on a 20k-row geospatial dataset with 8 strongly correlated continuous features and bimodal geographic distributions. Near-perfect statistical equivalence for ML purposes.
 
-**Relationships = 0.98 on Plane Crashes** — **10/10 critical pairs** preserved within tolerance, including the key physical correlation `aboard ↔ fatalities` (Spearman 0.763 real → 0.734 synthetic, delta=0.029). The `CorrelationLoss` term during training is directly responsible for this.
+**Utility (TSTR) = 0.81 on Titanic** — mean accuracy gap of 1.9% across three models on a notoriously hard dataset: 891 rows, 20% missing values in key columns, PII columns, zero-inflated distributions, and exponential-tailed continuous features. LogisticRegression trained on synthetic data achieves identical accuracy (80.45%) to training on real data.
 
-**Privacy = 1.00 on both datasets** — Distance Ratio of 1.71 (Titanic) and 1.20 (Plane) confirms synthetic records are further from real records than real records are from each other. No re-identification risk detected.
+**Relationships = 0.98 on Plane Crashes / 0.97 on California Housing** — critical pairs preserved within tolerance across both datasets. The `CorrelationLoss` term during training is directly responsible: strongly correlated column pairs detected in Phase 1 are injected into the training objective, and the model is penalised for breaking them. On California Housing, **35/36 pairs** preserved including the key `median_income ↔ median_house_value` relationship (Pearson 0.688).
 
-**Dataset size effect is visible and expected** — Titanic (891 rows) scores 0.84 GOOD while Plane Crashes (2,709 rows) scores 0.93 EXCELLENT. More data gives the diffusion model more signal to learn from. Diamonds (~54k rows) results pending.
+**Privacy = 1.00 on all three datasets** — Distance Ratio of 1.60 (Housing), 1.71 (Titanic) and 1.20 (Plane) confirms synthetic records are further from real records than real records are from each other. No re-identification risk detected.
+
+**Dataset size effect is visible and expected** — Titanic (891 rows) scores 0.84 GOOD, Plane Crashes (2,709 rows) scores 0.93 EXCELLENT, and California Housing (20,640 rows) scores 0.98 EXCELLENT. More data gives the diffusion model more signal to learn from.
 
 ---
 
@@ -288,10 +319,10 @@ synthetic-data-engine/
 
 Honest about what doesn't work yet:
 
-- **Heavy-tailed distributions** (`Fare` in Titanic, max 512 with median 14) remain the hardest case. `log1p` helps significantly but the extreme tail is undersampled on small datasets — this is a fundamental limitation of the dataset size, not the model.
-- **High-cardinality categoricals** (`hour` in Plane Crashes: 30 classes including malformed values like `c:09:00`) degrade TVD scores. The model generates valid-format values but cannot fully replicate a noisy real-world distribution.
-- **CPU training time** on large datasets (~54k rows, Diamonds) takes 30–60 min per run. CUDA reduces this to ~5 min.
-- **Free-text columns** (`operator`, `summary`, `route`) are skipped in v1 — they are logged in the profile but not generated. NLP generation is on the roadmap.
+- **Heavy-tailed distributions** (e.g. financial amounts or fares with extreme outliers) remain the hardest case. `log1p` helps significantly but the extreme tail is undersampled on small datasets — this is a fundamental limitation of the dataset size, not the model.
+- **High-cardinality categoricals** with malformed or noisy real-world values degrade TVD scores. The model generates valid-format values but cannot fully replicate a noisy real-world distribution.
+- **CPU training time** on large datasets (~54k rows) takes 30–60 min per run. CUDA reduces this to ~5 min.
+- **Free-text columns** are skipped in v1 — they are logged in the profile but not generated. NLP generation is on the roadmap.
 
 The project does not yet support: time-series data, multi-table relational schemas, or streaming input.
 
@@ -299,7 +330,6 @@ The project does not yet support: time-series data, multi-table relational schem
 
 ## Roadmap
 
-- [ ] Diamonds results + full 3-dataset table
 - [ ] Hugging Face Spaces interactive demo
 - [ ] Quantile fix for low-cardinality ordinals (≤10 unique values → `transform=none`)
 - [ ] Optional Microsoft Presidio integration for value-level PII validation

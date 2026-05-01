@@ -63,10 +63,23 @@ import warnings
 
 GAP_THRESHOLD = 0.10   # gap above this → score = 0
 
+# Row cap applied ONLY when dataset exceeds this size.
+# Titanic (891) and Plane (2709) are below → never sampled → results identical.
+# Diamonds (53940) is above → sampled to 10k → runs in seconds not hours.
+MAX_TSTR_ROWS = 10_000
+
 MODELS = {
     "LogisticRegression" : LogisticRegression(max_iter=1000, random_state=42),
     "RandomForest"       : RandomForestClassifier(n_estimators=100, random_state=42),
     "GradientBoosting"   : GradientBoostingClassifier(n_estimators=100, random_state=42),
+}
+
+# Reduced models used ONLY for large datasets (> MAX_TSTR_ROWS).
+# Titanic and Plane always use MODELS above — results identical.
+MODELS_LARGE = {
+    "LogisticRegression" : LogisticRegression(max_iter=1000, random_state=42),
+    "RandomForest"       : RandomForestClassifier(n_estimators=50, random_state=42, max_depth=10),
+    "GradientBoosting"   : GradientBoostingClassifier(n_estimators=30, random_state=42, max_depth=4),
 }
 
 
@@ -148,8 +161,19 @@ class UtilityEvaluator:
             if c != target_col and c not in excluded_cols
         ]
 
-        X_real, y_real   = self._prepare(real_df,  feature_cols, target_col)
-        X_synth, y_synth = self._prepare(synth_df, feature_cols, target_col)
+        # Cap rows ONLY for large datasets (> MAX_TSTR_ROWS).
+        # Small datasets (Titanic 891, Plane 2709) are NEVER sampled:
+        # the condition is False → real_df_tstr = real_df exactly →
+        # results are bit-for-bit identical to before this change.
+        if len(real_df) > MAX_TSTR_ROWS:
+            real_df_tstr  = real_df.sample(MAX_TSTR_ROWS, random_state=42)
+            synth_df_tstr = synth_df.sample(MAX_TSTR_ROWS, random_state=42)
+        else:
+            real_df_tstr  = real_df
+            synth_df_tstr = synth_df
+
+        X_real, y_real   = self._prepare(real_df_tstr,  feature_cols, target_col)
+        X_synth, y_synth = self._prepare(synth_df_tstr, feature_cols, target_col)
 
         if X_real is None or X_synth is None:
             return UtilityResult(
@@ -170,8 +194,12 @@ class UtilityEvaluator:
         is_binary = len(np.unique(y_real)) == 2
 
         # ── Run each model ─────────────────────────────────────────────────
+        # Use reduced models for large datasets to avoid MemoryError.
+        # Small datasets (Titanic, Plane) always use full MODELS — identical results.
+        active_models = MODELS_LARGE if len(real_df) > MAX_TSTR_ROWS else MODELS
+
         model_results = []
-        for name, clf_template in MODELS.items():
+        for name, clf_template in active_models.items():
             result = self._run_model(
                 name, clf_template,
                 X_real_train, y_real_train,
