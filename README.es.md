@@ -11,20 +11,20 @@
   <a href="#"><img src="https://img.shields.io/badge/PyTorch-2.x-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch"/></a>
   <a href="#"><img src="https://img.shields.io/badge/OpenAI-GPT--4-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI"/></a>
   <a href="#"><img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat-square" alt="Licencia"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/GDPR-compliant-success?style=flat-square" alt="GDPR"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/RGPD-compliant-success?style=flat-square" alt="RGPD"/></a>
   <a href="#"><img src="https://img.shields.io/badge/estado-prototipo-blue?style=flat-square" alt="Estado"/></a>
 </p>
 
 <p align="center">
-  <b>Generación auto-adaptativa de datos tabulares sintéticos mediante modelos de difusión.</b><br>
-  Apúntalo a cualquier CSV — él se encarga del resto.
+  <b>Generación de datos sintéticos tabulares auto-adaptativa mediante modelos de difusión.</b><br>
+  Dale cualquier CSV. Él se encarga.
 </p>
 
 <p align="center">
-  <a href="#por-qué">Por qué</a> ·
-  <a href="#seguridad">Seguridad</a> ·
-  <a href="#inicio-rápido">Inicio Rápido</a> ·
-  <a href="#cómo-funciona">Cómo Funciona</a> ·
+  <a href="#por-qué-existe-esto">Por qué existe esto</a> ·
+  <a href="#-los-datos-no-salen">Seguridad</a> ·
+  <a href="#primeros-pasos">Primeros pasos</a> ·
+  <a href="#cómo-funciona">Cómo funciona</a> ·
   <a href="#resultados">Resultados</a> ·
   <a href="#arquitectura">Arquitectura</a> ·
   <a href="#limitaciones">Limitaciones</a>
@@ -32,41 +32,41 @@
 
 ---
 
-## Por qué
+## Por qué existe esto
 
-Los datos reales son el activo más valioso y más restringido de cualquier organización. Las multas del RGPD alcanzan los 20 M€, los datos sanitarios no pueden salir del edificio, los registros financieros no se pueden compartir con proveedores. La respuesta habitual — "simplemente genera datos sintéticos" — es más difícil de lo que parece: la mayoría de las herramientas requieren configuración manual del esquema, ignoran la estructura estadística o rompen las correlaciones que hacen que los datos sean útiles para el ML.
+Hay un problema que se repite constantemente en proyectos de datos: tienes información valiosa pero no puedes compartirla. Los datos de pacientes no salen del hospital. Los registros financieros no se pueden ceder a un proveedor externo. El equipo de ML necesita datos para entrenar modelos, pero los datos reales están blindados por el RGPD, por contrato o por simple sentido común.
 
-**tabsynth** se construye en torno a una idea: el sistema debe entender los datos antes de generar nada. Un pipeline de análisis de cinco capas inspecciona cada columna de forma autónoma — tipos, distribuciones, categorías de IIP, correlaciones entre columnas — y utiliza ese conocimiento para configurar un modelo de difusión que preserva la distribución conjunta completa, no solo las marginales.
+La respuesta habitual es "genera datos sintéticos". Fácil de decir. Difícil de hacer bien.
 
-Tres principios de diseño guiaron cada decisión:
+La mayoría de herramientas existentes tienen el mismo problema: requieren que alguien configure el esquema a mano, column por columna. Que indique qué es un nombre, qué es una categoría, qué transformación aplicar. Y aun así, el resultado suele ser datos que pasan un vistazo rápido pero fallan en cuanto los metes en un modelo — porque se han perdido las correlaciones, las distribuciones no cuadran, o simplemente nadie detectó que esa columna tenía un 70% de ceros.
 
-- **Auto-adaptativo.** Sin archivos de configuración, sin sugerencias de tipo, sin esquema manual. Carga cualquier CSV y el pipeline se encarga del resto — detectando automáticamente distribuciones con inflación de ceros, identificando identificadores directos del RGPD, infiriendo patrones regex para códigos estructurados y eligiendo la transformación numérica óptima por columna.
-- **Entrenamiento consciente de correlaciones.** Los pares de columnas con fuerte dependencia detectados en la Fase 1 (Pearson, Spearman, V de Cramér, η²) se inyectan como término `CorrelationLoss` durante el entrenamiento del modelo de difusión. El modelo es penalizado explícitamente por romper relaciones estadísticamente significativas entre columnas.
-- **Cumplimiento del RGPD por diseño.** Los identificadores directos se regeneran con Faker — los valores reales nunca se muestrean, nunca se almacenan, nunca se envían a ningún sitio. Los quasi-identificadores pasan por el modelo de difusión. La privacidad se cuantifica mediante el Distance Ratio (riesgo de re-identificación basado en NND).
+**tabsynth** parte de otra premisa: el sistema tiene que entender los datos antes de generar nada. No tú. El sistema.
+
+Un pipeline de cinco fases analiza cada columna de forma autónoma, detecta su naturaleza, sus dependencias con otras columnas y sus particularidades estadísticas. Con ese conocimiento configura y entrena un modelo de difusión que no solo replica cada columna por separado, sino la distribución conjunta completa — las relaciones entre variables incluidas.
+
+Tres cosas que lo diferencian:
+
+- **No necesita configuración.** Carga el CSV, ejecuta, obtén datos sintéticos. El sistema detecta automáticamente distribuciones con exceso de ceros, identifica si una columna es un identificador personal del RGPD, extrae patrones de campos estructurados y elige la transformación numérica más adecuada. Todo solo.
+- **Las correlaciones se preservan activamente.** Las dependencias fuertes entre columnas no se esperan que "salgan solas" del entrenamiento — se inyectan explícitamente en la función de pérdida. Si dos variables están muy relacionadas en los datos reales, el modelo es penalizado si las rompe.
+- **Los datos personales nunca se usan.** Nombres, emails, IDs directos: se generan desde cero con Faker. Los datos reales de esas columnas se descartan antes de que empiece el entrenamiento. No es una opción de configuración. Es cómo funciona el sistema.
 
 ---
 
-## 🔒 Seguridad
+## 🔒 Los datos no salen
 
-> **Ningún dato real abandona jamás el entorno seguro. Esto es una garantía arquitectónica, no una política.**
+Esto merece su propia sección porque es lo más importante.
 
-Este es el compromiso de seguridad central del sistema, y determina cada decisión de diseño:
+En muchos contextos — sanidad, banca, recursos humanos — el simple hecho de que los datos salgan del entorno ya es un problema legal. Por eso **tabsynth está diseñado para que eso no ocurra nunca**, no como una política configurable, sino como consecuencia de cómo está construido.
 
-**Lo que siempre permanece local:**
-- Los valores brutos de los datos nunca se envían a ningún servicio externo, en ninguna etapa del pipeline.
-- El LLM (GPT-4) recibe únicamente metadatos estructurales agregados: longitudes medias, ratios de capitalización, ratios de caracteres numéricos, rangos de cardinalidad. Nunca ve valores reales de las filas.
-- El RegexMiner se ejecuta completamente en proceso: analiza los valores reales en memoria para inferir patrones estructurales, y su único output es una cadena regex — una descripción de la estructura, no una copia de los datos.
-- Todo el análisis de distribuciones, cálculo de correlaciones y perfilado estadístico ocurre de forma local mediante scipy y pandas.
+¿Qué significa en la práctica?
 
-**Lo que el modelo aprende — y lo que no:**
-- El modelo de difusión aprende la distribución estadística conjunta del dataset. No memoriza filas.
-- Las columnas `direct_identifier` (nombres, emails, IDs, teléfonos) nunca se pasan al tensor. Se regeneran desde cero usando Faker con el locale inferido — los valores reales se descartan antes de que comience el entrenamiento.
-- La privacidad se mide activamente: la métrica Distance Ratio confirma que los registros sintéticos están estadísticamente más lejos de los registros reales que los registros reales entre sí.
+El único servicio externo que interviene es GPT-4, y solo lo hace para clasificar semánticamente columnas de texto ambiguas — decidir si una columna contiene nombres, correos o códigos estructurados. Pero GPT-4 **nunca ve los valores reales**. Recibe únicamente métricas agregadas: longitud media de las cadenas, proporción de mayúsculas, si contiene números, rangos de cardinalidad. Nada más. Los valores reales no salen.
 
-**Lo que los evaluadores nunca tocan:**
-- Las columnas con IIP se eliminan de todos los evaluadores (fidelidad, relaciones, utilidad, detectabilidad, privacidad) antes de cualquier cómputo. Los nombres o IDs reales nunca entran en ningún clasificador ni cálculo de distancias.
+Todo lo demás — análisis de distribuciones, cálculo de correlaciones, detección de patrones en campos de código, entrenamiento del modelo, generación, evaluación — ocurre completamente en local. Sin llamadas externas, sin logs de datos, sin transferencias.
 
-**En resumen:** lo único que abandona el entorno es el dataset sintético — y por construcción, no puede rastrearse hasta ningún individuo real.
+Y cuando el sistema termina, las columnas con datos personales directos (nombres, IDs, correos) no están en el output del modelo de difusión. Se generan aparte con Faker, usando el locale inferido automáticamente. El modelo nunca aprendió de esos valores porque nunca los vio.
+
+Lo que sale del sistema es el dataset sintético. Y ese dataset, por cómo se ha construido, no puede vincularse a ninguna persona real — algo que además se mide con el Distance Ratio, una métrica que confirma que los registros sintéticos están más alejados de los reales que los propios registros reales entre sí.
 
 ---
 
@@ -74,12 +74,12 @@ Este es el compromiso de seguridad central del sistema, y determina cada decisi�
 
 <div align="center">
   <img src="assets/pipeline.gif" alt="tabsynth pipeline" width="820"/>
-  <br><sub>Pipeline completo sobre Titanic (891 filas × 12 columnas) — análisis, entrenamiento, generación, evaluación.</sub>
+  <br><sub>Pipeline completo con el dataset Titanic (891 filas × 12 columnas) — análisis, entrenamiento, generación y evaluación.</sub>
 </div>
 
 ---
 
-## Inicio Rápido
+## Primeros pasos
 
 ```bash
 git clone https://github.com/LarenHernandezCalderon/synthetic-data-engine.git
@@ -88,153 +88,141 @@ pip install -r requirements.txt
 cp .env.example .env   # añade tu OPENAI_API_KEY
 ```
 
-Edita `src/main.py` — cambia una línea:
+Edita `src/main.py` y cambia el dataset:
 
 ```python
-DATASET = "titanic.csv"   # o "diamonds.csv", "plane.csv", tu propio CSV
+DATASET = "titanic.csv"   # o "plane.csv", "housing.csv", tu propio CSV
 ```
 
-Luego ejecuta:
+Ejecuta:
 
 ```bash
 cd src
 python main.py
 ```
 
-Salida: `output/synthetic.csv` + `output/evaluation_report.txt` + `models/tabddpm_<dataset>_seed<N>.pt`
+Obtendrás tres ficheros: `output/synthetic.csv` con los datos generados, `output/evaluation_report.txt` con el análisis de calidad detallado, y el checkpoint del modelo entrenado en `models/`.
 
 ---
 
-## Cómo Funciona
+## Cómo funciona
 
-El pipeline se ejecuta en cinco fases secuenciales. Cada fase tiene una única responsabilidad y expone un contrato tipado (`DatasetProfile`, `PreprocessorOutput`) a la siguiente.
+El pipeline tiene cinco fases. Cada una tiene una responsabilidad clara y le pasa un contrato tipado a la siguiente — `DatasetProfile` de la Fase 1 al preprocesador, `PreprocessorOutput` al modelo de difusión.
 
 ```
 ┌─────────────┐    ┌──────────────┐    ┌───────────┐    ┌───────────┐    ┌───────────┐
 │  Analyzer   │───▶│ Preprocessor │───▶│ Diffusion │───▶│ Generator │───▶│ Evaluator │
 │  (Fase 1)   │    │  (Fase 2)    │    │ (Fase 3)  │    │ (Fase 4)  │    │ (Fase 5)  │
 └─────────────┘    └──────────────┘    └───────────┘    └───────────┘    └───────────┘
-  5 capas de         pipeline tensor     TabDDPM-        tipos, Faker,    puntuación
-  detección:         modular de 8        inspirado       regex, nulos     6 dimensiones
-  tipos, IIP,        pasos [0,1]         + CorrelLoss    preservados      + informe PDF
-  regex, distrib,    + splits            + auto-tune
-  correlaciones      zero-inflated
+  5 capas de         pipeline de 8       TabDDPM-        tipos, Faker,    puntuación en
+  detección          pasos modulares     inspirado       regex, nulos     6 dimensiones
+  autónoma           normalizado [0,1]   + CorrelLoss    preservados      + informe
 ```
 
-### Fase 1 — Analizador (5 capas)
+### Fase 1 — El analizador (5 capas)
 
-El cerebro del sistema. La calidad de todo lo que sigue depende directamente de lo que se detecta aquí.
+Todo lo que viene después depende de lo que se detecta aquí. Si el análisis es bueno, el resto del pipeline puede hacer su trabajo. Si falla, nada lo compensa.
 
-**Capa 1 — MetadataExtractor** inspecciona cada columna estructuralmente sin almacenar valores brutos. Las columnas de texto producen un objeto `StringMetadata` que captura señales como longitud media, ratio de capitalización, ratio de caracteres numéricos y presencia de caracteres especiales. Estas señales — nunca los datos reales — son las que se envían al LLM en la Capa 2.
+La primera capa (**MetadataExtractor**) inspecciona cada columna sin guardar valores. Para columnas de texto genera un perfil con señales estructurales — longitud media, proporción de mayúsculas, si tiene números, si tiene caracteres especiales — que describen la forma de los datos sin exponer su contenido.
 
-**Capa 2 — SemanticAnalyzer (GPT-4)** clasifica las columnas que el MetadataExtractor no pudo resolver (`unknown_string`). Recibe únicamente las señales agregadas, infiere el tipo semántico (`full_name`, `email`, `code`, `free_text`…), asigna una categoría RGPD (identificador directo / quasi-identificador / sensible Art. 9 / no-IIP), e infiere el locale para la generación con Faker. **Los datos reales nunca abandonan el sistema.**
+Cuando esas señales no son suficientes para determinar el tipo de una columna, entra la segunda capa (**SemanticAnalyzer**). Envía las métricas agregadas a GPT-4, que devuelve el tipo semántico (`full_name`, `email`, `code`, `free_text`…), la categoría RGPD y el locale para generación. Nunca los valores reales — solo las señales.
 
-**Capa 2b — RegexMiner** actúa sobre columnas `code` (números de ticket, códigos de producto, IDs estructurados). Agrupa cadenas por patrones estructurales y sintetiza una expresión regular que cubre ≥80% de los valores no nulos. **Se ejecuta completamente de forma local — no se almacena ni transmite ningún valor, solo el patrón inferido.** Los códigos sintéticos generados después superarán los mismos validadores de formato que los reales.
+Si la columna resulta ser un campo de código estructurado — números de ticket, referencias de producto, IDs con formato propio — actúa la capa **RegexMiner**, que analiza los patrones localmente y sintetiza una expresión regular. Solo sale el patrón. Los valores se quedan dentro.
 
-**Capa 3 — DistributionProfiler** ejecuta tests de normalidad de Shapiro-Wilk (limitados a 5.000 muestras), clasifica la asimetría (leve / moderada / severa), detecta inflación de ceros y recomienda la transformación pre-modelo óptima: `log1p` para distribuciones exponenciales, `QuantileTransformer` para formas multimodales o desconocidas, `none` para datos ya normales.
+La capa de distribuciones (**DistributionProfiler**) determina la forma estadística de cada columna numérica: si es exponencial, bimodal, tiene exceso de ceros, cuántos outliers hay. Con esa información recomienda la transformación más adecuada antes de meterla al modelo.
 
-**Capa 4 — CorrelationAnalyzer** calcula todas las dependencias por pares usando el método apropiado para cada tipo de par de columnas: Pearson / Spearman para numérico–numérico, V de Cramér para categórico–categórico, η² para numérico–categórico. Los pares por encima del umbral `strong` (≥0.40) se almacenan en `DatasetProfile.critical_pairs` y se inyectan en la función de pérdida del entrenamiento de difusión.
+Y la capa de correlaciones (**CorrelationAnalyzer**) calcula las dependencias entre todos los pares de columnas — Pearson y Spearman para pares numéricos, V de Cramér para categóricos, η² para mixtos. Los pares que superan el umbral de correlación fuerte (≥0.40) se guardan y se usarán más adelante para penalizar al modelo si los rompe.
 
-### Fase 2 — Preprocesador (8 pasos)
+### Fase 2 — El preprocesador (8 pasos)
 
-Un pipeline modular donde cada paso es independiente e invertible:
+Convierte el DataFrame original en un tensor listo para el modelo de difusión. Cada paso es independiente e invertible:
 
 | Paso | Qué hace |
 |------|----------|
-| 0 — Null Normaliser | Detecta nulos centinela (`-1`, `999`, `N/A`) y los reemplaza con `NaN` |
-| 1 — Column Filter | Enruta columnas: tensor / generación externa (Faker, regex) / omitir (free_text) / ID secuencial |
-| 2 — Missing Handler | Crea flags binarias `_missing`; imputa con mediana/moda |
-| 3 — Zero-Inflated Split | Divide columnas con muchos ceros en `_flag` (binaria) + `_value` (distribución no-cero) |
-| 4 — Numeric Transform | Aplica log1p / QuantileTransformer según lo recomendado por la Fase 1 |
-| 5 — Categorical Encoder | Codificación ordinal y one-hot; preserva el orden de categorías |
-| 6 — Normaliser | Escalado MinMax a [0, 1] para todas las features del tensor |
-| 7 — Tensor Builder | Ensambla un `TensorDataset` tipado con metadatos de features (binaria / continua / ordinal / categórica) |
+| 0 — Null Normaliser | Detecta nulos enmascarados como `-1`, `999` o `N/A` y los convierte a `NaN` |
+| 1 — Column Filter | Decide qué va al tensor, qué se genera externamente (Faker, regex) y qué se omite |
+| 2 — Missing Handler | Crea indicadores binarios `_missing` e imputa con mediana o moda |
+| 3 — Zero-Inflated Split | Divide columnas con exceso de ceros en `_flag` (¿tiene valor?) + `_value` (cuánto) |
+| 4 — Numeric Transform | Aplica log1p o QuantileTransformer según lo que recomendó la Fase 1 |
+| 5 — Categorical Encoder | Codificación ordinal y one-hot respetando el orden de las categorías |
+| 6 — Normalizer | Escala todo a [0, 1] con MinMax |
+| 7 — Tensor Builder | Construye el `TensorDataset` tipado con metadatos por feature |
 
-La transformación inversa completa está implementada en `inverter.py` para mapear los tensores generados de vuelta al esquema original.
+La transformación inversa completa está en `inverter.py` — permite reconstruir el DataFrame original a partir del tensor generado.
 
-### Fase 3 — Modelo de Difusión
+### Fase 3 — El modelo de difusión
 
-Una arquitectura de difusión gaussiana personalizada para datos tabulares mixtos, inspirada en [TabDDPM (Kotelnikov et al., 2022)](https://arxiv.org/abs/2209.15421).
+Un modelo de difusión gaussiana para datos tabulares mixtos, inspirado en [TabDDPM (Kotelnikov et al., 2022)](https://arxiv.org/abs/2209.15421) pero con varias diferencias importantes.
 
-**Arquitectura:** MLP residual con embeddings sinusoidales de timestep. Cada ResidualBlock aplica LayerNorm → Linear → SiLU → Dropout → Linear con una conexión de salto. El timestep se embebe mediante codificación sinusoidal y se proyecta en cada bloque, condicionando la denoisificación al nivel de ruido.
+La arquitectura es un MLP residual con embeddings sinusoidales de timestep. Cada bloque aplica normalización de capa, una proyección lineal, activación SiLU, dropout y otra proyección, más una conexión de salto. El timestep se proyecta en cada bloque para que el modelo sepa en qué punto del proceso de denoising está.
 
-**Pérdida:** `MixedLoss` combinada que combina MSE (features continuas), BCE (binarias) y CrossEntropy (categóricas), ponderadas por conteos de tipo de feature. Se añade un término `CorrelationLoss` para los pares críticos detectados en la Fase 1:
+La función de pérdida combina MSE para features continuas, BCE para binarias y CrossEntropy para categóricas. Y sobre esa base se añade el `CorrelationLoss` — un término que en cada paso de entrenamiento compara la matriz de correlaciones del batch generado con los valores objetivo que detectó la Fase 1, y penaliza al modelo si se aleja de ellos:
 
 ```
 pérdida_total = mixed_loss + corr_weight × correlation_loss
 ```
 
-donde `correlation_loss` penaliza la desviación de la matriz de correlación del batch predicho respecto a los valores objetivo en cada paso de entrenamiento.
+Antes de entrenar, el `HyperTuner` hace una búsqueda rápida entre cinco configuraciones de red (50 épocas de sondeo cada una) y selecciona la que mejor loss obtiene. La configuración ganadora entrena hasta convergencia con early stopping.
 
-**Calendario de ruido:** Calendario coseno (`noise_scheduler.py`) para un control de varianza más suave que los calendarios lineales.
-
-**Auto-ajuste:** `HyperTuner` ejecuta una búsqueda en rejilla de 5 candidatos (50 épocas de sondeo cada uno) a lo largo de la profundidad de la red, anchura, tasa de aprendizaje y tamaño de batch. La configuración ganadora entrena hasta convergencia con early stopping basado en paciencia (paciencia por defecto=50, máx. 2000 épocas).
-
-| Candidato | hidden_dims | lr | batch |
+| Candidato | Capas ocultas | lr | batch |
 |-----------|-------------|-----|-------|
-| A — pequeño/rápido | [128, 128] | 1e-3 | 256 |
-| B — estándar | [256, 256] | 1e-3 | 64 |
+| A — ligero y rápido | [128, 128] | 1e-3 | 256 |
+| B — equilibrado | [256, 256] | 1e-3 | 64 |
 | C — más profundo | [256, 256, 128] | 1e-3 | 64 |
-| D — ancho + lr bajo | [512, 256] | 5e-4 | 128 |
-| E — red grande | [512, 512, 256] | 1e-3 | 64 |
+| D — ancho con lr bajo | [512, 256] | 5e-4 | 128 |
+| E — red profunda y ancha | [512, 512, 256] | 1e-3 | 64 |
 
-### Fase 4 — Generador
+### Fase 4 — El generador
 
-Toma ruido gaussiano puro → 1000 pasos de difusión inversa → tensor sintético → invierte todas las transformaciones del preprocesador → reconstruye el esquema original:
+Parte de ruido gaussiano puro y aplica 1.000 pasos de difusión inversa para obtener el tensor sintético. Luego invierte todas las transformaciones del preprocesador y reconstruye el esquema original:
 
-- **Columnas ordinales**: snap discreto al valor entero válido más cercano
-- **Columnas IIP** (`direct_identifier`): Faker con el locale inferido en la Fase 1 — los valores reales nunca se utilizan
-- **Columnas de código**: generación por plantilla regex a partir del patrón RegexMiner
-- **Tasas de nulos**: preservadas por columna del dataset real
-- **Calibración post-hoc**: calibración QuantileTransformer sobre columnas continuas para corregir la deriva distribucional residual
+- Las columnas ordinales se redondean al entero válido más cercano
+- Las columnas con datos personales directos se generan con Faker, usando el locale inferido en la Fase 1
+- Los campos de código se generan con la expresión regular que extrajo el RegexMiner
+- La tasa de nulos de cada columna se preserva tal como estaba en los datos reales
+- Una calibración post-hoc corrige la deriva distribucional residual en columnas continuas
 
-### Fase 5 — Evaluador (6 dimensiones)
+### Fase 5 — El evaluador (6 dimensiones)
 
-Dos evaluadores con roles diferentes:
+La calidad del dataset sintético se mide desde seis ángulos distintos. Cinco de ellos contribuyen a la puntuación global:
 
-**Evaluador A — Realismo Estadístico** (cuenta para la puntuación global):
-
-| Dimensión | Método | Peso |
+| Dimensión | Cómo se mide | Peso |
 |-----------|--------|------|
-| Fidelidad | Test KS + distancia Wasserstein + TVD | 30% |
-| Relaciones | Norma de Frobenius Pearson/Spearman + delta de par | 25% |
-| Utilidad (TSTR) | Train on Synthetic, Test on Real — 3 modelos ML | 30% |
-| Privacidad | NND Distance Ratio (riesgo de re-identificación) | 10% |
+| Fidelidad | Test KS + distancia de Wasserstein + TVD | 30% |
+| Relaciones | Norma de Frobenius sobre matrices de correlación + delta por par | 25% |
+| Utilidad (TSTR) | Entrena en sintético, evalúa en real — 3 modelos ML | 30% |
+| Privacidad | Distance Ratio basado en vecinos más cercanos | 10% |
 | Diversidad | Ratio de varianza + dispersión PCA + cobertura de categorías | 5% |
 
-**Evaluador B — Detectabilidad** (solo diagnóstico, no cuenta en la puntuación global): RandomForest adversarial entrenado para distinguir real vs sintético. Las columnas generadas externamente (Faker, regex, IDs secuenciales) se excluyen — inflarían trivialmente la detectabilidad sin decirnos nada sobre la calidad del modelo.
+El sexto, la **Detectabilidad**, es diagnóstico: un RandomForest adversarial intenta distinguir registros reales de sintéticos. Si lo consigue con facilidad, hay algo que mejorar. No suma a la puntuación global porque las columnas generadas externamente (Faker, regex, IDs) lo inflarían de forma artificial.
 
-> Seguridad IIP: las columnas `direct_identifier` se eliminan de **todos** los evaluadores antes de cualquier cómputo. Los nombres, emails o IDs reales nunca entran en ningún clasificador ni cálculo de distancias.
+Las columnas con datos personales directos se eliminan de todos los evaluadores antes de cualquier cálculo. Ningún valor real entra en ningún clasificador.
 
 ---
 
 ## Resultados
 
-Validado en tres datasets públicos que cubren diferentes retos: dataset pequeño con IIP, tipos mixtos y distribuciones exponenciales (Titanic); dataset de aviación de tamaño medio con fuertes correlaciones físicas entre variables continuas (Plane Crashes); dataset geoespacial grande con fuertes correlaciones entre columnas y features exclusivamente continuas (California Housing, ~21k filas).
+Tres datasets con retos muy distintos: Titanic, pequeño y lleno de casuísticas (datos personales, nulos, distribuciones con cola, ceros inflados); Plane Crashes, tamaño medio con correlaciones físicas muy marcadas entre variables continuas; y California Housing, un dataset geoespacial grande donde casi todo está correlacionado con todo.
 
-| Dataset | Filas | Cols | Fidelidad | Relaciones | Utilidad (TSTR) | Privacidad | Diversidad | **Global** |
-|---------|-------|------|-----------|------------|-----------------|------------|------------|------------|
+| Dataset | Filas | Cols | Fidelidad | Relaciones | Utilidad | Privacidad | Diversidad | **Global** |
+|---------|-------|------|-----------|------------|----------|------------|------------|------------|
 | **Titanic** | 891 | 12 | 0.78 | 0.84 | 0.81 | 1.00 | 0.96 | **0.84** 🟡 |
 | **Plane Crashes** | 2.709 | 8 | 0.80 | 0.98 | 1.00 | 1.00 | 0.98 | **0.93** 🟢 |
 | **California Housing** | 20.640 | 10 | 0.97 | 0.97 | 0.99 | 1.00 | 0.98 | **0.98** 🟢 |
 
 > 🟢 ≥ 0.85 listo para producción · 🟡 ≥ 0.70 válido para la mayoría de casos · 🟠 ≥ 0.55 usar con precaución
 
-Todos los resultados usan `SEED = 12` — totalmente reproducibles. Ejecuta `python main.py` con el dataset de tu elección.
+Todos los resultados con `SEED = 12`, totalmente reproducibles.
 
-**Lo que significan los números en la práctica:**
+**Lo que estos números significan de verdad:**
 
-**Utilidad (TSTR) = 1.00 en Plane Crashes** — tres clasificadores (LogisticRegression, RandomForest, GradientBoosting) entrenados sobre datos sintéticos y evaluados sobre datos reales alcanzan **exactamente la misma precisión** que los modelos entrenados sobre datos reales. Cero diferencia medible.
+En Plane Crashes, los tres clasificadores entrenados con datos sintéticos obtienen exactamente la misma precisión al evaluarlos sobre datos reales que si los hubieran entrenado con datos reales desde el principio. Diferencia cero. En California Housing la diferencia media es del 0.1%. En Titanic, el dataset más difícil de los tres, es del 1.9% — y eso con 891 filas, un 20% de valores ausentes y varias columnas de datos personales.
 
-**Utilidad (TSTR) = 0.99 en California Housing** — diferencia media de precisión del 0.1% en tres modelos sobre un dataset geoespacial de 20k filas con 8 features continuas fuertemente correlacionadas y distribuciones geográficas bimodales. Equivalencia estadística casi perfecta para propósitos de ML.
+Las correlaciones se preservan porque el modelo está explícitamente penalizado por romperlas. En California Housing se conservan 35 de 36 pares críticos. En Plane Crashes, todos los pares críticos dentro de tolerancia.
 
-**Utilidad (TSTR) = 0.81 en Titanic** — diferencia media de precisión del 1.9% en tres modelos sobre un dataset notoriamente difícil: 891 filas, 20% de valores ausentes en columnas clave, columnas IIP, distribuciones con inflación de ceros y features continuas de cola exponencial. LogisticRegression entrenado sobre datos sintéticos alcanza exactamente la misma precisión (80.45%) que entrenando sobre datos reales.
+La privacidad da 1.00 en los tres casos. El Distance Ratio confirma que los registros sintéticos están más alejados de los reales que los propios registros reales entre sí. No se detecta riesgo de re-identificación.
 
-**Relaciones = 0.98 en Plane Crashes / 0.97 en California Housing** — pares críticos preservados dentro de tolerancia en ambos datasets. El término `CorrelationLoss` durante el entrenamiento es directamente responsable: los pares de columnas fuertemente correlacionados detectados en la Fase 1 se inyectan en el objetivo de entrenamiento, y el modelo es penalizado por romperlos. En California Housing, **35/36 pares** preservados incluyendo la relación clave `median_income ↔ median_house_value` (Pearson 0.688).
-
-**Privacidad = 1.00 en los tres datasets** — Distance Ratio de 1.60 (Housing), 1.71 (Titanic) y 1.20 (Plane) confirma que los registros sintéticos están más lejos de los registros reales que los registros reales entre sí. No se detecta riesgo de re-identificación.
-
-**El efecto del tamaño del dataset es visible y esperado** — Titanic (891 filas) puntúa 0.84 BUENO, Plane Crashes (2.709 filas) puntúa 0.93 EXCELENTE, y California Housing (20.640 filas) puntúa 0.98 EXCELENTE. Más datos dan al modelo de difusión más señal de la que aprender.
+Y el patrón es claro: cuantos más datos, mejor aprende el modelo. Titanic con 891 filas llega a 0.84. Housing con 20k filas llega a 0.98.
 
 ---
 
@@ -243,19 +231,19 @@ Todos los resultados usan `SEED = 12` — totalmente reproducibles. Ejecuta `pyt
 ```
 synthetic-data-engine/
 ├── src/
-│   ├── main.py                        # punto de entrada
+│   ├── main.py
 │   │
-│   ├── analyzer/                      # Fase 1 — 5 capas de detección
-│   │   ├── metadata_extractor.py      # inspección estructural, sin valores brutos almacenados
-│   │   ├── semantic_analyzer.py       # clasificación IIP con GPT-4 via metadatos de señales
-│   │   ├── regex_miner.py             # extracción local de patrones para columnas de código
-│   │   ├── distribution_profiler.py   # Shapiro-Wilk, asimetría, recomendación de transformación
+│   ├── analyzer/                      # Fase 1 — análisis autónomo
+│   │   ├── metadata_extractor.py      # inspección estructural sin guardar valores
+│   │   ├── semantic_analyzer.py       # GPT-4 clasifica por señales, no por valores
+│   │   ├── regex_miner.py             # patrones locales para columnas de código
+│   │   ├── distribution_profiler.py   # Shapiro-Wilk, asimetría, transformación
 │   │   ├── correlation_analyzer.py    # Pearson / Spearman / V de Cramér / η²
 │   │   └── dataset_analyzer.py        # orquestador → DatasetProfile
 │   │
-│   ├── preprocessor/                  # Fase 2 — pipeline modular de 8 pasos
-│   │   ├── contracts.py               # dataclasses compartidos + constantes tipadas
-│   │   ├── preprocessor.py            # orquestador
+│   ├── preprocessor/                  # Fase 2 — 8 pasos modulares e invertibles
+│   │   ├── contracts.py
+│   │   ├── preprocessor.py
 │   │   ├── steps/
 │   │   │   ├── step0_null_normalizer.py
 │   │   │   ├── step1_column_filter.py
@@ -265,51 +253,49 @@ synthetic-data-engine/
 │   │   │   ├── step5_categorical_encoder.py
 │   │   │   ├── step6_normalizer.py
 │   │   │   └── step7_tensor_builder.py
-│   │   └── inverter.py                # transformación inversa completa
+│   │   └── inverter.py
 │   │
-│   ├── diffusion/                     # Fase 3 — modelo de difusión personalizado
-│   │   ├── tabddpm.py                 # modelo principal + bucle de entrenamiento
+│   ├── diffusion/                     # Fase 3 — modelo de difusión
+│   │   ├── tabddpm.py                 # arquitectura + entrenamiento
 │   │   ├── mlp.py                     # ResidualBlock + SinusoidalEmbedding
 │   │   ├── noise_scheduler.py         # calendario coseno
 │   │   ├── loss.py                    # MixedLoss + CorrelationLoss
-│   │   └── tuner.py                   # HyperTuner + EarlyStopping
+│   │   └── tuner.py                   # búsqueda de hiperparámetros + early stopping
 │   │
 │   ├── generator/                     # Fase 4 — tensor → esquema original
 │   │   ├── generator.py
-│   │   ├── type_enforcer.py           # snap discreto para ordinales/binarias
-│   │   ├── column_builder.py          # generación con Faker + regex
-│   │   ├── null_validator.py          # corrección de tasa de nulos
-│   │   └── calibrator.py             # calibración cuantil post-hoc
+│   │   ├── type_enforcer.py
+│   │   ├── column_builder.py          # Faker + regex
+│   │   ├── null_validator.py
+│   │   └── calibrator.py
 │   │
-│   └── evaluator/                     # Fase 5 — puntuación en 6 dimensiones
-│       ├── evaluator.py               # orquestación Evaluador A / B
-│       ├── fidelity.py                # KS + Wasserstein + TVD
-│       ├── relationships.py           # Pearson/Spearman + Frobenius
-│       ├── utility.py                 # TSTR — 3 modelos ML
-│       ├── detectability.py           # clasificador adversarial
-│       ├── privacy.py                 # NND + Distance Ratio
-│       ├── diversity.py               # Varianza + PCA + Cobertura
-│       └── report.py                  # generador de informe de evaluación
+│   └── evaluator/                     # Fase 5 — 6 dimensiones de calidad
+│       ├── evaluator.py
+│       ├── fidelity.py
+│       ├── relationships.py
+│       ├── utility.py
+│       ├── detectability.py
+│       ├── privacy.py
+│       ├── diversity.py
+│       └── report.py
 │
-├── data/                              # CSVs de entrada (no subidos al repo)
-├── output/                            # synthetic.csv + evaluation_report.txt
-├── models/                            # checkpoints .pt guardados
-├── assets/                            # banner, diagramas
-├── docs/                              # informe técnico PDF
+├── data/
+├── output/
+├── models/
 ├── requirements.txt
 └── .env.example
 ```
 
 ---
 
-## Stack Tecnológico
+## Stack tecnológico
 
 | Capa | Librería |
 |------|----------|
 | Deep learning | PyTorch 2.x |
 | Procesamiento de datos | pandas, numpy, scipy |
 | Evaluación ML | scikit-learn |
-| Generación de IIP | Faker |
+| Generación de datos personales | Faker |
 | Análisis semántico | OpenAI API (GPT-4) |
 | Tests estadísticos | scipy.stats (KS, Shapiro-Wilk, Wasserstein) |
 
@@ -317,23 +303,23 @@ synthetic-data-engine/
 
 ## Limitaciones
 
-Siendo honestos sobre lo que aún no funciona bien:
+Sin rodeos:
 
-- **Distribuciones de cola pesada** (p.ej. importes financieros o variables con outliers extremos) siguen siendo el caso más difícil. `log1p` ayuda significativamente, pero la cola extrema está submuestreada en datasets pequeños — esta es una limitación fundamental del tamaño del dataset, no del modelo.
-- **Categóricas de alta cardinalidad** con valores reales ruidosos o malformados degradan las puntuaciones TVD. El modelo genera valores de formato válido pero no puede replicar completamente una distribución real ruidosa.
-- **Tiempo de entrenamiento en CPU** en datasets grandes (~54k filas) tarda 30–60 min por ejecución. CUDA lo reduce a ~5 min.
-- **Columnas de texto libre** se omiten en v1 — se registran en el perfil pero no se generan. La generación con NLP está en el roadmap.
+- Las distribuciones con colas muy pesadas siguen siendo el caso más difícil. `log1p` ayuda mucho, pero los extremos quedan submuestreados en datasets pequeños. Es una limitación del volumen de datos, no del modelo.
+- Las categóricas de alta cardinalidad con valores reales ruidosos degradan el TVD. El modelo genera valores con formato correcto pero no puede replicar perfectamente una distribución real con mucho ruido.
+- El entrenamiento en CPU en datasets grandes puede tardar entre 20 y 60 minutos. Con GPU se reduce a unos 5 minutos.
+- Las columnas de texto libre no se generan en esta versión — se omiten y se registran en el perfil. La generación con NLP está en el roadmap.
 
-El proyecto aún no soporta: datos de series temporales, esquemas relacionales multi-tabla, ni input en streaming.
+No soporta todavía: series temporales, esquemas relacionales con varias tablas, ni entrada en streaming.
 
 ---
 
 ## Roadmap
 
 - [ ] Demo interactiva en Hugging Face Spaces
-- [ ] Fix de cuantil para ordinales de baja cardinalidad (≤10 valores únicos → `transform=none`)
-- [ ] Integración opcional con Microsoft Presidio para validación de IIP a nivel de valor
-- [ ] Generación NLP para columnas de texto libre
+- [ ] Corrección para ordinales de baja cardinalidad (≤10 valores únicos → `transform=none`)
+- [ ] Integración opcional con Microsoft Presidio para validación de datos personales a nivel de valor
+- [ ] Generación de columnas de texto libre con NLP
 - [ ] Soporte para series temporales
 - [ ] Esquemas relacionales multi-tabla
 
@@ -341,7 +327,7 @@ El proyecto aún no soporta: datos de series temporales, esquemas relacionales m
 
 ## Cita
 
-Si utilizas este sistema en investigación o producción:
+Si usas esto en investigación o producción:
 
 ```bibtex
 @software{hernandez2026tabsynth,
@@ -352,11 +338,11 @@ Si utilizas este sistema en investigación o producción:
 }
 ```
 
-La arquitectura de difusión está inspirada en — pero no es una reimplementación de — el artículo original de TabDDPM:
+La arquitectura está inspirada en TabDDPM, aunque no es una reimplementación:
 
 > Kotelnikov, A., Baranchuk, D., Rubachev, I., & Babenko, A. (2022). *TabDDPM: Modelling Tabular Data with Diffusion Models*. ICML 2023.
 
-Diferencias clave con el original: esta implementación usa un MLP residual con embeddings sinusoidales de timestep y una pérdida mixta solo gaussiana (MSE + BCE + CE) en lugar del proceso de difusión multinomial para features categóricas descrito en el artículo. El pipeline de análisis de cinco capas, la pérdida de entrenamiento consciente de correlaciones y el marco de evaluación de seis dimensiones son originales de este proyecto.
+Las diferencias principales: MLP residual con embeddings sinusoidales de timestep, función de pérdida mixta gaussiana (MSE + BCE + CE) en lugar del proceso multinomial del original, y el pipeline de análisis de cinco capas, el `CorrelationLoss` y el marco de evaluación de seis dimensiones son originales de este proyecto.
 
 ---
 
@@ -374,4 +360,4 @@ MIT — ver [`LICENSE`](LICENSE).
 
 ---
 
-<sub>Hecho con cuidado. Si te ha sido útil, una ⭐ en el repositorio significa mucho.</sub>
+<sub>Hecho con cuidado. Si te ha resultado útil, una ⭐ en el repositorio significa mucho.</sub>

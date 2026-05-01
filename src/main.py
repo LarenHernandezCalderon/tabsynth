@@ -15,11 +15,11 @@ import random
 load_dotenv()
 
 # ── Dataset selection — change only this line ─────────────────────────────
-# DATASET = "titanic.csv"
+DATASET = "titanic.csv"
 # DATASET = "plane.csv"
 # DATASET = "diamonds.csv"
 # DATASET = "social_media.csv"
-DATASET = "housing.csv"
+# DATASET = "housing.csv"
 
 # ── Semillas por dataset (encontradas con find_best_seed) ─────────────────
 SEEDS = {
