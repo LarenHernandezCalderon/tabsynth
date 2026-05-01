@@ -3,7 +3,7 @@
 </p>
 
 <div align="center">
-  <img src="docs/assets/banner.svg" alt="tabsynth" width="100%"/>
+  <img src="docs/assets/banner.png" alt="tabsynth" width="100%"/>
 </div>
 
 <p align="center">
@@ -109,15 +109,9 @@ You get three files: `output/synthetic.csv` with the generated data, `output/eva
 
 The pipeline has five phases. Each one has a single responsibility and hands a typed contract to the next — `DatasetProfile` from Phase 1 to the preprocessor, `PreprocessorOutput` to the diffusion model.
 
-```
-┌─────────────┐    ┌──────────────┐    ┌───────────┐    ┌───────────┐    ┌───────────┐
-│  Analyzer   │───▶│ Preprocessor │───▶│ Diffusion │───▶│ Generator │───▶│ Evaluator │
-│  (Phase 1)  │    │  (Phase 2)   │    │ (Phase 3) │    │ (Phase 4) │    │ (Phase 5) │
-└─────────────┘    └──────────────┘    └───────────┘    └───────────┘    └───────────┘
-  5 autonomous       8-step modular      TabDDPM-        types, Faker,    6-dimension
-  detection          tensor pipeline     inspired        regex, nulls     quality score
-  layers             normalized [0,1]    + CorrelLoss    preserved        + report
-```
+<div align="center">
+  <img src="docs/assets/pipeline.png" alt="tabsynth pipeline diagram" width="100%"/>
+</div>
 
 ### Phase 1 — The analyzer (5 layers)
 

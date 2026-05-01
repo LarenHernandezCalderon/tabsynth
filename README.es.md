@@ -3,7 +3,7 @@
 </p>
 
 <div align="center">
-  <img src="docs/assets/banner.svg" alt="tabsynth" width="100%"/>
+  <img src="docs/assets/banner.png" alt="tabsynth" width="100%"/>
 </div>
 
 <p align="center">
@@ -109,15 +109,9 @@ Obtendrás tres ficheros: `output/synthetic.csv` con los datos generados, `outpu
 
 El pipeline tiene cinco fases. Cada una tiene una responsabilidad clara y le pasa un contrato tipado a la siguiente — `DatasetProfile` de la Fase 1 al preprocesador, `PreprocessorOutput` al modelo de difusión.
 
-```
-┌─────────────┐    ┌──────────────┐    ┌───────────┐    ┌───────────┐    ┌───────────┐
-│  Analyzer   │───▶│ Preprocessor │───▶│ Diffusion │───▶│ Generator │───▶│ Evaluator │
-│  (Fase 1)   │    │  (Fase 2)    │    │ (Fase 3)  │    │ (Fase 4)  │    │ (Fase 5)  │
-└─────────────┘    └──────────────┘    └───────────┘    └───────────┘    └───────────┘
-  5 capas de         pipeline de 8       TabDDPM-        tipos, Faker,    puntuación en
-  detección          pasos modulares     inspirado       regex, nulos     6 dimensiones
-  autónoma           normalizado [0,1]   + CorrelLoss    preservados      + informe
-```
+<div align="center">
+  <img src="docs/assets/pipeline.png" alt="diagrama del pipeline de tabsynth" width="100%"/>
+</div>
 
 ### Fase 1 — El analizador (5 capas)
 
