@@ -310,6 +310,7 @@ No soporta todavía: series temporales, esquemas relacionales con varias tablas,
 
 ## Roadmap
 
+- [ ] Batería de tests — unitarios e integración para todas las fases del pipeline
 - [ ] Demo interactiva en Hugging Face Spaces
 - [ ] Corrección para ordinales de baja cardinalidad (≤10 valores únicos → `transform=none`)
 - [ ] Integración opcional con Microsoft Presidio para validación de datos personales a nivel de valor

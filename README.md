@@ -310,6 +310,7 @@ Not supported yet: time-series data, multi-table relational schemas, or streamin
 
 ## Roadmap
 
+- [ ] Test suite — unit and integration tests for all pipeline phases
 - [ ] Interactive demo on Hugging Face Spaces
 - [ ] Fix for low-cardinality ordinals (≤10 unique values → `transform=none`)
 - [ ] Optional Microsoft Presidio integration for value-level PII validation
