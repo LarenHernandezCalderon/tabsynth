@@ -70,15 +70,6 @@ Lo que sale del sistema es el dataset sintético. Y ese dataset, por cómo se ha
 
 ---
 
-## Demo
-
-<div align="center">
-  <img src="assets/pipeline.gif" alt="tabsynth pipeline" width="820"/>
-  <br><sub>Pipeline completo con el dataset Titanic (891 filas × 12 columnas) — análisis, entrenamiento, generación y evaluación.</sub>
-</div>
-
----
-
 ## Primeros pasos
 
 ```bash
@@ -310,7 +301,6 @@ No soporta todavía: series temporales, esquemas relacionales con varias tablas,
 
 ## Roadmap
 
-- [ ] Batería de tests — unitarios e integración para todas las fases del pipeline
 - [ ] Demo interactiva en Hugging Face Spaces
 - [ ] Corrección para ordinales de baja cardinalidad (≤10 valores únicos → `transform=none`)
 - [ ] Integración opcional con Microsoft Presidio para validación de datos personales a nivel de valor

@@ -70,15 +70,6 @@ What leaves the system is the synthetic dataset. And that dataset, by how it was
 
 ---
 
-## Demo
-
-<div align="center">
-  <img src="assets/pipeline.gif" alt="tabsynth pipeline" width="820"/>
-  <br><sub>Full pipeline on Titanic (891 rows × 12 columns) — analysis, training, generation, evaluation.</sub>
-</div>
-
----
-
 ## Getting started
 
 ```bash
@@ -310,7 +301,6 @@ Not supported yet: time-series data, multi-table relational schemas, or streamin
 
 ## Roadmap
 
-- [ ] Test suite — unit and integration tests for all pipeline phases
 - [ ] Interactive demo on Hugging Face Spaces
 - [ ] Fix for low-cardinality ordinals (≤10 unique values → `transform=none`)
 - [ ] Optional Microsoft Presidio integration for value-level PII validation
