@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <a href="#por-qué-existe-esto">Por qué existe esto</a> ·
+  <a href="#planteamiento-del-problema">Planteamiento del problema</a> ·
   <a href="#-los-datos-no-salen">Seguridad</a> ·
   <a href="#primeros-pasos">Primeros pasos</a> ·
   <a href="#cómo-funciona">Cómo funciona</a> ·
@@ -32,7 +32,7 @@
 
 ---
 
-## Por qué existe esto
+## Planteamiento del problema
 
 Hay un problema que se repite constantemente en proyectos de datos: tienes información valiosa pero no puedes compartirla. Los datos de pacientes no salen del hospital. Los registros financieros no se pueden ceder a un proveedor externo. El equipo de ML necesita datos para entrenar modelos, pero los datos reales están blindados por el RGPD, por contrato o por simple sentido común.
 

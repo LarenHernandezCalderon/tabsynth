@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <a href="#why-this-exists">Why this exists</a> ·
+  <a href="#statement-of-the-problem">Statement of the problem</a> ·
   <a href="#-the-data-never-leaves">Security</a> ·
   <a href="#getting-started">Getting started</a> ·
   <a href="#how-it-works">How it works</a> ·
@@ -32,7 +32,7 @@
 
 ---
 
-## Why this exists
+## Statement of the problem
 
 There's a problem that comes up constantly in data projects: you have valuable information, but you can't share it. Patient records can't leave the hospital. Financial data can't go to an external vendor. The ML team needs data to train models, but the real data is locked down — by GDPR, by contract, or by plain common sense.
 
