@@ -34,20 +34,20 @@
 
 ## Statement of the problem
 
-There's a problem that comes up constantly in data projects: you have valuable information, but you can't share it. Patient records can't leave the hospital. Financial data can't go to an external vendor. The ML team needs data to train models, but the real data is locked down — by GDPR, by contract, or by plain common sense.
+There's a problem that comes up constantly in data projects: you have valuable information, but you can't share it. Patient records can't leave the hospital. Financial data can't go to an external vendor. The ML team needs data to train models, but the real data is locked down by GDPR, by contract, or by plain common sense.
 
 The usual answer is "just generate synthetic data." Easy to say. Hard to do well.
 
-Most existing tools have the same flaw: someone has to configure the schema by hand, column by column. Specify what's a name, what's a category, what transformation to apply. And even then, the result tends to be data that looks fine at a glance but falls apart as soon as you put it through a model — because the correlations got lost, the distributions don't match, or nobody noticed that column had 70% zeros.
+Most existing tools have the same flaw: someone has to configure the schema by hand, column by column. Specify what's a name, what's a category, what transformation to apply. And even then, the result tends to be data that looks fine at a glance but falls apart as soon as you put it through a model, because the correlations got lost, the distributions don't match, or nobody noticed that column had 70% zeros.
 
 **tabsynth** starts from a different premise: the system has to understand the data before generating anything. Not you. The system.
 
-A five-phase pipeline analyzes every column autonomously — its type, its statistical shape, its dependencies with other columns. With that understanding it configures and trains a diffusion model that doesn't just replicate each column independently, but the full joint distribution, relationships between variables included.
+A five-phase pipeline analyzes every column autonomously: its type, its statistical shape, its dependencies with other columns. With that understanding it configures and trains a diffusion model that doesn't just replicate each column independently, but the full joint distribution, relationships between variables included.
 
 Three things that set it apart:
 
 - **Zero configuration.** Drop the CSV, run, get synthetic data. The system automatically detects zero-inflated distributions, identifies GDPR direct identifiers, extracts patterns from structured fields, and picks the right numerical transform for each column. All on its own.
-- **Correlations are preserved actively.** Strong dependencies between columns don't just get hoped into existence during training — they're explicitly injected into the loss function. If two variables are strongly related in the real data, the model is penalized for breaking that relationship.
+- **Correlations are preserved actively.** Strong dependencies between columns don't just get hoped into existence during training. They're explicitly injected into the loss function. If two variables are strongly related in the real data, the model is penalized for breaking that relationship.
 - **Personal data is never used.** Names, emails, direct IDs: generated from scratch with Faker. The real values in those columns are discarded before training begins. That's not a configuration option. That's how the system works.
 
 ---
@@ -56,17 +56,17 @@ Three things that set it apart:
 
 This deserves its own section because it's the most important thing.
 
-In many contexts — healthcare, banking, HR — the mere fact that data leaves the environment is already a legal problem. **tabsynth is built so that never happens**, not as a configurable policy, but as a consequence of how it's put together.
+In many contexts (healthcare, banking, HR), the mere fact that data leaves the environment is already a legal problem. **tabsynth is built so that never happens**, not as a configurable policy, but as a consequence of how it's put together.
 
 What does that mean in practice?
 
-The only external service involved is GPT-4, and only to semantically classify ambiguous text columns — deciding whether a column contains names, emails, or structured codes. But GPT-4 **never sees the actual values**. It receives only aggregated structural metrics: average string length, capitalisation ratio, whether it contains numbers, cardinality ranges. Nothing else. The real values don't go anywhere.
+The only external service involved is GPT-4, and only to semantically classify ambiguous text columns, that is, to decide whether a column contains names, emails, or structured codes. But GPT-4 **never sees the actual values**. It receives only aggregated structural metrics: average string length, capitalisation ratio, whether it contains numbers, cardinality ranges. Nothing else. The real values don't go anywhere.
 
-Everything else — distribution analysis, correlation computation, pattern extraction for code fields, model training, generation, evaluation — runs completely locally. No external calls, no data logs, no transfers.
+Everything else (distribution analysis, correlation computation, pattern extraction for code fields, model training, generation, evaluation) runs completely locally. No external calls, no data logs, no transfers.
 
 And when the system finishes, the columns with direct personal identifiers (names, IDs, emails) are not in the diffusion model's output. They're generated separately with Faker, using the locale inferred automatically during analysis. The model never learned from those values because it never saw them.
 
-What leaves the system is the synthetic dataset. And that dataset, by how it was built, can't be linked back to any real individual — something that's also measured with the Distance Ratio metric, which confirms that synthetic records are further from real records than real records are from each other.
+What leaves the system is the synthetic dataset. And that dataset, by how it was built, can't be linked back to any real individual. This is also measured with the Distance Ratio metric, which confirms that synthetic records are further from real records than real records are from each other.
 
 ---
 
@@ -98,50 +98,50 @@ You get three files: `output/synthetic.csv` with the generated data, `output/eva
 
 ## How it works
 
-The pipeline has five phases. Each one has a single responsibility and hands a typed contract to the next — `DatasetProfile` from Phase 1 to the preprocessor, `PreprocessorOutput` to the diffusion model.
+The pipeline has five phases. Each one has a single responsibility and hands a typed contract to the next: `DatasetProfile` from Phase 1 to the preprocessor, `PreprocessorOutput` to the diffusion model.
 
 <div align="center">
   <img src="docs/assets/pipeline.png" alt="tabsynth pipeline diagram" width="100%"/>
 </div>
 
-### Phase 1 — The analyzer (5 layers)
+### Phase 1: The analyzer (5 layers)
 
 Everything downstream depends on what gets detected here. If the analysis is good, the rest of the pipeline can do its job. If it fails, nothing compensates for it.
 
-The first layer (**MetadataExtractor**) inspects each column without storing values. For text columns it builds a structural signal profile — average length, capitalisation ratio, whether it contains numbers, whether it has special characters — that describes the shape of the data without exposing its content.
+The first layer (**MetadataExtractor**) inspects each column without storing values. For text columns it builds a structural signal profile (average length, capitalisation ratio, whether it contains numbers, whether it has special characters) that describes the shape of the data without exposing its content.
 
-When those signals aren't enough to determine a column's type, the second layer steps in (**SemanticAnalyzer**). It sends the aggregated metrics to GPT-4, which returns the semantic type (`full_name`, `email`, `code`, `free_text`…), the GDPR category, and the locale for generation. Never the actual values — only the signals.
+When those signals aren't enough to determine a column's type, the second layer steps in (**SemanticAnalyzer**). It sends the aggregated metrics to GPT-4, which returns the semantic type (`full_name`, `email`, `code`, `free_text`…), the GDPR category, and the locale for generation. Never the actual values, only the signals.
 
-If the column turns out to be a structured code field — ticket numbers, product references, IDs with a specific format — the **RegexMiner** layer takes over. It analyzes the patterns locally and synthesizes a regular expression. Only the pattern comes out. The values stay inside.
+If the column turns out to be a structured code field (ticket numbers, product references, IDs with a specific format), the **RegexMiner** layer takes over. It analyzes the patterns locally and synthesizes a regular expression. Only the pattern comes out. The values stay inside.
 
 The distribution layer (**DistributionProfiler**) determines the statistical shape of each numeric column: exponential, bimodal, zero-inflated, how many outliers. With that, it recommends the right transformation before the column goes into the model.
 
-And the correlation layer (**CorrelationAnalyzer**) computes pairwise dependencies across all column pairs — Pearson and Spearman for numeric pairs, Cramér's V for categoricals, η² for mixed. Pairs that exceed the strong correlation threshold (≥0.40) are stored and will be used later to penalize the model if it breaks them.
+And the correlation layer (**CorrelationAnalyzer**) computes pairwise dependencies across all column pairs: Pearson and Spearman for numeric pairs, Cramér's V for categoricals, η² for mixed. Pairs that exceed the strong correlation threshold (≥0.40) are stored and will be used later to penalize the model if it breaks them.
 
-### Phase 2 — The preprocessor (8 steps)
+### Phase 2: The preprocessor (8 steps)
 
 Turns the original DataFrame into a tensor ready for the diffusion model. Each step is independent and invertible:
 
 | Step | What it does |
 |------|-------------|
-| 0 — Null Normalizer | Detects masked nulls like `-1`, `999` or `N/A` and converts them to `NaN` |
-| 1 — Column Filter | Decides what goes to the tensor, what gets generated externally (Faker, regex), and what gets skipped |
-| 2 — Missing Handler | Creates binary `_missing` indicator flags and imputes with median or mode |
-| 3 — Zero-Inflated Split | Splits zero-heavy columns into `_flag` (has a value?) + `_value` (how much?) |
-| 4 — Numeric Transform | Applies log1p or QuantileTransformer based on Phase 1's recommendation |
-| 5 — Categorical Encoder | Ordinal and one-hot encoding, respecting category order |
-| 6 — Normalizer | Scales everything to [0, 1] with MinMax |
-| 7 — Tensor Builder | Builds the typed `TensorDataset` with per-feature metadata |
+| 0. Null Normalizer | Detects masked nulls like `-1`, `999` or `N/A` and converts them to `NaN` |
+| 1. Column Filter | Decides what goes to the tensor, what gets generated externally (Faker, regex), and what gets skipped |
+| 2. Missing Handler | Creates binary `_missing` indicator flags and imputes with median or mode |
+| 3. Zero-Inflated Split | Splits zero-heavy columns into `_flag` (has a value?) + `_value` (how much?) |
+| 4. Numeric Transform | Applies log1p or QuantileTransformer based on Phase 1's recommendation |
+| 5. Categorical Encoder | Ordinal and one-hot encoding, respecting category order |
+| 6. Normalizer | Scales everything to [0, 1] with MinMax |
+| 7. Tensor Builder | Builds the typed `TensorDataset` with per-feature metadata |
 
-The full inverse transformation lives in `inverter.py` — it reconstructs the original DataFrame from the generated tensor.
+The full inverse transformation lives in `inverter.py`, which reconstructs the original DataFrame from the generated tensor.
 
-### Phase 3 — The diffusion model
+### Phase 3: The diffusion model
 
 A Gaussian diffusion model for mixed tabular data, inspired by [TabDDPM (Kotelnikov et al., 2022)](https://arxiv.org/abs/2209.15421) but with several meaningful differences.
 
 The architecture is a residual MLP with sinusoidal timestep embeddings. Each block applies layer normalization, a linear projection, SiLU activation, dropout, and another projection, plus a skip connection. The timestep is projected into every block so the model knows where it is in the denoising process.
 
-The loss function combines MSE for continuous features, BCE for binary, and CrossEntropy for categorical. On top of that sits the `CorrelationLoss` — a term that at every training step compares the correlation matrix of the generated batch against the target values recorded in Phase 1, and penalizes the model for drifting away:
+The loss function combines MSE for continuous features, BCE for binary, and CrossEntropy for categorical. On top of that sits the `CorrelationLoss`, a term that at every training step compares the correlation matrix of the generated batch against the target values recorded in Phase 1, and penalizes the model for drifting away:
 
 ```
 total_loss = mixed_loss + corr_weight × correlation_loss
@@ -151,13 +151,13 @@ Before training, `HyperTuner` runs a quick search across five network configurat
 
 | Candidate | Hidden layers | lr | batch |
 |-----------|-------------|-----|-------|
-| A — light and fast | [128, 128] | 1e-3 | 256 |
-| B — balanced | [256, 256] | 1e-3 | 64 |
-| C — deeper | [256, 256, 128] | 1e-3 | 64 |
-| D — wide, low lr | [512, 256] | 5e-4 | 128 |
-| E — deep and wide | [512, 512, 256] | 1e-3 | 64 |
+| A: light and fast | [128, 128] | 1e-3 | 256 |
+| B: balanced | [256, 256] | 1e-3 | 64 |
+| C: deeper | [256, 256, 128] | 1e-3 | 64 |
+| D: wide, low lr | [512, 256] | 5e-4 | 128 |
+| E: deep and wide | [512, 512, 256] | 1e-3 | 64 |
 
-### Phase 4 — The generator
+### Phase 4: The generator
 
 Starts from pure Gaussian noise and runs 1,000 reverse diffusion steps to get the synthetic tensor. Then it inverts all the preprocessor transforms and reconstructs the original schema:
 
@@ -167,7 +167,7 @@ Starts from pure Gaussian noise and runs 1,000 reverse diffusion steps to get th
 - Null rates are preserved per column from the real dataset
 - A post-hoc calibration step corrects residual distributional drift in continuous columns
 
-### Phase 5 — The evaluator (6 dimensions)
+### Phase 5: The evaluator (6 dimensions)
 
 Synthetic data quality is measured from six angles. Five of them contribute to the overall score:
 
@@ -175,7 +175,7 @@ Synthetic data quality is measured from six angles. Five of them contribute to t
 |-----------|--------|--------|
 | Fidelity | KS test + Wasserstein distance + TVD | 30% |
 | Relationships | Frobenius norm on correlation matrices + per-pair delta | 25% |
-| Utility (TSTR) | Train on Synthetic, Test on Real — 3 ML models | 30% |
+| Utility (TSTR) | Train on Synthetic, Test on Real (3 ML models) | 30% |
 | Privacy | Distance Ratio based on nearest-neighbour distances | 10% |
 | Diversity | Variance ratio + PCA spread + category coverage | 5% |
 
@@ -201,7 +201,7 @@ All results use `SEED = 12` and are fully reproducible.
 
 **What these numbers actually mean:**
 
-On Plane Crashes, three classifiers trained on synthetic data achieve exactly the same accuracy on real data as classifiers trained on real data from the start. Zero gap. On California Housing the mean difference is 0.1%. On Titanic — the hardest of the three — it's 1.9%, with only 891 rows, 20% missing values in key columns, and several personal data columns mixed in.
+On Plane Crashes, three classifiers trained on synthetic data achieve exactly the same accuracy on real data as classifiers trained on real data from the start. Zero gap. On California Housing the mean difference is 0.1%. On Titanic, the hardest of the three, it's 1.9%, with only 891 rows, 20% missing values in key columns, and several personal data columns mixed in.
 
 Correlations are preserved because the model is explicitly penalized for breaking them. On California Housing, 35 out of 36 critical pairs are preserved. On Plane Crashes, every critical pair within tolerance.
 
@@ -218,7 +218,7 @@ synthetic-data-engine/
 ├── src/
 │   ├── main.py
 │   │
-│   ├── analyzer/                      # Phase 1 — autonomous analysis
+│   ├── analyzer/                      # Phase 1: autonomous analysis
 │   │   ├── metadata_extractor.py      # structural inspection, no values stored
 │   │   ├── semantic_analyzer.py       # GPT-4 classifies by signals, not values
 │   │   ├── regex_miner.py             # local pattern extraction for code columns
@@ -226,7 +226,7 @@ synthetic-data-engine/
 │   │   ├── correlation_analyzer.py    # Pearson / Spearman / Cramér's V / η²
 │   │   └── dataset_analyzer.py        # orchestrator → DatasetProfile
 │   │
-│   ├── preprocessor/                  # Phase 2 — 8 modular, invertible steps
+│   ├── preprocessor/                  # Phase 2: 8 modular, invertible steps
 │   │   ├── contracts.py
 │   │   ├── preprocessor.py
 │   │   ├── steps/
@@ -240,21 +240,21 @@ synthetic-data-engine/
 │   │   │   └── step7_tensor_builder.py
 │   │   └── inverter.py
 │   │
-│   ├── diffusion/                     # Phase 3 — diffusion model
+│   ├── diffusion/                     # Phase 3: diffusion model
 │   │   ├── tabddpm.py                 # architecture + training loop
 │   │   ├── mlp.py                     # ResidualBlock + SinusoidalEmbedding
 │   │   ├── noise_scheduler.py         # cosine schedule
 │   │   ├── loss.py                    # MixedLoss + CorrelationLoss
 │   │   └── tuner.py                   # hyperparameter search + early stopping
 │   │
-│   ├── generator/                     # Phase 4 — tensor → original schema
+│   ├── generator/                     # Phase 4: tensor → original schema
 │   │   ├── generator.py
 │   │   ├── type_enforcer.py
 │   │   ├── column_builder.py          # Faker + regex
 │   │   ├── null_validator.py
 │   │   └── calibrator.py
 │   │
-│   └── evaluator/                     # Phase 5 — 6-dimension quality score
+│   └── evaluator/                     # Phase 5: 6-dimension quality score
 │       ├── evaluator.py
 │       ├── fidelity.py
 │       ├── relationships.py
@@ -293,7 +293,7 @@ No sugarcoating:
 - Heavy-tailed distributions are still the hardest case. `log1p` helps a lot, but the extreme tail gets undersampled on small datasets. That's a data volume limitation, not a model one.
 - High-cardinality categoricals with noisy real-world values degrade TVD scores. The model generates correctly formatted values but can't perfectly replicate a noisy real-world distribution.
 - CPU training on large datasets can take between 20 and 60 minutes. GPU brings it down to around 5.
-- Free-text columns aren't generated in this version — they're skipped and logged in the profile. NLP generation is on the roadmap.
+- Free-text columns aren't generated in this version. They're skipped and logged in the profile. NLP generation is on the roadmap.
 
 Not supported yet: time-series data, multi-table relational schemas, or streaming input.
 
@@ -333,7 +333,7 @@ Key differences: residual MLP with sinusoidal timestep embeddings, mixed Gaussia
 
 ## License
 
-MIT — see [`LICENSE`](LICENSE).
+MIT. See [`LICENSE`](LICENSE).
 
 ---
 
